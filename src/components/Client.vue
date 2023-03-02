@@ -137,28 +137,17 @@ export default {
                 depois
                 sua mãe/vó.</p>
             </div>
-            <div class="col-12 " >
-              <video id="my-video2" class="my-video img-fluid " controls autoplay loop>
-                <source src="../assets/bolerada-gold.mp4" type="video/mp4">
-              </video>
-              <p class="text-danger">Vc é boy rapaz</p>
-            </div>
-            <!-- <div class="col-5 " >
-              <video id="my-video" class="my-video img-fluid rounded-circle" controls autoplay loop>
-                <source src="../assets/jesus_VP9.webm" type="video/webm">
-              </video>
-              <p class="text-danger">Vc é boy rapaz</p>
-            </div> -->
+           
           </div>
           <hr>
-          <div class="col-12 row align-items-center">
+          <!-- <div class="col-12 row align-items-center">
             <div class="col-12 " >
               <video id="my-video" class=" img-fluid " controls autoplay loop>
                 <source src="../assets/sasa-running_VP9.webm" type="video/webm">
               </video>
               <p class="text-danger">Vc é boy rapaz</p>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-6">
           <div class="mycard-header">
