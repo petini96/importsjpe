@@ -39,7 +39,7 @@ import Catalog from '../components/Catalog.vue';
     </form>
   </div>
 </nav> -->
-  <main>
+  <section>
     <Catalog  /> 
-  </main>
+  </section>
 </template>

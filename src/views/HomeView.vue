@@ -4,40 +4,85 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <main>
-    <h1>Bolerada67 - Site em Construção</h1>
-    <h4>Estamos preparando o melhor para você...</h4>
-    <p>Camisas e artigos esportivos</p>
-    <!-- <div class="col-4">
-            <video id="my-video2" class="my-video img-fluid " controls autoplay loop>
-            <source src="../assets/fudeo.mp4" type="video/mp4">
-          </video>
-          </div> -->
-    
+  <section>
+    <div class="row justify-content-center">
+      <picture class="col-12 col-md-8 col-lg-5">
+      <img src="../assets/capa.png" alt="Flowers" class="img-fluid">
+    </picture>
+    </div>
+  </section>
 
-  <!-- <div class="row">
-    <RouterLink to="/catalog" class="col-12 mb-3" id="figure">
-      <div class="catalogo-option ">
-        <span>
-          <font-awesome-icon icon="fa-solid fa-folder-tree" />
-        </span>
-        <h4 class="d-inline">CATÁLOGO</h4>
+  <section>
+    <div class="container my-5">
+      <div class="row justify-content-center ">
+        <div class="col-10 col-md-8 col-lg-5">
+          <h1>Bolerada67</h1>
+          <h4>Camisas de time de futebol, exclusivamente para você!</h4>
+          <p>Camisas e artigos esportivos</p>
+        </div>
+
       </div>
-    </RouterLink>
-    
-    <RouterLink to="/adm" class="col-12" id="figure">
-                <div class="catalogo-option ">
-                  <span>
-                    <font-awesome-icon icon="fa-solid fa-lock" />
-                  </span>
-                  <h4 class="d-inline">ÁREA ADMINISTRATIVA</h4>
-                </div>
-              </RouterLink>
-             </div> -->
-  </main>
+    </div>
+
+  </section>
 </template>
 
 <style>
+.text-icon {
+  display: inline;
+}
+
+li {
+  list-style: none;
+}
+
+.my-menu svg {
+  width: 30px;
+  position: fixed;
+  z-index: 1;
+  color: white;
+  fill: #FFC100;
+}
+
+h1 {
+  font-size: 3.5em;
+}
+
+header {
+  line-height: 1.5;
+  max-height: 100vh;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+ 
+
 #figure {
   animation: borderAnimate 2s infinite;
 }
@@ -75,3 +120,4 @@ import { RouterLink, RouterView } from 'vue-router';
   color: white;
 }
 </style>
+

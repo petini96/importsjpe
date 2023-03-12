@@ -4,9 +4,9 @@ import Supplier from '../components/Supplier.vue';
 </script>
 
 <template> 
-  <main>
+  <section>
     <Supplier  /> 
-  </main>
+  </section>
 </template>
 <style>
 #figure {

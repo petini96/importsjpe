@@ -31,11 +31,11 @@ export default {
 }
 </script>
 <template>
-    <main>
+    <section>
         <h4 class="text-center my-5">{{title}}</h4>
         <component :is="namecp"></component>
         
         <!-- <h1>listagem papai {{title}} {{namecp}} </h1> -->
         <!-- <List :my-props="myProps" />   -->
-    </main>
+    </section>
 </template>

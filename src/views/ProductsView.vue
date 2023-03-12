@@ -4,7 +4,7 @@ import Products from '../components/Products.vue';
 </script>
 
 <template> 
-  <main>
+  <section>
     <Products  /> 
-  </main>
+  </section>
 </template>

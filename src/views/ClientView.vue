@@ -4,9 +4,9 @@ import Client from '../components/Client.vue';
 </script>
 
 <template> 
-  <main>
+  <section>
     <Client  /> 
-  </main>
+  </section>
 </template>
 <style>
 #figure {

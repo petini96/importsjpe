@@ -8,7 +8,7 @@ const scrollToTop = function () {
 
 <template>
 
-  <main>
+  <section>
     <div class="row">
       <div class="col-12">
       </div>
@@ -110,5 +110,5 @@ const scrollToTop = function () {
         </a>
       </div>
     </div>
-  </main>
+  </section>
 </template>
