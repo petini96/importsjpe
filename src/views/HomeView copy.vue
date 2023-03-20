@@ -1,15 +1,14 @@
 <script setup>
-import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
+import Catalog from '../components/Catalog.vue';
 import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
   <section>
     <div class="row justify-content-center">
-      <BoleradaCarrousel :posts="posts"/> 
-      <!-- <picture class="col-12 col-md-8 col-lg-5">
-        <img src="../assets/capa.png" alt="Flowers" class="img-fluid">
-      </picture> -->
+      <picture class="col-12 col-md-8 col-lg-5">
+      <img src="../assets/capa.png" alt="Flowers" class="img-fluid">
+    </picture>
     </div>
   </section>
 
@@ -28,37 +27,6 @@ import { RouterLink, RouterView } from 'vue-router';
   </section>
 </template>
 
-<script>
-export default {
-  components: {
-    BoleradaCarrousel,
-  },
-  data() {
-    return {
-      posts: [
-        {
-          media : './src/assets/capa.png',
-          title: 'Brasileirão 2023',
-          description: 'Atualize-se já! Compre conosco a camisa do seu time de coração para acompanhar os campeonatos.',
-          order: 0
-        },
-       {
-          media : './src/assets/capa2.png',
-          title: 'Libertadores',
-          description: 'Veja seu time tomar sal aqui conosco. Vamos rir da sua cara de chupeteiro, rsrs.',
-          order: 1
-        },
-        {
-          media : './src/assets/capa3.png',
-          title: 'Faça Boquetes Online',
-          description: 'Conosco não, apenas camisas de time fera! Tamo junto boleiro.',
-          order: 2
-        },
-      ],
-    };
-  },
-};
-</script>
 <style>
 .text-icon {
   display: inline;
@@ -113,7 +81,7 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+ 
 
 #figure {
   animation: borderAnimate 2s infinite;

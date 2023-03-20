@@ -10,16 +10,18 @@ import Categories from './components/Categories.vue'
   <section>
     <div class="sidebar-bolerada" :class="{ animatein: isActive, 'animateout': !isActive }" v-show="ok">
       <li class="mx-auto text-center mb-4">
+        <router-link to="/">
         <img src="./assets/OFICIAL.png" alt="" class="img-fluid" width="150" height="150">
+        </router-link>
       </li>
 
       <li class="mx-auto text-center">
-        <a to="/catalog">
+        <router-link to="/catalog">
           <span>
             <font-awesome-icon icon="fa-solid fa-shirt" class="icon-mobile-md" />
             <span class="text-icon mx-0"> CATÁLOGO</span>
           </span>
-        </a>
+        </router-link>
       </li>
       <li class="mx-auto text-center">
         <a @click="handleWhatsappSubmit">
@@ -115,8 +117,7 @@ import Categories from './components/Categories.vue'
             <h4>Sobre nós</h4>
             <hr>
           </li>
-          <p>Somos uma equipe com matriz em Campo Grande - MS. Temos a responsabilidade de prestar um bom atendimento,
-            disponibilizando os melhores produtos para você, cosumidor.</p>
+          <p>Bem-vindo à Bolerada 67, sua loja especializada em camisas de time de futebol em Campo Grande - MS! Oferecemos aos nossos clientes as melhores opções de camisas de times de futebol do Brasil e do mundo, com alta qualidade e preços acessíveis. Com anos de experiência no mercado, nos orgulhamos em fornecer um atendimento personalizado, ágil e eficiente para satisfazer as expectativas de nossos clientes. Venha conhecer nossos produtos em nossa loja ou faça seu pedido online.</p>
         </ul>
 
       </div>
@@ -193,6 +194,7 @@ export default {
 
 </script>
 <style scoped>
+ 
 @media (min-width: 768px) {
   .sidebar-bolerada {
 
@@ -216,8 +218,6 @@ export default {
     display: inline-flex;
   }
 }
-
-
 
 @media (min-width: 2560px) {
   .sidebar-bolerada {

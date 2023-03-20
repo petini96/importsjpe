@@ -6,6 +6,7 @@ import PostView from '../views/PostView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import SupplierView from '../views/SupplierView.vue'
 import ClientView from '../views/ClientView.vue'
+import YuppoView from '../views/YuppoView.vue'
 
 
 const router = createRouter({
@@ -25,6 +26,11 @@ const router = createRouter({
       path: '/adm/products',
       name: 'prod',
       component: ProductsView
+    },
+    {
+      path: '/adm/products/yuppo',
+      name: 'yuppo',
+      component: YuppoView
     },
     {
       path: '/adm/suppliers',
