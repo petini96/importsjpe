@@ -12,6 +12,10 @@ import Bundesliga from '../components/Bundesliga.vue';
 import OutrosClubes from '../components/OutrosClubes.vue';
 
 defineProps({
+    catalogPicked: {
+        type: Number,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -32,9 +36,9 @@ export default {
 </script>
 <template>
     <section>
-        <h4 class="text-center my-5">{{title}}</h4>
-        <component :is="namecp"></component>
-        
+        <!-- <h4 class="text-center my-3">{{title}}</h4> -->
+        <h5 class="text-center my-3" >Catálogo {{ catalogPicked }}</h5>
+        <component :is="namecp" v-bind:catalogPicked="catalogPicked"></component>
         <!-- <h1>listagem papai {{title}} {{namecp}} </h1> -->
         <!-- <List :my-props="myProps" />   -->
     </section>

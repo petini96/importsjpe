@@ -57,6 +57,7 @@ export default {
         <div class="col-6">
           <div class="mycard-header">
             <img class="rounded img-fluid" :src="productApi.photo" alt="">
+            
           </div>
         </div>
         <div class="col-6">

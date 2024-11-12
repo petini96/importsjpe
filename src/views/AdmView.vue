@@ -9,12 +9,10 @@ const scrollToTop = function () {
 <template>
 
   <section>
-    <div class="row">
-      <div class="col-12">
-      </div>
+    <div class="row justify-content-center">
      
 
-      <RouterLink id="figure" to="/adm/products" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/products" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-shirt" />
@@ -23,7 +21,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
       
-      <RouterLink id="figure" to="/adm/suppliers" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/suppliers" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-parachute-box" />
@@ -32,7 +30,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
 
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-qrcode" />
@@ -41,7 +39,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
 
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-person" />
@@ -50,7 +48,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
 
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-divide" />
@@ -59,7 +57,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
 
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-cart-shopping" />
@@ -68,7 +66,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
 
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-money-bill-transfer" />
@@ -77,7 +75,7 @@ const scrollToTop = function () {
         </div>
       </RouterLink>
       
-      <RouterLink id="figure" to="/adm/clients" class="col-12 mb-3">
+      <RouterLink id="figure" to="/adm/clients" class="col-10 mb-3">
         <div class="catalogo-option ">
           <span>
             <font-awesome-icon icon="fa-solid fa-list" />

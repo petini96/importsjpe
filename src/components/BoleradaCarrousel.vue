@@ -19,7 +19,7 @@ export default {
     data() {
         return {
             picked: this.posts[0],
-            secondsDelary: 6,
+            secondsDelary: 10,
             progress: 0,
             touchStartX: null,
             touchEndX: null
@@ -108,23 +108,23 @@ export default {
 }
 </script>
 <template>
-    <picture class="col-12 col-md-8 col-lg-5">
+    <picture class="col-12 d-none d-md-block">
         <img :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
-        <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
-        <div class="post text-center p-3 bg-opacity-50 bg-black">
+        <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%'}"></div>
+        <!-- <div class="post text-center p-3 bg-opacity-50 bg-black">
             <h2>{{ this.picked.title }}</h2>
             <hr class="w-50 mx-auto">
             <p>{{ this.picked.description }}</p>
-        </div>
+        </div> -->
         <span></span>
     </picture>
 </template>
 
 <style scoped>
 .progress-carousel {
-    background-color: #ffc100;
+    background-color: gray;
     width: 0%;
-    padding: 5px;
+    padding: 1px;
     transition: width 0.2s ease-in-out;
 }
 

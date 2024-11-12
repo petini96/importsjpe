@@ -5,6 +5,6 @@ import Yuppo from '../components/Yuppo.vue';
 
 <template> 
   <section>
-    <Yuppo  /> 
+    <Yuppo /> 
   </section>
 </template>

@@ -122,9 +122,9 @@ export default {
 
       </div>
     </div>
-    <div v-for="(clientApi, index) in this.clients" id="animate-section">
+     
 
-      <div  class="row align-items-center my-3" v-on:click="supplierClicked(divIndex(index))">
+      <div v-for="(clientApi, index) in this.clients" id="animate-section" class="row align-items-center my-3" v-on:click="supplierClicked(divIndex(index))">
         <div v-if="index == 0" class="col-12">
 
           <div class="col-12 row align-items-center">
@@ -149,13 +149,13 @@ export default {
             </div>
           </div> -->
         </div>
-        <div class="col-6">
+        <div class="col-6 col-md-2">
           <div class="mycard-header">
             <img :src="photo(clientApi.photo)" alt="" class="img-fluid circle img-listing bg-dark">
           </div>
 
         </div>
-        <div class="col-6">
+        <div class="col-6 col-md-2">
           <div class="mycard-body">
             <h3>{{ clientApi.name }}</h3>
             <a :href="whatsApp(clientApi.contact_number, questions['doubt']['new-orders']['question'])">
@@ -166,7 +166,6 @@ export default {
             </a>
             <!-- <h3>{{ clientApi.contact_number }}</h3>  -->
           </div>
-
         </div>
         <!-- v-show="detail" -->
         <div class="col-12 my-3" v-if="clickedID == divIndex(index)" :id="divIndex(index)">
@@ -232,7 +231,7 @@ export default {
           </div>
         </div>
       </div>
-    </div>
+   
   </div>
 
 

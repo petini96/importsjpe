@@ -1,123 +1,65 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Catalog from './components/Catalog.vue'
-import Categories from './components/Categories.vue'
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-
+const store = useStore();
+const isSleeping = computed(() => store.getters.getIsSleeping);
+const ok = computed(() => store.getters.getOk);
+const isActive = computed(() => store.getters.getIsActive);
 </script>
 
 <template>
-  <section>
-    <div class="sidebar-bolerada" :class="{ animatein: isActive, 'animateout': !isActive }" v-show="ok">
-      <li class="mx-auto text-center mb-4">
-        <router-link to="/">
-        <img src="./assets/OFICIAL.png" alt="" class="img-fluid" width="150" height="150">
-        </router-link>
-      </li>
-
-      <li class="mx-auto text-center">
-        <router-link to="/catalog">
-          <span>
-            <font-awesome-icon icon="fa-solid fa-shirt" class="icon-mobile-md" />
-            <span class="text-icon mx-0"> CATÁLOGO</span>
-          </span>
-        </router-link>
-      </li>
-      <li class="mx-auto text-center">
-        <a @click="handleWhatsappSubmit">
-          <span>
-            <font-awesome-icon icon="fa-brands fa-whatsapp" class="icon-mobile-md" />
-            <span class="text-icon mx-0"> CONTATO</span>
-          </span>
-        </a>
-      </li>
-      <li class="mx-auto text-center">
-        <a @click="handleRedirectBlankSubmit('https://instagram.com/bolerada67_3.0')">
-          <span>
-            <font-awesome-icon icon="fa-brands fa-instagram" class="icon-mobile-md" />
-            <span class="text-icon mx-0"> INSTAGRAM</span>
-          </span>
-        </a>
-      </li>
-      <li class="mx-auto text-center">
-        <a>
-          <span>
-            <font-awesome-icon icon="fas fa-thumbs-up" class="icon-mobile-md" />
-            <span class="text-icon"> QUALIDADE</span>
-          </span>
-        </a>
-      </li>
-      <li class="mx-auto text-center my-5">
-        <span @click="showMenuMobile">
-          <font-awesome-icon icon="fa-solid fa-bars" />
-          <span class="text-icon"> RETORNAR</span>
-        </span>
-      </li>
+  <div class="bg-white text-black p-2 text-center">
+    <strong>Aproveite -25% na nova temporada | Termina em 1d 18h 53m 20s | Saiba mais</strong>
+  </div>
+  <nav class="navbar bolerada-bg-black2 navbar-expand-lg bg-body-tertiary p-2" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./assets/logo-imortsjpe.png" alt="" class="img-fluid" width="150" height="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link class="nav-link active" aria-current="page" to="/produtos">Produtos</router-link>
+          </li>
+        </ul>
+        
+      </div>
     </div>
-    <nav class="container-fluid bg-dark rounded p-3 p-md-2 p-lg-0 m-0">
-      <ul class="row p-0 m-0 menu-mobile">
-        <li class="col-2 p-0 mx-0">
-          <span @click="showMenuMobile" class="icon-mobile">
-            <font-awesome-icon icon="fa-solid fa-bars" />
-          </span>
-        </li>
-      </ul>
-      <ul class="row align-items-center p-0 m-0 menu-desktop">
-        <li class="col-2 text-center mb-4">
-          <img src="./assets/OFICIAL.png" alt="" class="img-fluid" width="80" height="80">
-        </li>
-        <li class="col-2 text-center">
-          <a to="/catalog">
-            <span>
-              <font-awesome-icon icon="fa-solid fa-shirt" class="icon-mobile-md" />
-              <span class="text-icon mx-0"> CATÁLOGO</span>
-            </span>
-          </a>
-        </li>
-        <li class="col-2 text-center">
-          <a @click="handleWhatsappSubmit">
-            <span>
-              <font-awesome-icon icon="fa-brands fa-whatsapp" class="icon-mobile-md" />
-              <span class="text-icon mx-0"> CONTATO</span>
-            </span>
-          </a>
-        </li>
-        <li class="col-2 text-center">
-          <a @click="handleRedirectBlankSubmit('https://instagram.com/bolerada67_3.0')">
-            <span>
-              <font-awesome-icon icon="fa-brands fa-instagram" class="icon-mobile-md" />
-              <span class="text-icon mx-0"> INSTAGRAM</span>
-            </span>
-          </a>
-        </li>
-        <li class="col-2 text-center">
-          <a>
-            <span>
-              <font-awesome-icon icon="fas fa-thumbs-up" class="icon-mobile-md" />
-              <span class="text-icon"> QUALIDADE</span>
-            </span>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-  </section>
-  <main :class="{ active: isActive, 'desactive': !isActive }">
+  </nav>
+   
+  <main :class="{ active: isSleeping, 'desactive': !isSleeping }">
     <RouterView />
   </main>
-  <footer class="bg-dark p-3 w-100 text-center" :class="{ active: isActive, 'desactive': !isActive }">
+  <footer class="bg-white text-black p-3 w-100 text-center" :class="{ active: isActive, 'desactive': !isActive }">
+    
     <div class="row justify-content-center align-items-center w-100 m-0">
-      <div class="col-7 col-md-4 col-lg-2 text-center">
-        <img src="./assets/OFICIAL.png" alt="" class="img-fluid">
+      <div class="col-12 col-md-4">
+        <ul>
+          <li>
+            <h4>Dúvidas frequentes</h4>
+            <hr>
+          </li> 
+          <p>Perguntas frequentes</p>
+          <p>Devoluções</p>
+          <p>Como comprar</p>
+        </ul>
 
       </div>
       <div class="col-12 col-md-4">
         <ul>
           <li>
-            <h4>Sobre nós</h4>
+            <h4>Dúvidas frequentes</h4>
             <hr>
-          </li>
-          <p>Bem-vindo à Bolerada 67, sua loja especializada em camisas de time de futebol em Campo Grande - MS! Oferecemos aos nossos clientes as melhores opções de camisas de times de futebol do Brasil e do mundo, com alta qualidade e preços acessíveis. Com anos de experiência no mercado, nos orgulhamos em fornecer um atendimento personalizado, ágil e eficiente para satisfazer as expectativas de nossos clientes. Venha conhecer nossos produtos em nossa loja ou faça seu pedido online.</p>
+          </li> 
+          <p>Perguntas frequentes</p>
+          <p>Devoluções</p>
+          <p>Como comprar</p>
         </ul>
 
       </div>
@@ -129,7 +71,7 @@ import Categories from './components/Categories.vue'
             <a @click="handleRedirectBlankSubmit('https://instagram.com/bolerada67_3.0')">
               <span>
                 <font-awesome-icon icon="fa-brands fa-instagram" class="icon-mobile-md" />
-                <span class="text-icon mx-3">bolerada67</span>
+                <span class="text-icon mx-3">importsjpe</span>
               </span>
             </a>
           </li>
@@ -142,11 +84,11 @@ import Categories from './components/Categories.vue'
             </a>
           </li>
           <li>
-            
+
             <a @click="handleWhatsappSubmit">
               <span>
-                <font-awesome-icon icon="fa-solid fa-mail-forward" class="icon-mobile-md"/>
-                <span class="text-icon mx-3">bolerada67@gmail.com</span>
+                <font-awesome-icon icon="fa-solid fa-mail-forward" class="icon-mobile-md" />
+                <span class="text-icon mx-3">contato@importsjpe.com.br</span>
               </span>
             </a>
           </li>
@@ -155,152 +97,108 @@ import Categories from './components/Categories.vue'
 
     </div>
   </footer>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered p-3 ">
+      <div class="modal-content bolerada-bg-black2 bolerada-border-gray">
+        <div class="modal-header row justify-content-center align-items-center m-0">
+          <div class="col-4 text-center">
+
+            <img src="/src/assets/OFICIAL.png" alt="" class="img-fluid jump-animate" width="200" height="200">
+          </div>
+          <div class="col-6 text-start">
+            <h5 class="modal-title fs-5 bolerada-cl-yellow" id="exampleModalLabel">Seleção de Catálogo</h5>
+          </div>
+          <div class="col-2 text-center">
+
+            <button type="button" class="btn-close bolerada-bg-yellow" @click="sleepBG" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center align-items-center my-3">
+            <div class="col-12 mb-3 text-center">
+              <p class="text-white"><strong>Escolha entre uma das opções abaixo:</strong></p>
+            </div>
+            <div class="col-6 text-end">
+              <!-- :to="{ name: 'leagues', params: { title: this.$store.state.leagueTitle, namecp: this.$store.state.leaguePicked, catalogPicked: 1 } }" -->
+              <button @click="handlePageChange(1)" class="btn bolerada-bg-yellow" data-bs-dismiss="modal">
+                OPÇÃO 1
+              </button>
+            </div>
+            <div class="col-6 text-start">
+              <button @click="handlePageChange(2)" class="btn bolerada-bg-yellow" data-bs-dismiss="modal">
+                OPÇÃO 2
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bolerada-bg-yellow border-dark" @click="sleepBG"
+            data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
  
 <script>
+
+
 export default {
-  // props: {
-  //   // Using value here allows us to be v-model compatible.
-  //   value: File
-  // },
+
   data() {
     return {
       whatsapp: "https://wa.me/556791315938",
-      ok: false,
-      isActive: false,
     }
   },
   methods: {
+    getIsSleeping() {
+      this.$store.commit('getIsSleeping')
+    },
+    ok() {
+      this.$store.commit('getOk')
+    },
+    isActive() {
+      this.$store.commit('getIsActive')
+      alert(this.$store.commit('getIsActive'))
+    },
+    handlePageChange(catalogPicked) {
+      this.$store.commit('sleepBG')
+      this.$router.push({
+        name: 'leagues',
+        params: { title: this.$store.state.leagueTitle, namecp: this.$store.state.leaguePicked, catalogPicked: catalogPicked },
+      });
+    },
     handleWhatsappSubmit(e) {
       var texto = "*CONSULTA DE CAMISAS* \n \n Contato realizado pelo site...";
       texto = window.encodeURIComponent(texto);
       window.open(this.whatsapp + "?text=" + texto, "_blank");
     },
     handleRedirectBlankSubmit(link) {
-
       window.open(link, "_blank");
     },
     showMenuMobile() {
-      if (this.ok) {
-        this.ok = false;
-        this.isActive = false;
-      } else {
-        this.ok = true;
-        this.isActive = true;
-      }
+      this.$store.commit('sleepBG');
+      this.$store.commit('showMenuMobile');
     },
+    sleepBG() {
+      this.$store.commit('sleepBG');
+    }
   }
 }
 
 </script>
 <style scoped>
- 
-@media (min-width: 768px) {
-  .sidebar-bolerada {
-
-    width: 40% !important;
-
-
-  }
+.bolerada-bg-yellow {
+  background-color: #ffc100;
 }
 
-.menu-desktop {
-  display: none;
+.bolerada-bg-black2 {
+  background-color: #1c1c1c44 !important;
 }
 
-@media (min-width: 1024px) {
-
-  .menu-mobile {
-    display: none;
-  }
-
-  .menu-desktop {
-    display: inline-flex;
-  }
-}
-
-@media (min-width: 2560px) {
-  .sidebar-bolerada {
-
-    width: 30% !important;
-
-
-  }
-}
-
-.icon-mobile {
-  font-size: 1.8em;
-}
-
-.icon-mobile-md {
-  font-size: 1.5em;
-}
-
-.icon-mobile-md span {
-  margin-left: 10px;
-}
-
-@keyframes inBoleradaAnimate {
-  0% {
-    transform: translateX(-200px);
-  }
-
-  100% {
-    transform: translateX(0px);
-  }
-}
-
-@keyframes outBoleradaAnimate {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(-70%);
-  }
-}
-
-.animatein {
-  animation: inBoleradaAnimate 0.5s;
-}
-
-.animateout {
-  animation: outBoleradaAnimate 2.5s;
-}
-
-.sidebar-bolerada {
-  background-image: url("./assets/fundo.jpg");
-  background-position: center top;
-  background-size: 100% auto;
-  min-height: 100vh;
-  width: 70%;
-  transform: translateX(0px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100% !important;
-  z-index: 1;
-
-}
-
-.sidebar-bolerada li:not(:first-of-type, :last-of-type) {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  margin: 10px 50px;
-
-  border-radius: 10px;
-}
-
-.active {
-  filter: blur(1px);
-  -webkit-filter: blur(8px);
-  transition: 2s;
-
-}
-
-.desactive {
-  filter: blur(0px);
-  -webkit-filter: blur(0px);
-  transition: 1s;
+#navbarSupportedContent {
+  font-size: 1.4em;
 }
 </style>

@@ -2,11 +2,239 @@
 import List from "./List.vue";
 import { ref } from 'vue';
 import { computed } from 'vue';
+import BtnFooter from "./generics/BtnFooter.vue";
 
 import { RouterLink, RouterView } from 'vue-router'
 const scrollToTop = function () {
   window.scrollTo(0, 0);
 };
+
+
+const teams = []
+
+const catalogPicked = defineProps(['catalogPicked'])
+
+const addNewTeam = (description, namecp, photo, link) => {
+  const newTeam = {
+    description: description,
+    namecp: namecp,
+    photo: photo,
+    link: link,
+  };
+  teams.push(newTeam);
+}
+
+
+if (catalogPicked.catalogPicked == 1) {
+
+
+  addNewTeam(
+    "BARCELONA",
+    "SelecoesEuropeias",
+    "https://www.freepnglogos.com/uploads/barcelona-png/barcelona-logos-dream-league-soccer-cear-fotos-0.png",
+    "https://photos.app.goo.gl/1G4WJHJQuZBCGsYS8"
+  );
+  addNewTeam(
+    "REAL MADRID",
+    "SelecoesEuropeias",
+    "https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png",
+    "https://photos.app.goo.gl/i4zuNHqF2dxcrE3A6"
+  );
+  addNewTeam(
+    "ATLÉTICO MADRID",
+    "SelecoesEuropeias",
+    "https://logodetimes.com/times/atletico-madrid/logo-atletico-madrid-1536.png",
+    "https://photos.app.goo.gl/oupZGYk2BmSdZB24A"
+  );
+  addNewTeam(
+    "SEVILLA",
+    "SelecoesEuropeias",
+    "https://i.pinimg.com/originals/ad/7b/f6/ad7bf6f0c1e989daa5848eeac9c85a3b.png",
+    "https://photos.app.goo.gl/MNNL28VHhn2ksX989"
+  );
+  addNewTeam(
+    "VILLAREAL",
+    "SelecoesEuropeias",
+    "https://www.mrsoccer5.com/wp-content/uploads/2015/08/villarreal-cf-hd-logo.png",
+    "https://photos.app.goo.gl/9pyKEmXNbxG7Y98T8"
+  );
+  addNewTeam(
+    "VALENCIA",
+    "SelecoesEuropeias",
+    "https://i.pinimg.com/originals/af/b2/2b/afb22b6c74cd4c5133e933912f25dbdf.png",
+    "https://photos.app.goo.gl/RNj22A2Ts8HpbxYDA"
+  );
+  addNewTeam(
+    "REAL SOCIEDADE",
+    "SelecoesEuropeias",
+    "http://lofrev.net/wp-content/photos/2014/08/Real-Sociedad-de-Futbol-Logo-3D.png",
+    "https://photos.app.goo.gl/niuF1oCyY9qs1SWn6"
+  );
+  addNewTeam(
+    "BETIS",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/244.png",
+    "https://photos.app.goo.gl/1HeqpoQHsxWX5azW9"
+  );
+  addNewTeam(
+    "ZARAGOZA",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/RealZaragoza_wbg.png",
+    "https://photos.google.com/share/AF1QipPjH1vTfmTD_85YSI6dfwIUzvaXbfYPCobALXmqxsM0SWEh92g6h-RFmCXWY2X-dg?key=YmgxSkxadGNfVU41Q0ZjamZqcER3bVUwWlltdDR3"
+  );
+  addNewTeam(
+    "OSASUNA",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/97.png",
+    "https://photos.app.goo.gl/qV1GKBndAdxRKKzr8"
+  );
+  addNewTeam(
+    "LA CORUNÃ",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/90.png",
+    "https://photos.app.goo.gl/UyQW7cRmFhu5qoN46"
+  );
+  addNewTeam(
+    "ESPANYOL",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/88.png",
+    "https://photos.google.com/share/AF1QipMcnP-KtneFUW9RvXOxSYaDaufpMA8axq3_YzCUMH9aMfrwpJdK9iLdSVFb8y8cRw?key=MW00MlNGanVwZWpZbDhjc2JkVHRVS1NnX1dyek53"
+  );
+  addNewTeam(
+    "VIGO",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181127/500x500/CeltaVigo_wbg.png",
+    "https://photos.app.goo.gl/nxedm6FTTpNc6rGj7"
+  );
+  addNewTeam(
+    "ALMERIA",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/6832.png",
+    "https://photos.app.goo.gl/MN6oA8XDN23DTj2h9"
+  );
+  addNewTeam(
+    "VALLADOLID",
+    "SelecoesEuropeias",
+    "https://pbs.twimg.com/media/DyQU1XTX0AEIjDR.png",
+    "https://photos.app.goo.gl/Cg9Wpmic8J1s34eV8"
+  );
+  addNewTeam(
+    "LAS PALMAS",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/98.png",
+    "https://photos.app.goo.gl/JJTendA5Cxg2uXpLA"
+  );
+  addNewTeam(
+    "GRANADA",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/Granada_wbg.png",
+    "https://photos.app.goo.gl/vBVBPo276oV9G4Nw7"
+  );
+  addNewTeam(
+    "LEGANÉS",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181127/500x500/Leganes_wbg.png",
+    "https://photos.app.goo.gl/jjR18iTzJWukgKi29"
+  );
+  addNewTeam(
+    "CADIZ",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/Cadiz_wbg.png",
+    "https://photos.app.goo.gl/vx1PJWpyYQUfzDSM9"
+  );
+  addNewTeam(
+    "BILBAO",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/93.png",
+    "https://photos.app.goo.gl/LEFynNSF9apg2FKQ7"
+  );
+  addNewTeam(
+    "ALAVEZ",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/96.png",
+    "https://photos.app.goo.gl/v6KHnDQ335anpuT36"
+  );
+
+
+}
+
+if (catalogPicked.catalogPicked == 2) {
+
+  addNewTeam(
+    "BARCELONA",
+    "SelecoesEuropeias",
+    "https://www.freepnglogos.com/uploads/barcelona-png/barcelona-logos-dream-league-soccer-cear-fotos-0.png",
+    "https://drive.google.com/drive/folders/1fng984bVR-Y_fwJce1z9Cb_zoCMsyioR?usp=sharing"
+  );
+  addNewTeam(
+    "REAL MADRID",
+    "SelecoesEuropeias",
+    "https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png",
+    "https://drive.google.com/drive/folders/18-mmHc26FVy2XWI8egRKpzRY117V-azG?usp=sharing"
+  );
+  addNewTeam(
+    "ATLÉTICO MADRID",
+    "SelecoesEuropeias",
+    "https://logodetimes.com/times/atletico-madrid/logo-atletico-madrid-1536.png",
+    "https://drive.google.com/drive/folders/1dMRwuIolk-8LFWdP8Srn7JLPhssQ9A7O?usp=sharing"
+  );
+  addNewTeam(
+    "SEVILLA",
+    "SelecoesEuropeias",
+    "https://i.pinimg.com/originals/ad/7b/f6/ad7bf6f0c1e989daa5848eeac9c85a3b.png",
+    "https://drive.google.com/drive/folders/1c-vlO1TdpMkdCN0skuMp2S3nZ6Bfht_D?usp=sharing"
+  );
+  addNewTeam(
+    "VILLAREAL",
+    "SelecoesEuropeias",
+    "https://www.mrsoccer5.com/wp-content/uploads/2015/08/villarreal-cf-hd-logo.png",
+    "https://drive.google.com/drive/folders/1S5KjJPUGaHnwREIsOEe1Aphtun42kiJs?usp=sharing"
+  );
+  addNewTeam(
+    "VALENCIA",
+    "SelecoesEuropeias",
+    "https://i.pinimg.com/originals/af/b2/2b/afb22b6c74cd4c5133e933912f25dbdf.png",
+    "https://drive.google.com/drive/folders/1nkTcl0Vhiy9VfBUtVGpbSA_NDfnMlfX_?usp=sharing"
+  );
+  addNewTeam(
+    "REAL SOCIEDADE",
+    "SelecoesEuropeias",
+    "http://lofrev.net/wp-content/photos/2014/08/Real-Sociedad-de-Futbol-Logo-3D.png",
+    "https://drive.google.com/drive/folders/1so6maz_TFdff8pm4b8dCGEyw296fQgx7?usp=sharing"
+  );
+  addNewTeam(
+    "BETIS",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/244.png",
+    "https://drive.google.com/drive/folders/13PxzE2lgPiatWuhSKIZ1Bu0kKY_yyMAt?usp=sharing"
+  );  
+  addNewTeam(
+    "ESPANYOL",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/88.png",
+    "https://drive.google.com/drive/folders/1e4EQ0y7EbBtPGO7MJdXvif5xEZiDDsQ0?usp=sharing"
+  );
+  addNewTeam(
+    "VIGO",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181127/500x500/CeltaVigo_wbg.png",
+    "https://drive.google.com/drive/folders/1e4EQ0y7EbBtPGO7MJdXvif5xEZiDDsQ0?usp=sharing"
+  );
+  addNewTeam(
+    "GRANADA",
+    "SelecoesEuropeias",
+    "https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/Granada_wbg.png",
+    "https://drive.google.com/drive/folders/1JmxBXqJLmU4lqPUcrLLFfD7J_1BLyTyJ?usp=sharing"
+  );
+  addNewTeam(
+    "BILBAO",
+    "SelecoesEuropeias",
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/93.png",
+    "https://drive.google.com/drive/folders/1p2Y7tUYpzNoGsQHCDvoq2Oaun14dzDYD?usp=sharing"
+  );
+
+}
+
 </script>  
 <script>
 export default {
@@ -19,7 +247,7 @@ export default {
       checked: false,
       value: null,
       url: null,
-      picked:null,
+      picked: null,
       whatsapp: "https://wa.me/556791315938",
       name: "",
       version: "",
@@ -32,10 +260,10 @@ export default {
       this.url = URL.createObjectURL(this.value);
     },
     handleWhatsappSubmit(e) {
-      var agora= "https://m.media-amazon.com/images/I/510HStL3cnL._AC_SY606_.jpg";
-      var texto = "*CONSULTA DE CAMISAS* \n \n Contato realizado pelo senhor(a) "+this.name+"....\n *Nome da camisa:* "+ this.shirt + "\n *Versão:* "+ this.version + "\n *Gênero:* " + this.picked + "\n *Imagem:* "+ this.url;
+      var agora = "https://m.media-amazon.com/images/I/510HStL3cnL._AC_SY606_.jpg";
+      var texto = "*CONSULTA DE CAMISAS* \n \n Contato realizado pelo senhor(a) " + this.name + "....\n *Nome da camisa:* " + this.shirt + "\n *Versão:* " + this.version + "\n *Gênero:* " + this.picked + "\n *Imagem:* " + this.url;
       texto = window.encodeURIComponent(texto);
-      window.open(this.whatsapp +"?text="+texto,"_blank");
+      window.open(this.whatsapp + "?text=" + texto, "_blank");
     }
   }
 }
@@ -44,113 +272,11 @@ export default {
 <template>
   <div class="container my-5">
     <div class="row align-items-center">
-      <div class="col-4 col-md-2  text-center">
-        <List description="BARCELONA" namecp="SelecoesEuropeias"
-          photo="https://www.freepnglogos.com/uploads/barcelona-png/barcelona-logos-dream-league-soccer-cear-fotos-0.png"
-          link="https://photos.app.goo.gl/1G4WJHJQuZBCGsYS8" />
+      <div class="col-4 col-md-2 text-center" v-for="(item, index) in teams">
+        <List :description="item.description" :namecp="item.namecp" :photo="item.photo" :link="item.link" />
       </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="REAL MADRID" namecp="SelecoesEuropeias"
-          photo="https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png"
-          link="https://photos.app.goo.gl/i4zuNHqF2dxcrE3A6" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="ATLÉTICO MADRID" namecp="SelecoesEuropeias"
-          photo="https://logodetimes.com/times/atletico-madrid/logo-atletico-madrid-1536.png"
-          link="https://photos.app.goo.gl/oupZGYk2BmSdZB24A" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="SEVILLA" namecp="SelecoesEuropeias"
-          photo="https://i.pinimg.com/originals/ad/7b/f6/ad7bf6f0c1e989daa5848eeac9c85a3b.png"
-          link="https://photos.app.goo.gl/MNNL28VHhn2ksX989" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="VILLAREAL" namecp="SelecoesEuropeias"
-          photo="https://www.mrsoccer5.com/wp-content/uploads/2015/08/villarreal-cf-hd-logo.png"
-          link="https://photos.app.goo.gl/9pyKEmXNbxG7Y98T8" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="VALENCIA" namecp="SelecoesEuropeias"
-          photo="https://i.pinimg.com/originals/af/b2/2b/afb22b6c74cd4c5133e933912f25dbdf.png"
-          link="https://photos.app.goo.gl/RNj22A2Ts8HpbxYDA" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="REAL SOCIEDADE" namecp="SelecoesEuropeias"
-          photo="http://lofrev.net/wp-content/photos/2014/08/Real-Sociedad-de-Futbol-Logo-3D.png"
-          link="https://photos.app.goo.gl/niuF1oCyY9qs1SWn6" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="BETIS" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/244.png"
-          link="https://photos.app.goo.gl/1HeqpoQHsxWX5azW9" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="ZARAGOZA" namecp="SelecoesEuropeias"
-          photo="https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/RealZaragoza_wbg.png"
-          link="https://photos.google.com/share/AF1QipPjH1vTfmTD_85YSI6dfwIUzvaXbfYPCobALXmqxsM0SWEh92g6h-RFmCXWY2X-dg?key=YmgxSkxadGNfVU41Q0ZjamZqcER3bVUwWlltdDR3" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="OSASUNA" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/97.png"
-          link="https://photos.app.goo.gl/qV1GKBndAdxRKKzr8" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="LA CORUNÃ" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/90.png"
-          link="https://photos.app.goo.gl/UyQW7cRmFhu5qoN46" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="ESPANYOL" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/88.png"
-          link="https://photos.google.com/share/AF1QipMcnP-KtneFUW9RvXOxSYaDaufpMA8axq3_YzCUMH9aMfrwpJdK9iLdSVFb8y8cRw?key=MW00MlNGanVwZWpZbDhjc2JkVHRVS1NnX1dyek53" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="VIGO" namecp="SelecoesEuropeias"
-          photo="https://s.yimg.com/cv/apiv2/default/soccer/20181127/500x500/CeltaVigo_wbg.png"
-          link="https://photos.app.goo.gl/nxedm6FTTpNc6rGj7" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="ALMERIA" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/6832.png"
-          link="https://photos.app.goo.gl/MN6oA8XDN23DTj2h9" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="VALLADOLID" namecp="SelecoesEuropeias"
-          photo="https://pbs.twimg.com/media/DyQU1XTX0AEIjDR.png"
-          link="https://photos.app.goo.gl/Cg9Wpmic8J1s34eV8" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="LAS PALMAS" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/98.png"
-          link="https://photos.app.goo.gl/JJTendA5Cxg2uXpLA" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="GRANADA" namecp="SelecoesEuropeias"
-          photo="https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/Granada_wbg.png"
-          link="https://photos.app.goo.gl/vBVBPo276oV9G4Nw7" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="LEGANÉS" namecp="SelecoesEuropeias"
-          photo="https://s.yimg.com/cv/apiv2/default/soccer/20181127/500x500/Leganes_wbg.png"
-          link="https://photos.app.goo.gl/jjR18iTzJWukgKi29" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="CADIZ" namecp="SelecoesEuropeias"
-          photo="https://s.yimg.com/cv/apiv2/default/soccer/20181219/500x500/Cadiz_wbg.png"
-          link="https://photos.app.goo.gl/vx1PJWpyYQUfzDSM9" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="BILBAO" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/93.png"
-          link="https://photos.app.goo.gl/LEFynNSF9apg2FKQ7" />
-      </div>
-      <div class="col-4 col-md-2  text-center">
-        <List description="ALAVEZ" namecp="SelecoesEuropeias"
-          photo="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/96.png"
-          link="https://photos.app.goo.gl/v6KHnDQ335anpuT36" />
-      </div>
-       
     </div>
+
 
     <div class="row justify-content-end align-items-center">
       <div class="col-12 text-center mb-5">
@@ -168,18 +294,19 @@ export default {
                 <img :src="url" width="150">
               </div>
               <div class="col-10 p-2">
-                <span class="mt-2">{{value.name}}</span>
+                <span class="mt-2">{{ value.name }}</span>
               </div>
               <div class="col-10 p-2">
-                <input type="text" name="name" id="name" class="rounded bolerada-input"
-                  placeholder="Digite o seu nome" v-model="name">
+                <input type="text" name="name" id="name" class="rounded bolerada-input" placeholder="Digite o seu nome"
+                  v-model="name">
               </div>
               <div class="col-10 p-2">
                 <input type="text" name="shirt" id="shirt" class="rounded bolerada-input"
                   placeholder="Digite o nome da camisa" v-model="shirt">
               </div>
               <div class="col-10 p-2">
-                <input type="text" name="version" id="version" class="rounded bolerada-input" placeholder="Digite o modelo" v-model="version">
+                <input type="text" name="version" id="version" class="rounded bolerada-input"
+                  placeholder="Digite o modelo" v-model="version">
               </div>
               <div class="col-10 p-2">
                 <input type="radio" id="m" value="M" v-model="picked" />
@@ -190,9 +317,9 @@ export default {
               </div>
               <div class="col-10 p-2">
                 <a @click="handleWhatsappSubmit"><span style="font-size: 1.5em;">
-                  <i class="bi bi-whatsapp"></i>
-                </span>CONSULTAR</a>
-                 
+                    <i class="bi bi-whatsapp"></i>
+                  </span>CONSULTAR</a>
+
               </div>
             </div>
             <span v-else>Click aqui para enviar sua foto</span>
@@ -200,25 +327,7 @@ export default {
           <input type="file" @change="handleFileChange" />
         </label>
       </div>
-      <div class="col-3 text-center ">
-        <RouterLink to="/">
-          <div class="box-button">
-            <span>
-              <i class="bi bi-arrow-return-left"></i>
-            </span>
-          </div>
-        </RouterLink>
-      </div>
-
-      <div class="col-3 text-center">
-        <a v-on:click="scrollToTop()">
-          <div class="box-button">
-            <span>
-              <i class="bi bi-arrow-90deg-up"></i>
-            </span>
-          </div>
-        </a>
-      </div>
+      <BtnFooter></BtnFooter>
     </div>
   </div>
 </template>

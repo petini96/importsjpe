@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AdmView from '../views/AdmView.vue'
-import TeansView from '../views/TeansView.vue'
+import LeaguesView from '../views/LeaguesView.vue'
 import PostView from '../views/PostView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import SupplierView from '../views/SupplierView.vue'
@@ -51,7 +51,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/catalog',
+      path: '/catalogo',
       name: 'catalog',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -59,12 +59,12 @@ const router = createRouter({
       component: () => import('../views/CatalogView.vue')
     },
     {
-      path: '/teans/:title:namecp',
-      name: 'teans',
+      path: '/leagues/:title/componente/:namecp/id/:catalogPicked',
+      name: 'leagues',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: TeansView,
+      component: LeaguesView,
       props: true
     },
     {

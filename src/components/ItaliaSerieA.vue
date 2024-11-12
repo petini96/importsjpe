@@ -2,6 +2,7 @@
 import List from "./List.vue";
 import { ref } from 'vue';
 import { computed } from 'vue';
+import BtnFooter from "./generics/BtnFooter.vue";
 
 import { RouterLink, RouterView } from 'vue-router'
 const scrollToTop = function () {
@@ -182,25 +183,7 @@ export default {
           <input type="file" @change="handleFileChange" />
         </label>
       </div>
-      <div class="col-3 text-center ">
-        <RouterLink to="/">
-          <div class="box-button">
-            <span>
-              <i class="bi bi-arrow-return-left"></i>
-            </span>
-          </div>
-        </RouterLink>
-      </div>
-
-      <div class="col-3 text-center">
-        <a v-on:click="scrollToTop()">
-          <div class="box-button">
-            <span>
-              <i class="bi bi-arrow-90deg-up"></i>
-            </span>
-          </div>
-        </a>
-      </div>
+      <BtnFooter></BtnFooter>
     </div>
   </div>
 </template>
