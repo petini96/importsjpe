@@ -36,9 +36,9 @@ const isActive = computed(() => store.getters.getIsActive);
   <main :class="{ active: isSleeping, 'desactive': !isSleeping }">
     <RouterView />
   </main>
-  <footer class="bg-white text-black p-3 w-100 text-center" :class="{ active: isActive, 'desactive': !isActive }">
-    
-    <div class="row justify-content-center align-items-center w-100 m-0">
+  
+  <footer class="bg-white text-black p-3 w-100 text-center my-10" :class="{ active: isActive, 'desactive': !isActive }">
+    <div class="row justify-content-center align-items-center w-100 my-5">
       <div class="col-12 col-md-4">
         <ul>
           <li>
@@ -97,49 +97,7 @@ const isActive = computed(() => store.getters.getIsActive);
 
     </div>
   </footer>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered p-3 ">
-      <div class="modal-content bolerada-bg-black2 bolerada-border-gray">
-        <div class="modal-header row justify-content-center align-items-center m-0">
-          <div class="col-4 text-center">
-
-            <img src="/src/assets/OFICIAL.png" alt="" class="img-fluid jump-animate" width="200" height="200">
-          </div>
-          <div class="col-6 text-start">
-            <h5 class="modal-title fs-5 bolerada-cl-yellow" id="exampleModalLabel">Seleção de Catálogo</h5>
-          </div>
-          <div class="col-2 text-center">
-
-            <button type="button" class="btn-close bolerada-bg-yellow" @click="sleepBG" data-bs-dismiss="modal"
-              aria-label="Close"></button>
-
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row justify-content-center align-items-center my-3">
-            <div class="col-12 mb-3 text-center">
-              <p class="text-white"><strong>Escolha entre uma das opções abaixo:</strong></p>
-            </div>
-            <div class="col-6 text-end">
-              <!-- :to="{ name: 'leagues', params: { title: this.$store.state.leagueTitle, namecp: this.$store.state.leaguePicked, catalogPicked: 1 } }" -->
-              <button @click="handlePageChange(1)" class="btn bolerada-bg-yellow" data-bs-dismiss="modal">
-                OPÇÃO 1
-              </button>
-            </div>
-            <div class="col-6 text-start">
-              <button @click="handlePageChange(2)" class="btn bolerada-bg-yellow" data-bs-dismiss="modal">
-                OPÇÃO 2
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn bolerada-bg-yellow border-dark" @click="sleepBG"
-            data-bs-dismiss="modal">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+   
 </template>
  
 <script>
@@ -200,5 +158,9 @@ export default {
 
 #navbarSupportedContent {
   font-size: 1.4em;
+}
+
+.my-10{
+  margin-top: 10rem;
 }
 </style>

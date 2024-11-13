@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY --from=build-stage /app .
 
-EXPOSE 4173
+EXPOSE 5173
 
 # Comando inicial do Vite preview
 CMD ["npm", "run", "serve"]
