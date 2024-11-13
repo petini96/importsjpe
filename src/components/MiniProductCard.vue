@@ -19,9 +19,9 @@ defineProps({
 </script>
 
 <template>
-  <div class="col-10 col-md-3 col-lg-3 my-5">
+  <div class="col-10 col-md-3 col-lg-3 my-1 my-md-5">
     <RouterLink :to="{ path: '/produto/' + this.link }">
-      <div class="card bg-black my-5 zoom-in">
+      <div class="card bg-black my-1 my-md-5 zoom-in">
         <div class="card-body">
           <img
             :src="this.photo"
