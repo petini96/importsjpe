@@ -11,9 +11,13 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/produto/:id',
+      path: '/produto',
       name: 'product',
-      component: ProductView
+      component: ProductView,
+      props: route => {
+        const product = route.query.product ? JSON.parse(route.query.product) : null;
+        return { product };
+      }
     }
   ]
 })

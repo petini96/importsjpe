@@ -4,23 +4,23 @@ import MiniProductCard from '../components/MiniProductCard.vue';
 
 const products = [
   {
-    description: "Iphone 16",
+    description: "Iphone 16 Pro - Brown",
     photo: "https://reidocelular.com.br/wp-content/uploads/2024/09/Sem-2024-11-09T060243.299.png",
     link: "iphone-16"
   },
   {
-    description: "Iphone 16 Pro",
+    description: "Iphone 16 Pro - Black",
     photo: "https://www.goimports.com.br/image/catalog/0%20novos%20produtos%202024/iphone16/iphone-16-pro-finish-select-202409-6-9inch-blacktitanium.png",
     link: "iphone-16-pro"
   },
   {
-    description: "Iphone 16",
-    photo: "https://reidocelular.com.br/wp-content/uploads/2024/09/Sem-2024-11-09T060243.299.png",
+    description: "Iphone 16 Pro - White",
+    photo: "https://planoscelular.claro.com.br/medias/300Wx300H-productCard-19029-zero.png?context=bWFzdGVyfGltYWdlc3w3NDI5NHxpbWFnZS9wbmd8YURsakwyZ3hPUzh4TURJeU1UUTVOak13TXpZME5pOHpNREJYZURNd01FaGZjSEp2WkhWamRFTmhjbVJmTVRrd01qbGZlbVZ5Ynk1d2JtY3xiZWI3ZjAzYzcwNzMyMjRkNWQxMzFhNGI1Y2Y3ODVjZTY4OTc2ZDkyYmEzNGE0MDA3ZTk5NTFmN2E4NGM3Y2Rl",
     link: "iphone-16"
   },
   {
-    description: "Iphone 16 Pro",
-    photo: "https://www.goimports.com.br/image/catalog/0%20novos%20produtos%202024/iphone16/iphone-16-pro-finish-select-202409-6-9inch-blacktitanium.png",
+    description: "Iphone 16 Pro - Pink",
+    photo: "https://planoscelular.claro.com.br/medias/300Wx300H-productCard-19003-zero.png?context=bWFzdGVyfGltYWdlc3w4NTM2OXxpbWFnZS9wbmd8YURZd0wyaG1PUzh4TURJeU1USTNNemN4TURZeU1pOHpNREJYZURNd01FaGZjSEp2WkhWamRFTmhjbVJmTVRrd01ETmZlbVZ5Ynk1d2JtY3w3NmY5YmY5MmFhNWVjMzJlYzNiNTUyY2U2NmM5OTZiYzliYjEwYmE2MGFhZjZlODU3NWFjYjJkMmMzM2VhY2Zj",
     link: "iphone-16-pro"
   }
 ];
