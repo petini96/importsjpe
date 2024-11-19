@@ -2,12 +2,48 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 defineProps({
+  productName: {
+    type: String,
+    required: true,
+  },
+  productCategory: {
+    type: String,
+    required: true,
+  },
+  productBrand: {
+    type: String,
+    required: true,
+  },
+  originalPrice: {
+    type: String,
+    required: true,
+  },
+  discountPercentage: {
+    type: String,
+    required: true,
+  },
+  discountedPrice: {
+    type: String,
+    required: true,
+  },
+  installmentPrice: {
+    type: String,
+    required: true,
+  },
+  installmentsCount: {
+    type: String,
+    required: true,
+  },
+  additionalInfo: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
   },
-  photo: {
-    type: String,
+  photos: {
+    type: Array,
     required: true,
   },
   link: {
@@ -20,17 +56,28 @@ defineProps({
 
 <template>
   <div class="col-10 col-md-3 col-lg-3 my-1 my-md-5">
-    <RouterLink 
-      :to="{ 
-        name: 'product', 
-        query: { 
-          product: JSON.stringify({ description: this.description, photo: this.photo, link: this.link }) 
-        } 
-      }" 
-      class="card bg-black my-1 my-md-5 zoom-in"
-    >
+    <RouterLink :to="{
+      name: 'product',
+      query: {
+        product: JSON.stringify(
+          {
+            productName: this.productName,
+            productCategory: this.productCategory,
+            productBrand: this.productBrand,
+            originalPrice: this.originalPrice,
+            discountPercentage: this.discountPercentage,
+            discountedPrice: this.discountedPrice,
+            installmentPrice: this.installmentPrice,
+            installmentsCount: this.installmentsCount,
+            additionalInfo: this.additionalInfo,
+            description: this.description,
+            photos: this.photos
+          }
+        )
+      }
+    }" class="card bg-black my-1 my-md-5 zoom-in">
       <div class="card-body">
-        <img :src="this.photo" alt="" class="img-fluid">
+        <img :src="this.photos[0]" alt="" class="img-fluid">
       </div>
       <div class="card-footer text-center text-white">
         <li><strong>{{ this.description }}</strong></li>
