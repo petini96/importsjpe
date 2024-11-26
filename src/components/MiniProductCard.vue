@@ -61,26 +61,26 @@ defineProps({
       query: {
         product: JSON.stringify(
           {
-            productName: this.productName,
-            productCategory: this.productCategory,
-            productBrand: this.productBrand,
-            originalPrice: this.originalPrice,
-            discountPercentage: this.discountPercentage,
-            discountedPrice: this.discountedPrice,
-            installmentPrice: this.installmentPrice,
-            installmentsCount: this.installmentsCount,
-            additionalInfo: this.additionalInfo,
-            description: this.description,
-            photos: this.photos
+            productName: productName,
+            productCategory: productCategory,
+            productBrand: productBrand,
+            originalPrice: originalPrice,
+            discountPercentage: discountPercentage,
+            discountedPrice: discountedPrice,
+            installmentPrice: installmentPrice,
+            installmentsCount: installmentsCount,
+            additionalInfo: additionalInfo,
+            description: description,
+            photos: photos
           }
         )
       }
     }" class="card bg-black my-1 my-md-5 zoom-in">
       <div class="card-body">
-        <img :src="this.photos[0]" alt="" class="img-fluid">
+        <img :src="photos[0]" alt="" class="img-fluid">
       </div>
       <div class="card-footer text-center text-white">
-        <li><strong>{{ this.description }}</strong></li>
+        <li><strong>{{ description }}</strong></li>
       </div>
     </RouterLink>
   </div>
