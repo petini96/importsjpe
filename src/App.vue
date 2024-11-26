@@ -11,18 +11,15 @@ const isSleeping = computed(() => store.getters.getIsSleeping);
 </script>
 
 <template>
-
   <Nav />
   <main :class="{ active: isSleeping, 'desactive': !isSleeping }">
     <RouterView />
   </main>
   <Footer />
-  
 </template>
 <script>
 
 export default {
-
   data() {
     return {
       whatsapp: "https://wa.me/556791315938",

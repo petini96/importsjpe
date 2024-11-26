@@ -18,7 +18,7 @@ import { RouterLink } from 'vue-router';
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <RouterLink class="nav-link active" aria-current="page" to="/produtos">Produtos</RouterLink>
+            <RouterLink class="nav-link active" aria-current="page" to="/produto">Produtos</RouterLink>
           </li>
         </ul>
       </div>

@@ -3,9 +3,6 @@ import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import MiniProductCard from '../components/MiniProductCard.vue';
 import photoCell1 from '/src/assets/flyer-bolerada.jpg';
 import photoCell2 from '/src/assets/flyer-bolerada-2.jpg';
-
-
-
 </script>
 
 <template>
@@ -159,6 +156,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .zoom-in:hover {
   padding: 10px;
@@ -229,7 +227,6 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
 
 #figure {
   animation: borderAnimate 2s infinite;

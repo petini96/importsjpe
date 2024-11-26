@@ -2,15 +2,12 @@
 import WelcomeItem from './WelcomeItem.vue'
 import { RouterLink, RouterView } from 'vue-router'
 
-
 defineProps({
-
     posts: {
         type: Object,
         required: true
     }
 })
-
 
 </script>
 
@@ -97,10 +94,8 @@ export default {
         },
         handleDrag(event) {
             if (event.deltaX > 0) {
-                // arrasto para a direita
                 this.picked = this.posts[this.picked.order + 1]
             } else if (event.deltaX < 0) {
-                // arrasto para a esquerda
                 this.picked = this.posts[this.picked.order - 1]
             }
         }
@@ -111,11 +106,6 @@ export default {
     <picture class="col-12 d-none d-md-block">
         <img :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%'}"></div>
-        <!-- <div class="post text-center p-3 bg-opacity-50 bg-black">
-            <h2>{{ this.picked.title }}</h2>
-            <hr class="w-50 mx-auto">
-            <p>{{ this.picked.description }}</p>
-        </div> -->
         <span></span>
     </picture>
 </template>
@@ -129,17 +119,8 @@ export default {
 }
 
 .card-category {
-    /* position: relative; */
     padding: 10px;
 
-}
-
-.card-category figcaption {
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%);
-    transform: translateY(-50%); */
 }
 
 .card-category figure {
@@ -148,24 +129,6 @@ export default {
     padding: 10px;
 }
 
-/* .card-category{
-    position: relative;
-    padding: 10px;
-    
-    min-height: 220px; 
-    max-height: 220px; 
-} */
-/* 
-.card-category figure a img{ 
-    min-height: 150px; 
-    max-height: 150px; 
-}
-.card-category figure{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%);
-} */
 figcaption {
     color: #ffc100;
     font-size: 1.3em;

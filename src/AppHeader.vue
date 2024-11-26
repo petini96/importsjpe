@@ -3,11 +3,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  
-
-
-  
-  <!-- v-if="$route.path.includes('/')" -->
 </template>
 
 <style scoped>
@@ -15,10 +10,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </style>
 <script>
 export default {
-  // props: {
-  //   // Using value here allows us to be v-model compatible.
-  //   value: File
-  // },
   data() {
     return {
       whatsapp: "https://wa.me/556791315938",

@@ -1,7 +1,8 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
-defineProps({
+const props = defineProps({
   productName: {
     type: String,
     required: true,
@@ -52,45 +53,41 @@ defineProps({
   },
 });
 
+const router = useRouter();
+const store = useStore();
+
+const handleProductClick = () => {
+  const product = {
+    productName: props.productName,
+    productCategory: props.productCategory,
+    productBrand: props.productBrand,
+    originalPrice: props.originalPrice,
+    discountPercentage: props.discountPercentage,
+    discountedPrice: props.discountedPrice,
+    installmentPrice: props.installmentPrice,
+    installmentsCount: props.installmentsCount,
+    additionalInfo: props.additionalInfo,
+    description: props.description,
+    photos: props.photos,
+  };
+
+  store.dispatch('updatePickedProduct', product);
+
+  router.push({ name: 'product' });
+};
 </script>
 
 <template>
   <div class="col-10 col-md-3 col-lg-3 my-1 my-md-5">
-    <RouterLink :to="{
-      name: 'product',
-      query: {
-        product: JSON.stringify(
-          {
-            productName: productName,
-            productCategory: productCategory,
-            productBrand: productBrand,
-            originalPrice: originalPrice,
-            discountPercentage: discountPercentage,
-            discountedPrice: discountedPrice,
-            installmentPrice: installmentPrice,
-            installmentsCount: installmentsCount,
-            additionalInfo: additionalInfo,
-            description: description,
-            photos: photos
-          }
-        )
-      }
-    }" class="card bg-black my-1 my-md-5 zoom-in">
+    <div @click="handleProductClick" class="card bg-black my-1 my-md-5 zoom-in">
       <div class="card-body">
-        <img :src="photos[0]" alt="" class="img-fluid">
+        <img :src="photos[0]" alt="" class="img-fluid" />
       </div>
       <div class="card-footer text-center text-white">
         <li><strong>{{ description }}</strong></li>
       </div>
-    </RouterLink>
+    </div>
   </div>
 </template>
-
-
-<script>
-export default {
-  methods: {},
-};
-</script>
 
 <style></style>
