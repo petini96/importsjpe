@@ -3,6 +3,10 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 const props = defineProps({
+  productId: {
+    type: String,
+    required: true,
+  },
   productName: {
     type: String,
     required: true,
@@ -57,7 +61,9 @@ const router = useRouter();
 const store = useStore();
 
 const handleProductClick = () => {
+
   const product = {
+    productId: props.productId,
     productName: props.productName,
     productCategory: props.productCategory,
     productBrand: props.productBrand,

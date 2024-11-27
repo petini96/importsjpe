@@ -5,6 +5,7 @@ import team from './modules/team';
 import catalog from './modules/catalog';
 import league from './modules/league';
 import pickedProduct from './modules/pickedProduct';
+import cartProducts from './modules/cartProducts';
 
 const store = createStore({
   modules: {
@@ -12,7 +13,8 @@ const store = createStore({
     team,
     catalog,
     league,
-    pickedProduct
+    pickedProduct,
+    cartProducts
   }
 });
 

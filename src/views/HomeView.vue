@@ -17,6 +17,7 @@ import photoCell2 from '/src/assets/flyer-bolerada-2.jpg';
       <div class="row justify-content-center">
         <MiniProductCard v-for="(product, index) in products" 
           :key="index"
+          :productId="product.productId"
           :productName="product.productName"
           :productCategory="product.productCategory"
           :productBrand="product.productBrand"
@@ -62,6 +63,7 @@ export default {
     return {
       products: [
         {
+          productId: "1",
           productName: "iPhone 16 Pro - Brown",
           productCategory: "Smartphones",
           productBrand: "Apple",
@@ -81,6 +83,7 @@ export default {
           link: "iphone-16"
         },
         {
+          productId: "2",
           productName: "iPhone 16 Pro - Black",
           productCategory: "Smartphones",
           productBrand: "Apple",
@@ -100,6 +103,7 @@ export default {
           link: "iphone-16-pro"
         },
         {
+          productId: "3",
           productName: "iPhone 16 Pro - White",
           productCategory: "Smartphones",
           productBrand: "Apple",
@@ -119,6 +123,7 @@ export default {
           link: "iphone-16"
         },
         {
+          productId: "4",
           productName: "iPhone 16 Pro - Pink",
           productCategory: "Smartphones",
           productBrand: "Apple",

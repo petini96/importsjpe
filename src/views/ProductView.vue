@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue';
-import axios from 'axios';
-import { useStore } from 'vuex'; 
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+import CartComponent from '../components/CartComponent.vue';
 
 const store = useStore();
 
@@ -12,14 +12,41 @@ const product = computed(() => {
 
 const currentIndex = ref(0);
 
+const isProductInCart = (productId) => {
+    return store.getters.isProductInCart(productId);
+};
+
 const pickPhoto = (index: number) => {
   currentIndex.value = index;
 };
 
-const buyNow = () =>{
-  alert("comprando!")
-}
- 
+const isAddedToCart = ref(false);
+
+const addToCart = (product) => {
+  const cartProduct = {
+    productId: product.productId,
+    productName: product.productName,
+    productCategory: product.productCategory,
+    productBrand: product.productBrand,
+    originalPrice: product.originalPrice,
+    discountPercentage: product.discountPercentage,
+    discountedPrice: product.discountedPrice,
+    installmentPrice: product.installmentPrice,
+    installmentsCount: product.installmentsCount,
+    additionalInfo: product.additionalInfo,
+    description: product.description,
+    photos: product.photos,
+  };
+
+  store.dispatch('updateCartProducts', cartProduct);
+  isAddedToCart.value = true;
+};
+
+const removeFromCart = (product) => {
+  store.dispatch('removeCartProduct', product.productId);
+  isAddedToCart.value = false;
+};
+
 </script>
 
 <template>
@@ -55,14 +82,23 @@ const buyNow = () =>{
           </div>
           <div class="actions my-5">
             <p v-if="isSingleSizeAvailable">Tamanho único disponível</p>
-            <button class="btn-outline px-5" @click="buyNow">Comprar</button>
-            <button class="btn btn-warning mx-3" @click="addToCart">Carrinho</button>
+            <!-- <button class="btn-outline px-5" @click="addToCart(product)">
+              Comprar
+            </button> -->
+            <button v-if="!isProductInCart(product.productId)" class="btn-outline px-5" @click="addToCart(product)">
+              Comprar
+            </button>
+            <button v-else class="btn-outline px-5" @click="removeFromCart(product)">
+              Remover da sacola
+            </button>
+
+            <button class="btn btn-warning mx-3">Carrinho</button>
           </div>
         </div>
 
       </div>
     </div>
-
+    <CartComponent />
   </section>
   <section v-else>
     <p>Produto não encontrado.</p>
@@ -142,5 +178,4 @@ const buyNow = () =>{
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
   transform: scale(0.9);
 }
-
 </style>
