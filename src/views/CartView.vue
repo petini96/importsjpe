@@ -1,6 +1,7 @@
 <script setup lang="ts">
  import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
+import CartComponent from '../components/CartComponent.vue';
 
 const store = useStore();
 
@@ -13,8 +14,7 @@ const cartProducts = computed(() => {
 
 <template>
   <section>
-    <p>Sacola!</p>
-    {{ cartProducts }}
+    <CartComponent />
   </section>
 </template>
 

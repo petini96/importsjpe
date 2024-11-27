@@ -6,6 +6,8 @@ import router from './router'
 import './assets/main.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
+import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faUserSecret, faFolderTree, faLock, faShirt, faPerson, faDivide, faCartShopping, faMoneyBill, faMoneyBillTransfer, faQrcode, faList, faParachuteBox, faPaperPlane, faCalendar, faThumbsUp, faBars, faMailForward } from '@fortawesome/free-solid-svg-icons'
@@ -13,6 +15,9 @@ import { faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 import store from '../src/store/index'
 
+library.add(faTrash);
+library.add(faPlus);
+library.add(faMinus);
 library.add(faUserSecret)
 library.add(faFolderTree)
 library.add(faLock)

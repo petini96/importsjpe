@@ -88,17 +88,17 @@ const removeFromCart = (product) => {
             <button v-if="!isProductInCart(product.productId)" class="btn-outline px-5" @click="addToCart(product)">
               Comprar
             </button>
-            <button v-else class="btn-outline px-5" @click="removeFromCart(product)">
+            <button v-else class="btn-outline px-5 my-2" @click="removeFromCart(product)">
               Remover da sacola
             </button>
-
-            <button class="btn btn-warning mx-3">Carrinho</button>
+            <RouterLink class="navbar-brand" to="carrinho">
+              <button class="btn btn-warning mx-3 my-2">Carrinho</button>
+            </RouterLink>
           </div>
         </div>
 
       </div>
     </div>
-    <CartComponent />
   </section>
   <section v-else>
     <p>Produto não encontrado.</p>
