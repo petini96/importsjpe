@@ -12,8 +12,8 @@ const product = computed(() => {
 
 const currentIndex = ref(0);
 
-const isProductInCart = (productId) => {
-    return store.getters.isProductInCart(productId);
+const isProductInCart = (id) => {
+    return store.getters.isProductInCart(id);
 };
 
 const pickPhoto = (index: number) => {
@@ -24,10 +24,11 @@ const isAddedToCart = ref(false);
 
 const addToCart = (product) => {
   const cartProduct = {
-    productId: product.productId,
-    productName: product.productName,
-    productCategory: product.productCategory,
-    productBrand: product.productBrand,
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    brand: product.brand,
+    quantity: product.quantity,
     originalPrice: product.originalPrice,
     discountPercentage: product.discountPercentage,
     discountedPrice: product.discountedPrice,
@@ -43,7 +44,7 @@ const addToCart = (product) => {
 };
 
 const removeFromCart = (product) => {
-  store.dispatch('removeCartProduct', product.productId);
+  store.dispatch('removeCartProduct', product.id);
   isAddedToCart.value = false;
 };
 
@@ -70,13 +71,13 @@ const removeFromCart = (product) => {
 
         <div class="col-4">
           <div class="info my-5">
-            <p>{{ product.productCategory }}</p>
-            <h3>{{ product.productBrand }}</h3>
-            <p>{{ product.productName }}</p>
+            <p>{{ product.category }}</p>
+            <h3>{{ product.brand }}</h3>
+            <p>{{ product.name }}</p>
           </div>
-          <div class="price">
-            <p class="old-price">R$ {{ product.originalPrice }} -{{ product.discountPercentage }}</p>
-            <p class="new-price">R$ {{ product.discountedPrice }}</p>
+          <div class="originalPrice">
+            <p class="old-originalPrice">R$ {{ product.originalPrice }} -{{ product.discountPercentage }}</p>
+            <p class="new-originalPrice">R$ {{ product.discountedPrice }}</p>
             <p>{{ product.installmentsCount }} x R$ {{ product.installmentPrice }}</p>
             <p>{{ product.additionalInfo }}</p>
           </div>
@@ -85,7 +86,7 @@ const removeFromCart = (product) => {
             <!-- <button class="btn-outline px-5" @click="addToCart(product)">
               Comprar
             </button> -->
-            <button v-if="!isProductInCart(product.productId)" class="btn-outline px-5" @click="addToCart(product)">
+            <button v-if="!isProductInCart(product.id)" class="btn-outline px-5" @click="addToCart(product)">
               Comprar
             </button>
             <button v-else class="btn-outline px-5 my-2" @click="removeFromCart(product)">
@@ -125,17 +126,17 @@ const removeFromCart = (product) => {
   object-fit: cover;
 }
 
-.old-price {
+.old-originalPrice {
   text-decoration: line-through;
   color: gray;
 }
 
-.new-price {
+.new-originalPrice {
   color: red;
   font-weight: bold;
 }
 
-.price p {
+.originalPrice p {
   margin: 4px 0;
   padding: 0;
 }

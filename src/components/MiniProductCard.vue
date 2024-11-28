@@ -3,20 +3,24 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 const props = defineProps({
-  productId: {
+  id: {
     type: String,
     required: true,
   },
-  productName: {
+  name: {
     type: String,
     required: true,
   },
-  productCategory: {
+  category: {
     type: String,
     required: true,
   },
-  productBrand: {
+  brand: {
     type: String,
+    required: true,
+  },
+  quantity: {
+    type: Number,
     required: true,
   },
   originalPrice: {
@@ -63,10 +67,11 @@ const store = useStore();
 const handleProductClick = () => {
 
   const product = {
-    productId: props.productId,
-    productName: props.productName,
-    productCategory: props.productCategory,
-    productBrand: props.productBrand,
+    id: props.id,
+    name: props.name,
+    category: props.category,
+    brand: props.brand,
+    quantity: props.quantity,
     originalPrice: props.originalPrice,
     discountPercentage: props.discountPercentage,
     discountedPrice: props.discountedPrice,

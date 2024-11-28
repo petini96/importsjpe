@@ -3,10 +3,10 @@ export default {
     state() {
         return {
             pickedProduct: {
-                productId: "",
-                productName: "",
-                productCategory: "",
-                productBrand: "",
+                id: "",
+                name: "",
+                category: "",
+                brand: "",
                 originalPrice: "",
                 discountPercentage: "",
                 discountedPrice: "",
