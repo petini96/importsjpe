@@ -1,37 +1,26 @@
 <script setup>
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import MiniProductCard from '../components/MiniProductCard.vue';
-import photoCell1 from '/src/assets/flyer-bolerada.jpg';
-import photoCell2 from '/src/assets/flyer-bolerada-2.jpg';
+import PostService from '@/services/PostService';
+
 </script>
 
 <template>
-  <section id="corrousel">
+  <section id="carousel">
     <div class="row justify-content-center">
-      <BoleradaCarrousel :posts="posts" />
+      <BoleradaCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
   </section>
-
+  
   <section id="mini-products">
     <div class="container my-5">
       <div class="row justify-content-center">
-        <MiniProductCard v-for="(product, index) in products" 
-          :key="index"
-          :id="product.id"
-          :name="product.name"
-          :category="product.category"
-          :brand="product.brand"
-          :quantity="product.quantity"
-          :originalPrice="product.originalPrice"
-          :discountPercentage="product.discountPercentage"
-          :discountedPrice="product.discountedPrice"
-          :installmentPrice="product.installmentPrice"
-          :installmentsCount="product.installmentsCount"
-          :additionalInfo="product.additionalInfo"
-          :description="product.description"
-          :photos="product.photos"
-          :link="product.link"
-        />
+        <MiniProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
+          :category="product.category" :brand="product.brand" :quantity="product.quantity"
+          :originalPrice="product.originalPrice" :discountPercentage="product.discountPercentage"
+          :discountedPrice="product.discountedPrice" :installmentPrice="product.installmentPrice"
+          :installmentsCount="product.installmentsCount" :additionalInfo="product.additionalInfo"
+          :description="product.description" :photos="product.photos" :link="product.link" />
       </div>
     </div>
   </section>
@@ -148,21 +137,41 @@ export default {
           link: "iphone-16-pro"
         }
       ],
-      posts: [
-        {
-          media: photoCell1,
-          title: 'Seu Celular Ideal: Desempenho e Estilo!',
-          description: 'Encontre o Celular Perfeito para Você: Desempenho, Estilo e Inovação ao Seu Alcance!',
-          order: 0
-        },
-        {
-          media: photoCell2,
-          title: 'O Celular dos Seus Sonhos!',
-          description: 'Desempenho, Estilo e Tecnologia em um Só Lugar. Encontre o Seu!',
-          order: 1
-        }
-      ],
+      posts: [],
+      loading: true,
+      errored: false
+      // posts: [
+      //   {
+      //     media: photoCell1,
+      //     title: 'Seu Celular Ideal: Desempenho e Estilo!',
+      //     description: 'Encontre o Celular Perfeito para Você: Desempenho, Estilo e Inovação ao Seu Alcance!',
+      //     order: 0
+      //   },
+      //   {
+      //     media: photoCell2,
+      //     title: 'O Celular dos Seus Sonhos!',
+      //     description: 'Desempenho, Estilo e Tecnologia em um Só Lugar. Encontre o Seu!',
+      //     order: 1
+      //   }
+      // ],
     };
+  },
+  mounted() {
+    console.log(this.posts);
+    this.loadPosts();
+  },
+  methods: {
+    async loadPosts() {
+      try {
+        this.posts = await PostService.fetchPosts(0, 10);
+        console.log(this.posts);
+      } catch (error) {
+        console.error("Erro ao carregar posts:", error);
+        this.errored = true;
+      } finally {
+        this.loading = false; 
+      }
+    },
   },
 };
 </script>
