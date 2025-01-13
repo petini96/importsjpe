@@ -2,6 +2,16 @@
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import MiniProductCard from '../components/MiniProductCard.vue';
 import PostService from '@/services/PostService';
+import { onMounted, computed} from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+onMounted(() => {
+  store.dispatch('fetchAllPosts', { page: 0, size: 10 });
+});
+
+const posts = computed(() => store.getters.getAllPosts);
 
 </script>
 
@@ -156,23 +166,23 @@ export default {
       // ],
     };
   },
-  mounted() {
-    console.log(this.posts);
-    this.loadPosts();
-  },
-  methods: {
-    async loadPosts() {
-      try {
-        this.posts = await PostService.fetchPosts(0, 10);
-        console.log(this.posts);
-      } catch (error) {
-        console.error("Erro ao carregar posts:", error);
-        this.errored = true;
-      } finally {
-        this.loading = false; 
-      }
-    },
-  },
+  // mounted() {
+  //   console.log(this.posts);
+  //   this.loadPosts();
+  // },
+  // methods: {
+  //   async loadPosts() {
+  //     try {
+  //       this.posts = await PostService.fetchPosts(0, 10);
+  //       console.log(this.posts);
+  //     } catch (error) {
+  //       console.error("Erro ao carregar posts:", error);
+  //       this.errored = true;
+  //     } finally {
+  //       this.loading = false; 
+  //     }
+  //   },
+  // },
 };
 </script>
 

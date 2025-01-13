@@ -9,7 +9,13 @@ export default class PostService {
       console.log(response.data.content);
       return response.data.content;
     } catch (error) {
-      console.error('Erro ao buscar posts:', error);
+      if (error.response) {
+        console.error(`Erro na resposta da API: ${error.response.status} - ${error.response.data}`);
+      } else if (error.request) {
+        console.error('Erro na solicitação: Sem resposta do servidor', error.request);
+      } else {
+        console.error('Erro desconhecido:', error.message);
+      }
       throw error;
     }
   }
