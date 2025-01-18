@@ -1,17 +1,26 @@
 <script setup>
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
-import MiniProductCard from '../components/MiniProductCard.vue';
+import SimpleProductCard from '../components/SimpleProductCard.vue';
 import PostService from '@/services/PostService';
-import { onMounted, computed} from 'vue';
+import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
 
-onMounted(() => {
-  store.dispatch('fetchAllPosts', { page: 0, size: 10 });
+onMounted(async () => {
+  try {
+    await Promise.all([
+      store.dispatch('fetchAllPosts', { page: 0, size: 10 }),
+      store.dispatch('fetchAllProducts', { page: 0, size: 10 }),
+    ]);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 });
 
-const posts = computed(() => store.getters.getAllPosts);
+
+const posts = computed(() => store.getters.getAllPosts || []);
+const products = computed(() => store.getters.getAllProducts || []);
 
 </script>
 
@@ -21,16 +30,17 @@ const posts = computed(() => store.getters.getAllPosts);
       <BoleradaCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
   </section>
-  
+
   <section id="mini-products">
     <div class="container my-5">
       <div class="row justify-content-center">
-        <MiniProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
-          :category="product.category" :brand="product.brand" :quantity="product.quantity"
-          :originalPrice="product.originalPrice" :discountPercentage="product.discountPercentage"
-          :discountedPrice="product.discountedPrice" :installmentPrice="product.installmentPrice"
-          :installmentsCount="product.installmentsCount" :additionalInfo="product.additionalInfo"
-          :description="product.description" :photos="product.photos" :link="product.link" />
+        <SimpleProductCard v-for="(product, index) in products" 
+          :key="index" 
+          :id="product.id"
+          :name="product.name" 
+          :description="product.description" 
+          :photos="product.photos" 
+        />
       </div>
     </div>
   </section>
@@ -61,128 +71,12 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          id: "1",
-          name: "iPhone 16 Pro - Brown",
-          category: "Smartphones",
-          brand: "Apple",
-          quantity: 1,
-          originalPrice: "R$ 7.999",
-          discountPercentage: "10%",
-          discountedPrice: "6.999",
-          installmentPrice: "R$ 720",
-          installmentsCount: "12",
-          additionalInfo: "Garanta o seu agora mesmo!",
-          description: "iPhone 16 Pro - Brown, design sofisticado e desempenho de ponta.",
-          photos: [
-            "https://reidocelular.com.br/wp-content/uploads/2024/09/Sem-2024-11-09T060243.299.png",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FUp9nSAHSFd_VCfz3zihDtnN3RMoBLvEGFFZIWQ6T2Ap1FLB09UaFMpvZODqcLVVnS0&usqp=CAU",
-            "https://www.cnet.com/a/img/resize/24f33e2947794c06413c0f3cdf90d36755074186/hub/2023/09/12/01a357c3-9eb9-418f-b485-26a5c602203c/iphone-15-pro-titanium.png?auto=webp&fit=crop&height=1200&width=1200",
-            "https://5.imimg.com/data5/SELLER/Default/2024/1/375836308/UP/MK/QR/33769411/lightest-boybgwifuehe-large-2x.jpg"
-          ],
-          link: "iphone-16"
-        },
-        {
-          id: "2",
-          name: "iPhone 16 Pro - Black",
-          category: "Smartphones",
-          brand: "Apple",
-          quantity: 1,
-          originalPrice: "R$ 8.299",
-          discountPercentage: "12%",
-          discountedPrice: "7.500",
-          installmentPrice: "R$ 750",
-          installmentsCount: "12",
-          additionalInfo: "Compre agora e aproveite o desconto!",
-          description: "A beleza do iPhone 16 Pro com acabamento Black. Performance impressionante.",
-          photos: [
-            "https://www.goimports.com.br/image/catalog/0%20novos%20produtos%202024/iphone16/iphone-16-pro-finish-select-202409-6-9inch-blacktitanium.png",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FUp9nSAHSFd_VCfz3zihDtnN3RMoBLvEGFFZIWQ6T2Ap1FLB09UaFMpvZODqcLVVnS0&usqp=CAU",
-            "https://www.cnet.com/a/img/resize/24f33e2947794c06413c0f3cdf90d36755074186/hub/2023/09/12/01a357c3-9eb9-418f-b485-26a5c602203c/iphone-15-pro-titanium.png?auto=webp&fit=crop&height=1200&width=1200",
-            "https://5.imimg.com/data5/SELLER/Default/2024/1/375836308/UP/MK/QR/33769411/lightest-boybgwifuehe-large-2x.jpg"
-          ],
-          link: "iphone-16-pro"
-        },
-        {
-          id: "3",
-          name: "iPhone 16 Pro - White",
-          category: "Smartphones",
-          brand: "Apple",
-          quantity: 1,
-          originalPrice: "R$ 8.499",
-          discountPercentage: "15%",
-          discountedPrice: "8.000",
-          installmentPrice: "R$ 790",
-          installmentsCount: "12",
-          additionalInfo: "Em estoque, entrega rápida!",
-          description: "iPhone 16 Pro - White, o smartphone que combina elegância e tecnologia.",
-          photos: [
-            "https://planoscelular.claro.com.br/medias/300Wx300H-productCard-19029-zero.png?context=bWFzdGVyfGltYWdlc3w3NDI5NHxpbWFnZS9wbmd8YURsakwyZ3hPUzh4TURJeU1UUTVOak13TXpZME5pOHpNREJYZURNd01FaGZjSEp2WkhWamRFTmhjbVJmTVRrd01qbGZlbVZ5Ynk1d2JtY3xiZWI3ZjAzYzcwNzMyMjRkNWQxMzFhNGI1Y2Y3ODVjZTY4OTc2ZDkyYmEzNGE0MDA3ZTk5NTFmN2E4NGM3Y2Rl",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FUp9nSAHSFd_VCfz3zihDtnN3RMoBLvEGFFZIWQ6T2Ap1FLB09UaFMpvZODqcLVVnS0&usqp=CAU",
-            "https://www.cnet.com/a/img/resize/24f33e2947794c06413c0f3cdf90d36755074186/hub/2023/09/12/01a357c3-9eb9-418f-b485-26a5c602203c/iphone-15-pro-titanium.png?auto=webp&fit=crop&height=1200&width=1200",
-            "https://5.imimg.com/data5/SELLER/Default/2024/1/375836308/UP/MK/QR/33769411/lightest-boybgwifuehe-large-2x.jpg"
-          ],
-          link: "iphone-16"
-        },
-        {
-          id: "4",
-          name: "iPhone 16 Pro - Pink",
-          category: "Smartphones",
-          brand: "Apple",
-          quantity: 1,
-          originalPrice: "R$ 7.999",
-          discountPercentage: "8%",
-          discountedPrice: "6.800",
-          installmentPrice: "R$ 710",
-          installmentsCount: "12",
-          additionalInfo: "Não perca essa oferta!",
-          description: "iPhone 16 Pro - Pink, o celular que combina estilo e inovação.",
-          photos: [
-            "https://planoscelular.claro.com.br/medias/300Wx300H-productCard-19003-zero.png?context=bWFzdGVyfGltYWdlc3w4NTM2OXxpbWFnZS9wbmd8YURZd0wyaG1PUzh4TURJeU1USTNNemN4TURZeU1pOHpNREJYZURNd01FaGZjSEp2WkhWamRFTmhjbVJmTVRrd01ETmZlbVZ5Ynk1d2JtY3w3NmY5YmY5MmFhNWVjMzJlYzNiNTUyY2U2NmM5OTZiYzliYjEwYmE2MGFhZjZlODU3NWFjYjJkMmMzM2VhY2Zj",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FUp9nSAHSFd_VCfz3zihDtnN3RMoBLvEGFFZIWQ6T2Ap1FLB09UaFMpvZODqcLVVnS0&usqp=CAU",
-            "https://www.cnet.com/a/img/resize/24f33e2947794c06413c0f3cdf90d36755074186/hub/2023/09/12/01a357c3-9eb9-418f-b485-26a5c602203c/iphone-15-pro-titanium.png?auto=webp&fit=crop&height=1200&width=1200",
-            "https://5.imimg.com/data5/SELLER/Default/2024/1/375836308/UP/MK/QR/33769411/lightest-boybgwifuehe-large-2x.jpg"
-          ],
-          link: "iphone-16-pro"
-        }
-      ],
+      products:[],
       posts: [],
       loading: true,
       errored: false
-      // posts: [
-      //   {
-      //     media: photoCell1,
-      //     title: 'Seu Celular Ideal: Desempenho e Estilo!',
-      //     description: 'Encontre o Celular Perfeito para Você: Desempenho, Estilo e Inovação ao Seu Alcance!',
-      //     order: 0
-      //   },
-      //   {
-      //     media: photoCell2,
-      //     title: 'O Celular dos Seus Sonhos!',
-      //     description: 'Desempenho, Estilo e Tecnologia em um Só Lugar. Encontre o Seu!',
-      //     order: 1
-      //   }
-      // ],
     };
   },
-  // mounted() {
-  //   console.log(this.posts);
-  //   this.loadPosts();
-  // },
-  // methods: {
-  //   async loadPosts() {
-  //     try {
-  //       this.posts = await PostService.fetchPosts(0, 10);
-  //       console.log(this.posts);
-  //     } catch (error) {
-  //       console.error("Erro ao carregar posts:", error);
-  //       this.errored = true;
-  //     } finally {
-  //       this.loading = false; 
-  //     }
-  //   },
-  // },
 };
 </script>
 
