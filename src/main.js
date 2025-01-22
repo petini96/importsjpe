@@ -5,8 +5,8 @@ import router from './router'
 
 import './assets/main.css'
 import './assets/style/main.scss'
-import './assets/style/_mixins.scss'
-import './assets/style/_variables.scss'
+// import './assets/style/mixins.scss'
+import './assets/style/variables.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 

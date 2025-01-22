@@ -1,17 +1,17 @@
-@import "./themes/light";
-@import "./themes/dark";
-@import "./mixins";
+@use "./themes/light";
+// @import "./themes/dark";
+// @import "./mixins";
 
-:root {
-  @include theme-colors;
-}
+// :root {
+//   @include theme-colors;
+// }
 
-[data-theme="dark"] {
-  @import "./themes/dark";
-  @include theme-colors;
-}
+// [data-theme="dark"] {
+//   @import "./themes/dark";
+//   @include theme-colors;
+// }
 
-[data-theme="light"] {
-  @import "./themes/light";
-  @include theme-colors;
-}
+// [data-theme="light"] {
+//   @import "./themes/light";
+//   @include theme-colors;
+// }

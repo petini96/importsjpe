@@ -13,5 +13,16 @@ export default defineConfig({
   },
   server: {
     host: true
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+        additionalData: `@use "src/assets/style/mixins" as *;`,
+        silenceDeprecations: ["legacy-js-api"],
+      },
+    },
+  },
 })
+
+
