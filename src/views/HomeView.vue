@@ -1,4 +1,4 @@
-<script setup>
+<script setup> 
 
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
