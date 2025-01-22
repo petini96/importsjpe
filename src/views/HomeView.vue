@@ -1,7 +1,7 @@
 <script setup>
+
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
-import PostService from '@/services/PostService';
 import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 
@@ -17,7 +17,6 @@ onMounted(async () => {
     console.error('Error fetching data:', error);
   }
 });
-
 
 const posts = computed(() => store.getters.getAllPosts || []);
 const products = computed(() => store.getters.getAllProducts || []);
@@ -63,24 +62,10 @@ const products = computed(() => store.getters.getAllProducts || []);
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  components: {
-    BoleradaCarrousel,
-  },
-  data() {
-    return {
-      products:[],
-      posts: [],
-      loading: true,
-      errored: false
-    };
-  },
-};
-</script>
+ 
 
 <style>
+
 .zoom-in:hover {
   padding: 10px;
   transition: 0.3s;

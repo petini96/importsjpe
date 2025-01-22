@@ -4,6 +4,10 @@ import AppHeader from './AppHeader.vue'
 import router from './router'
 
 import './assets/main.css'
+import './assets/style/main.scss'
+import './assets/style/_mixins.scss'
+import './assets/style/_variables.scss'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';

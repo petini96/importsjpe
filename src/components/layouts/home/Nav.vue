@@ -9,7 +9,7 @@ import { RouterLink } from 'vue-router';
   <nav class="navbar bolerada-bg-black2 navbar-expand-lg p-2" data-bs-theme="dark">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/">
-        <img src="../../../assets/logo-imortsjpe.png" alt="" class="img-fluid" width="150" height="150">
+        <img src="../../../assets/images/logo-imortsjpe.png" alt="" class="img-fluid" width="150" height="150">
       </RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,5 +26,4 @@ import { RouterLink } from 'vue-router';
   </nav>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
