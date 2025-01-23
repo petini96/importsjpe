@@ -1,27 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { computed } from 'vue';
+import { useLayoutConfigStore } from './store/modules/layout-config-store';
 import Nav from './components/layouts/home/Nav.vue';
 import Footer from './components/layouts/home/Footer.vue';
 
+const layoutConfigStore = useLayoutConfigStore();
+layoutConfigStore.setIsSleeping(true)
 
-const store = useStore();
-const isSleeping = computed(() => store.getters.getIsSleeping);
-
-const theme = ref("light");
-
-const toggleTheme = () => {
-  theme.value = theme.value === "light" ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", theme.value);
-};
+const isSleeping = computed(() => layoutConfigStore.layoutConfig?.isSleeping);
 
 </script>
 
 <template>
-  <div>
-    <button @click="toggleTheme">Alternar Tema</button>
-  </div>
   <Nav />
   <main :class="{ active: isSleeping, 'desactive': !isSleeping }">
     <RouterView />

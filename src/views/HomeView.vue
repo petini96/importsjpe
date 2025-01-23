@@ -4,8 +4,14 @@ import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
+// import { usePostStore } from './store/modules/post-store';
 
 const store = useStore();
+
+
+// const postStore = usePostStore(); 
+
+// const posts = computed(() => postStore.posts);
 
 onMounted(async () => {
   try {

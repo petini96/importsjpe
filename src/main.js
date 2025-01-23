@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import AppHeader from './AppHeader.vue'
 import router from './router'
+import { createPinia } from 'pinia'
 
 import './assets/main.css'
 import './assets/style/main.scss'
@@ -43,7 +44,9 @@ library.add(faBars)
 library.add(faMailForward)
 
 const app = createApp(App)
+const pinia = createPinia()
 
+app.use(pinia)
 app.use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
 app.use(store)
