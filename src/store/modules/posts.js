@@ -1,4 +1,4 @@
-import PostService from "../../services/postService";
+import PostServices from "../../services/postServices";
 
 const CACHE_DURATION = 5 * 60 * 1000;
 
@@ -59,7 +59,7 @@ export default {
             commit('setError', null);
 
             try {
-                const posts = await PostService.fetchPosts(page, size);
+                const posts = await PostServices.fetchPosts(page, size);
                 if (page === 0) {
                     commit('setPosts', posts);
                 } else {

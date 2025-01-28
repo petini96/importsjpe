@@ -1,32 +1,26 @@
-<script setup> 
+<script setup lang="ts">
 
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
-// import { usePostStore } from './store/modules/post-store';
+import { usePostStore } from '../store/modules/post-store';
+import { useProductStore } from '../store/modules/product-store';
 
-const store = useStore();
+const postStore = usePostStore();
+const productStore = useProductStore();
 
-
-// const postStore = usePostStore(); 
-
-// const posts = computed(() => postStore.posts);
+const posts = computed(() => postStore.posts);
+const products = computed(() => productStore.products);
 
 onMounted(async () => {
   try {
-    await Promise.all([
-      store.dispatch('fetchAllPosts', { page: 0, size: 10 }),
-      store.dispatch('fetchAllProducts', { page: 0, size: 10 }),
-    ]);
+    console.log("fetch data");
+    await postStore.fetchPosts(0, 10);
+    await productStore.fetchProducts(0, 10);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 });
-
-const posts = computed(() => store.getters.getAllPosts || []);
-const products = computed(() => store.getters.getAllProducts || []);
-
 </script>
 
 <template>
@@ -39,13 +33,8 @@ const products = computed(() => store.getters.getAllProducts || []);
   <section id="mini-products">
     <div class="container my-5">
       <div class="row justify-content-center">
-        <SimpleProductCard v-for="(product, index) in products" 
-          :key="index" 
-          :id="product.id"
-          :name="product.name" 
-          :description="product.description" 
-          :photos="product.photos" 
-        />
+        <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
+          :description="product.description" :photos="product.photos" />
       </div>
     </div>
   </section>
@@ -68,10 +57,9 @@ const products = computed(() => store.getters.getAllProducts || []);
     </div>
   </section>
 </template>
- 
+
 
 <style>
-
 .zoom-in:hover {
   padding: 10px;
   transition: 0.3s;

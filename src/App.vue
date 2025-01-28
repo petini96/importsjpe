@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { RouterView } from 'vue-router';
 import { computed } from 'vue';
 import { useLayoutConfigStore } from './store/modules/layout-config-store';

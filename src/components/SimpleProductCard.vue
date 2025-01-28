@@ -1,42 +1,23 @@
-<script setup>
-import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+<script setup lang="ts">
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  photos: {
-    type: Array,
-    required: true,
-  },
-});
+import { useRouter } from 'vue-router';
+import { useProductStore } from '../store/modules/product-store';
+
+const props = defineProps<{
+  id: number;
+  name: string;
+  description: string;
+  photos: { id: number; url: string; fileType: string; fileSize: number; createdAt: number }[];
+}>();
 
 const router = useRouter();
-const store = useStore();
+const productStore = useProductStore();
 
 const handleProductClick = () => {
-
-  const product = {
-    id: props.id,
-    name: props.name,
-    description: props.description,
-    photos: props.photos,
-  };
-
-  store.dispatch('updatePickedProduct', product);
-
+  productStore.setSelectedProduct(props.id);
   router.push({ name: 'product' });
 };
+
 </script>
 
 <template>
@@ -55,6 +36,3 @@ const handleProductClick = () => {
     </div>
   </div>
 </template>
-
-
-<style></style>

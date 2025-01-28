@@ -1,14 +1,12 @@
 import axios from 'axios';
+import type { FetchResponse } from '../types/Paginable';
 
-const API_URL = 'http://localhost:8080/products';
-
-export default class productService {
-  static async fetchProducts(page = 0, size = 10) {
+export default class PaginableService {
+  static async fetchPaginable<T>(url: string, page: number = 0, size: number = 10): Promise<FetchResponse<T>> {
     try {
-      const response = await axios.get(`${API_URL}?page=${page}&size=${size}`);
-      console.log(response.data.content);
-      return response.data.content;
-    } catch (error) {
+      const response = await axios.get<FetchResponse<T>>(`${url}?page=${page}&size=${size}`);
+      return response.data;
+    } catch (error: any) {
       if (error.response) {
         console.error(`Erro na resposta da API: ${error.response.status} - ${error.response.data}`);
       } else if (error.request) {

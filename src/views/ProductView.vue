@@ -1,37 +1,47 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
-import CartComponent from '../components/CartComponent.vue';
+import { ref, computed, onMounted } from 'vue';
+import type { Product } from '../types/Product'; // Importação apenas de tipos
+import { useProductStore } from '../store/modules/product-store';
 
-const store = useStore();
+const productStore = useProductStore();
 
-const product = computed(() => {
-  console.log(store.getters.getPickedProduct);
-  return store.getters.getPickedProduct;
+const product = computed<Product | null>(() => productStore.product);
+
+onMounted(async () => {
+  try {
+    console.log("fetch data"); 
+    if(productStore.selectedProduct){
+      await productStore.getProduct(productStore.selectedProduct);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 });
 
-const currentIndex = ref(0);
+const currentIndex = ref<number>(0);
 
-const isProductInCart = (id) => {
-    return store.getters.isProductInCart(id);
+const isProductInCart = (id: number): boolean => {
+  // return store.getters.isProductInCart(id);
+  return true;
 };
 
-const pickPhoto = (index: number) => {
+const pickPhoto = (index: number): void => {
   currentIndex.value = index;
 };
 
-const isAddedToCart = ref(false);
+const isAddedToCart = ref<boolean>(false);
 
-const addToCart = (product) => {
+const addToCart = (product: Product): void => {
+
   const cartProduct = {
     id: product.id,
     name: product.name,
-    category: product.category,
+    category: product.productCategory.name,
     brand: product.brand,
-    quantity: product.quantity,
+    quantity: 1,
     originalPrice: product.originalPrice,
     discountPercentage: product.discountPercentage,
-    discountedPrice: product.discountedPrice,
+    discountedPrice: product.discountPrice,
     installmentPrice: product.installmentPrice,
     installmentsCount: product.installmentsCount,
     additionalInfo: product.additionalInfo,
@@ -39,50 +49,48 @@ const addToCart = (product) => {
     photos: product.photos,
   };
 
-  store.dispatch('updateCartProducts', cartProduct);
+  // store.dispatch('updateCartProducts', cartProduct);
   isAddedToCart.value = true;
 };
 
-const removeFromCart = (product) => {
-  store.dispatch('removeCartProduct', product.id);
+const removeFromCart = (product: Product): void => {
+  // store.dispatch('removeCartProduct', product.id);
   isAddedToCart.value = false;
 };
-
 </script>
 
 <template>
   <section v-if="product">
     <div class="container">
       <div class="row align-items-center">
-
         <div class="col-8">
           <div class="col-12 product-viewer">
             <div class="photo">
-              <img :src="product.photos[currentIndex]" alt="Imagem do produto" class="img-fluid" />
+              <img :src="product.photos[currentIndex].url" alt="Imagem do produto" class="img-fluid" />
             </div>
           </div>
 
           <div class="col-12 row my-3">
-            <div v-for="(photo, index) in product.photos" class="col-3 mini-viewer" v-on:click="pickPhoto(index)">
-              <img :src="photo" alt="Imagem do produto" class="img-fluid rounded " />
+            <div v-for="(photo, index) in product.photos" :key="photo.id" class="col-3 mini-viewer" v-on:click="pickPhoto(index)">
+              <img :src="photo.url" alt="Imagem do produto" class="img-fluid rounded " />
             </div>
           </div>
         </div>
 
         <div class="col-4">
           <div class="info my-5">
-            <p>{{ product.category }}</p>
+            <p>{{ product.productCategory.name }}</p>
             <h3>{{ product.brand }}</h3>
             <p>{{ product.name }}</p>
           </div>
           <div class="originalPrice">
             <p class="old-originalPrice">R$ {{ product.originalPrice }} -{{ product.discountPercentage }}</p>
-            <p class="new-originalPrice">R$ {{ product.discountedPrice }}</p>
+            <p class="new-originalPrice">R$ {{ product.discountPrice }}</p>
             <p>{{ product.installmentsCount }} x R$ {{ product.installmentPrice }}</p>
             <p>{{ product.additionalInfo }}</p>
           </div>
           <div class="actions my-5">
-            <p v-if="isSingleSizeAvailable">Tamanho único disponível</p>
+            <!-- <p v-if="isSingleSizeAvailable">Tamanho único disponível</p> -->
             <!-- <button class="btn-outline px-5" @click="addToCart(product)">
               Comprar
             </button> -->
@@ -97,7 +105,6 @@ const removeFromCart = (product) => {
             </RouterLink>
           </div>
         </div>
-
       </div>
     </div>
   </section>

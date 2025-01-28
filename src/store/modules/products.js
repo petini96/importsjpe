@@ -1,4 +1,4 @@
-import ProductService from "../../services/productService";
+import ProductServices from "../../services/productServices";
 
 const CACHE_DURATION = 5 * 60 * 1000;
 
