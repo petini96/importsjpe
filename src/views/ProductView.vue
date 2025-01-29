@@ -21,6 +21,7 @@ onMounted(async () => {
 const currentIndex = ref<number>(0);
 
 const isProductInCart = (id: number): boolean => {
+  console.log(id);
   // return store.getters.isProductInCart(id);
   return true;
 };
@@ -49,11 +50,13 @@ const addToCart = (product: Product): void => {
     photos: product.photos,
   };
 
+  console.log(cartProduct);
   // store.dispatch('updateCartProducts', cartProduct);
   isAddedToCart.value = true;
 };
 
 const removeFromCart = (product: Product): void => {
+  console.log(product);
   // store.dispatch('removeCartProduct', product.id);
   isAddedToCart.value = false;
 };

@@ -3,55 +3,44 @@ import App from './App.vue'
 import AppHeader from './AppHeader.vue'
 import router from './router'
 import { createPinia } from 'pinia'
-
 import './assets/main.css'
 import './assets/style/main.scss'
 import './assets/style/mixins.scss'
 import './assets/style/variables.scss'
+import { Quasar } from 'quasar'
+import langDe from 'quasar/lang/de'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-
-import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-import { faUserSecret, faFolderTree, faLock, faShirt, faPerson, faDivide, faCartShopping, faMoneyBill, faMoneyBillTransfer, faQrcode, faList, faParachuteBox, faPaperPlane, faCalendar, faThumbsUp, faBars, faMailForward } from '@fortawesome/free-solid-svg-icons'
+import {
+    faTrash, faPlus, faMinus, faUserSecret, faFolderTree, faLock, faShirt,
+    faPerson, faDivide, faCartShopping, faMoneyBill, faMoneyBillTransfer,
+    faQrcode, faList, faParachuteBox, faPaperPlane, faCalendar, faThumbsUp,
+    faBars, faMailForward
+} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-import store from '../src/store/index'
-
-library.add(faTrash);
-library.add(faPlus);
-library.add(faMinus);
-library.add(faUserSecret)
-library.add(faFolderTree)
-library.add(faLock)
-library.add(faShirt)
-library.add(faPerson)
-library.add(faDivide)
-library.add(faCartShopping)
-library.add(faMoneyBillTransfer)
-library.add(faQrcode)
-library.add(faList)
-library.add(faWhatsapp)
-library.add(faParachuteBox)
-library.add(faPaperPlane)
-library.add(faCalendar)
-library.add(faMoneyBill)
-library.add(faInstagram)
-library.add(faThumbsUp)
-library.add(faBars)
-library.add(faMailForward)
+// Add icons to the library
+library.add(faTrash, faPlus, faMinus, faUserSecret, faFolderTree, faLock, faShirt,
+    faPerson, faDivide, faCartShopping, faMoneyBillTransfer, faQrcode, faList,
+    faWhatsapp, faParachuteBox, faPaperPlane, faCalendar, faMoneyBill, faInstagram,
+    faThumbsUp, faBars, faMailForward)
 
 const app = createApp(App)
 const pinia = createPinia()
 
+app.use(Quasar, {
+    config: {
+        lang: langDe
+    }
+})
+
 app.use(pinia)
 app.use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
-app.use(store)
 app.mount('#app')
 
+// Mounting AppHeader to a different element
 const app2 = createApp(AppHeader)
 app2.use(router)
     .component('font-awesome-icon', FontAwesomeIcon)

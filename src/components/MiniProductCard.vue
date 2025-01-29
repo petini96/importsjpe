@@ -1,6 +1,5 @@
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 
 const props = defineProps({
   id: {
@@ -62,10 +61,8 @@ const props = defineProps({
 });
 
 const router = useRouter();
-const store = useStore();
 
-const handleProductClick = () => {
-
+const handleProductClick = async () => { 
   const product = {
     id: props.id,
     name: props.name,
@@ -82,17 +79,23 @@ const handleProductClick = () => {
     photos: props.photos,
   };
 
-  store.dispatch('updatePickedProduct', product);
+  console.log(product);
+  // store.dispatch('updatePickedProduct', product);
 
-  router.push({ name: 'product' });
+  try {
+    await router.push({ name: 'product' });
+  } catch (error) {
+    console.error('Erro ao navegar:', error);
+  }
 };
+
 </script>
 
 <template>
   <div class="col-10 col-md-3 col-lg-3 my-1 my-md-5">
     <div @click="handleProductClick" class="card bg-black my-1 my-md-5 zoom-in">
       <div class="card-body">
-        <img :src="photos[0]" alt="" class="img-fluid" />
+        <!-- <img :src="photos[0]" alt="" class="img-fluid" /> -->
       </div>
       <div class="card-footer text-center text-white">
         <li><strong>{{ description }}</strong></li>

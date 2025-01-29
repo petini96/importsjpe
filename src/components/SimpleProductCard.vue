@@ -13,9 +13,9 @@ const props = defineProps<{
 const router = useRouter();
 const productStore = useProductStore();
 
-const handleProductClick = () => {
+const handleProductClick = async () => {
   productStore.setSelectedProduct(props.id);
-  router.push({ name: 'product' });
+  await router.push({ name: 'product' });
 };
 
 </script>

@@ -1,6 +1,4 @@
-<script setup>
-import * as Popper from "@popperjs/core"
-import * as bootstrap from "bootstrap"
+<script setup lang="ts">
 
 defineProps({
   description: {
@@ -21,7 +19,7 @@ defineProps({
   },
 });
 
-const makeClass = (count) => {
+const makeClass = (count: number) => {
   return "delay-" + count.toString();
 }
 </script>

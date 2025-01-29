@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const count = ref(122)
-let x: string | number = 1
+const x: string | number = 1
 
 </script>
 

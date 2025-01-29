@@ -1,4 +1,4 @@
-import PaginableService from "./paginableService";
+import PaginableService from "./PaginableService";
 
 const API_URL = 'http://localhost:8080/posts';
 

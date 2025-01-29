@@ -1,10 +1,18 @@
+<template>
+  <router-view />
+</template>
+
 <script setup lang="ts">
+//
+</script>
+
+<!-- <script setup lang="ts">
 
 import { RouterView } from 'vue-router';
 import { computed } from 'vue';
 import { useLayoutConfigStore } from './store/modules/layout-config-store';
-import Nav from './components/layouts/home/Nav.vue';
-import Footer from './components/layouts/home/Footer.vue';
+import Nav from './components/layouts/home/MainNav.vue';
+import Footer from './components/layouts/home/MainFooter.vue';
 
 const layoutConfigStore = useLayoutConfigStore();
 layoutConfigStore.setIsSleeping(true)
@@ -32,4 +40,4 @@ button {
   color: var(--text-color);
   border: 1px solid var(--secondary-color);
 }
-</style>
+</style> -->

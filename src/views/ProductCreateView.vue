@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import CartComponent from '../components/CartComponent.vue';
-
+ 
 </script>
 
 <template>
   <section>
-    <CartComponent />
+     <div class="container">
+      <h1>Cadastro</h1>
+     </div>
   </section>
+
 </template>
 
 <style scoped>

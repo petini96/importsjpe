@@ -72,16 +72,8 @@ const handleTouchEnd = (event: TouchEvent) => {
 };
 
 const updateProgress = () => {
-  let time = secondsDelary * 1000;
+  const time = secondsDelary * 1000;
   progress.value = progress.value + (100 / (time / 100));
-};
-
-const handleDrag = (event: any) => {
-  if (event.deltaX > 0) {
-    picked.value = props.posts[picked.value.order + 1];
-  } else if (event.deltaX < 0) {
-    picked.value = props.posts[picked.value.order - 1];
-  }
 };
 
 onMounted(() => {

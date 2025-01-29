@@ -1,61 +1,60 @@
-<script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+<script setup lang="ts">
+// import { computed } from 'vue'; 
+// import { useRouter } from 'vue-router';
+ 
+// const router = useRouter();
 
-const store = useStore();
-const router = useRouter();
+// const calculateCoupon = (coupon) => {
+//   return coupon ? (state.subTotalPrice * coupon / 100) : 0;
+// };
 
-const calculateCoupon = (coupon) => {
-  return coupon ? (state.subTotalPrice * coupon / 100) : 0;
-};
+// const calculateSubTotalPrice = (products) => {
+//   return products.reduce((total, product) => total + (product.originalPrice * product.quantity), 0);
+// };
 
-const calculateSubTotalPrice = (products) => {
-  return products.reduce((total, product) => total + (product.originalPrice * product.quantity), 0);
-};
+// const calculateCartPrice = (products, coupon) => {
+//   const subTotal = calculateSubTotalPrice(products);
+//   const discount = calculateCoupon(coupon);
+//   return subTotal - discount;
+// };
 
-const calculateCartPrice = (products, coupon) => {
-  const subTotal = calculateSubTotalPrice(products);
-  const discount = calculateCoupon(coupon);
-  return subTotal - discount;
-};
+// const addProductQuantity = (product) => {
+//   store.dispatch('addProductQuantity', product.id);
+// };
 
-const addProductQuantity = (product) => {
-  store.dispatch('addProductQuantity', product.id);
-};
+// const removeProductQuantity = (product) => {
+//   store.dispatch('removeProductQuantity', product.id);
+// };
 
-const removeProductQuantity = (product) => {
-  store.dispatch('removeProductQuantity', product.id);
-};
+// const cartProducts = computed(() => {
+//   return store.getters.getCartProducts;
+// });
 
-const cartProducts = computed(() => {
-  return store.getters.getCartProducts;
-});
+// const coupon = computed(() => {
+//   return store.state.coupon;
+// });
 
-const coupon = computed(() => {
-  return store.state.coupon;
-});
+// const subTotalPrice = computed(() => {
+//   return calculateSubTotalPrice(cartProducts.value);
+// });
 
-const subTotalPrice = computed(() => {
-  return calculateSubTotalPrice(cartProducts.value);
-});
+// const totalCartPrice = computed(() => {
+//   return calculateCartPrice(cartProducts.value, coupon.value);
+// });
 
-const totalCartPrice = computed(() => {
-  return calculateCartPrice(cartProducts.value, coupon.value);
-});
+// const removeFromCart = (product) => {
+//   store.dispatch('removeCartProduct', product.id);
+// };
 
-const removeFromCart = (product) => {
-  store.dispatch('removeCartProduct', product.id);
-};
-
-const handleShowCart = () => {
-  router.push({ name: 'product' });
-};
+// const handleShowCart = () => {
+//   router.push({ name: 'product' });
+// };
 
 </script>
 
 <template>
-  <div class="container">
+  <h1>wait...</h1>
+  <!-- <div class="container">
     <div class="row align-items-center">
       <div class="col-8">
         <h4 class="my-3">🛒 Meu carrinho</h4>
@@ -128,7 +127,7 @@ const handleShowCart = () => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style>

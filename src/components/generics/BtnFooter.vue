@@ -1,4 +1,11 @@
-<script setup>
+<script setup lang="ts">
+
+const goBack = function () {
+    window.history.back();
+}
+const scrollToTop = function () {
+    window.scrollTo(0, 0);
+}
 
 </script>
 <template>
@@ -21,16 +28,3 @@
         </a>
     </div>
 </template>
-
-<script>
-export default {
-    methods: {
-        goBack() {
-            window.history.back();
-        },
-        scrollToTop() {
-            window.scrollTo(0, 0);
-        }
-    }
-}
-</script>

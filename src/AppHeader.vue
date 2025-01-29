@@ -1,14 +1,4 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
-<template>
-</template>
-
-<style scoped>
-
-</style>
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
@@ -17,12 +7,13 @@ export default {
     }
   },
   methods: {
-    handleWhatsappSubmit(e) {
-      var texto = "*CONSULTA DE CAMISAS* \n \n Contato realizado pelo site...";
+    handleWhatsappSubmit(e: MouseEvent) {
+      let texto = "*CONSULTA DE CAMISAS* \n \n Contato realizado pelo site...";
       texto = window.encodeURIComponent(texto);
       window.open(this.whatsapp + "?text=" + texto, "_blank");
+      console.log(e);
     },
-    handleRedirectBlankSubmit(link) {
+    handleRedirectBlankSubmit(link: string) {
 
       window.open(link, "_blank");
     },
