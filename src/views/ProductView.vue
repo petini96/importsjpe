@@ -69,7 +69,11 @@ const removeFromCart = (product: Product): void => {
         <div class="col-8">
           <div class="col-12 product-viewer">
             <div class="photo">
-              <img :src="product.photos[currentIndex].url" alt="Imagem do produto" class="img-fluid" />
+              <img 
+                :src="product?.photos?.[currentIndex]?.url || 'caminho/para/imagem-placeholder.jpg'" 
+                alt="Imagem do produto" 
+                class="img-fluid" 
+              />
             </div>
           </div>
 

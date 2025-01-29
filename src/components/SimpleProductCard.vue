@@ -25,10 +25,12 @@ const handleProductClick = async () => {
     <div @click="handleProductClick" class="card bg-black my-1 my-md-5 zoom-in">
       <div class="card-body">
         <img 
-          :src="photos.length > 0 ? photos[0].url : 'placeholder-image-url.png'" 
+          v-if="photos?.length" 
+          :src="photos[0] ? photos[0].url : ''" 
           alt="Product image" 
           class="img-fluid" 
         />
+
       </div>
       <div class="card-footer text-center text-white">
         <li><strong>{{ description }}</strong></li>

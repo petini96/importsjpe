@@ -21,7 +21,9 @@ const nextPicked = () => {
     setDefaultPicked();
     setDefaultProgress();
   } else {
-    picked.value = props.posts[picked.value.order + 1];
+    if (picked.value) {
+      picked.value = props.posts[picked.value.order + 1];
+    }
   }
 };
 
@@ -30,7 +32,9 @@ const previousPicked = () => {
     setLastPicked();
     setDefaultProgress();
   } else {
-    picked.value = props.posts[picked.value.order - 1];
+    if (picked.value) {
+      picked.value = props.posts[picked.value.order - 1];
+    }
   }
 };
 
@@ -43,11 +47,11 @@ const setDefaultPicked = () => {
 };
 
 const isOrderGreat = () => {
-  return picked.value.order >= props.posts.length - 1;
+  return picked.value ? picked.value.order >= props.posts.length - 1 : false;
 };
 
 const isOrderOlder = () => {
-  return picked.value.order <= 0;
+  return picked.value ? picked.value.order <= 0 : false;
 };
 
 const setDefaultProgress = () => {
@@ -55,11 +59,15 @@ const setDefaultProgress = () => {
 };
 
 const handleTouchStart = (event: TouchEvent) => {
-  touchStartX.value = event.touches[0].clientX;
+  if (event.touches[0]) {
+    touchStartX.value = event.touches[0].clientX;
+  }
 };
 
 const handleTouchEnd = (event: TouchEvent) => {
-  touchEndX.value = event.changedTouches[0].clientX;
+  if (event.changedTouches[0]) {
+    touchEndX.value = event.changedTouches[0].clientX;
+  }
   if (touchEndX.value && touchStartX.value) {
     if (touchEndX.value > touchStartX.value) {
       previousPicked();
@@ -89,7 +97,7 @@ onMounted(() => {
 
 <template>
   <picture class="col-12 d-none d-md-block">
-    <img :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart"
+    <img v-if="picked" :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart"
          @touchend="handleTouchEnd">
     <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
     <span></span>
