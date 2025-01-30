@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import type { Post } from '../../types/Post';
-import { fetchPosts } from '../../services/postService';
+import type { Post } from '../types/Post';
+import { fetchPosts } from '../services/postService';
 
 export const usePostStore = defineStore('post', {
   state: () => ({

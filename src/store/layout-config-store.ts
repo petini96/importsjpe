@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { LayoutConfig } from '../../types/LayoutConfig'
+import type { LayoutConfig } from '../types/LayoutConfig'
 
 export const useLayoutConfigStore = defineStore('layoutConfig', {
     state: () => {

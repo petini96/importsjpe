@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { fetchProducts, getProduct } from '../../services/productService';
-import type { ListProduct, Product } from '../../types/Product';
+import { fetchProducts, getProduct } from '../services/productService';
+import type { ListProduct, Product } from '../types/Product';
 
 export const useProductStore = defineStore('product', {
   state: () => ({

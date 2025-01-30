@@ -3,8 +3,8 @@
 import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, computed } from 'vue';
-import { usePostStore } from '../store/modules/post-store';
-import { useProductStore } from '../store/modules/product-store';
+import { usePostStore } from '../store/post-store';
+import { useProductStore } from '../store/product-store';
 
 const postStore = usePostStore();
 const productStore = useProductStore();

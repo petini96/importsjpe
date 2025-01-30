@@ -9,17 +9,18 @@
 </template>
 
 <script setup lang="ts">
- import { usePostStore } from 'src/store/modules/post-store';
-import { computed, onMounted } from 'vue';
- const postStore = usePostStore();
+import { usePostStore } from 'src/store/post-store';
+// import { onMounted } from 'vue';
+const postStore = usePostStore();
+console.log(postStore.posts);
 
- onMounted(async () => {
-  try {
-    console.log("fetch data");
-    await postStore.fetchPosts(0, 10);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-  
-});
+// onMounted(async () => {
+//   try {
+//     console.log("fetch data");
+//     await postStore.fetchPosts(0, 10);
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+
+// });
 </script>

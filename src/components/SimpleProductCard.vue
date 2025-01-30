@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import { useRouter } from 'vue-router';
-import { useProductStore } from '../store/modules/product-store';
+import { useProductStore } from '../store/product-store';
 
 const props = defineProps<{
   id: number;
