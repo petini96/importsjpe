@@ -17,24 +17,20 @@ const touchStartX = ref<number | null>(null);
 const touchEndX = ref<number | null>(null);
 
 const nextPicked = () => {
-  if (isOrderGreat()) {
-    setDefaultPicked();
-    setDefaultProgress();
+  const currentIndex = props.posts.findIndex(post => post.order === picked.value?.order);
+  if (currentIndex !== -1 && currentIndex < props.posts.length - 1) {
+    picked.value = props.posts[currentIndex + 1];
   } else {
-    if (picked.value) {
-      picked.value = props.posts[picked.value.order + 1];
-    }
+    setDefaultPicked();
   }
 };
 
 const previousPicked = () => {
-  if (isOrderOlder()) {
-    setLastPicked();
-    setDefaultProgress();
+  const currentIndex = props.posts.findIndex(post => post.order === picked.value?.order);
+  if (currentIndex > 0) {
+    picked.value = props.posts[currentIndex - 1];
   } else {
-    if (picked.value) {
-      picked.value = props.posts[picked.value.order - 1];
-    }
+    setLastPicked();
   }
 };
 
@@ -44,14 +40,6 @@ const setLastPicked = () => {
 
 const setDefaultPicked = () => {
   picked.value = props.posts[0];
-};
-
-const isOrderGreat = () => {
-  return picked.value ? picked.value.order >= props.posts.length - 1 : false;
-};
-
-const isOrderOlder = () => {
-  return picked.value ? picked.value.order <= 0 : false;
 };
 
 const setDefaultProgress = () => {
@@ -98,7 +86,7 @@ onMounted(() => {
 <template>
   <picture class="col-12 d-none d-md-block">
     <img v-if="picked" :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart"
-         @touchend="handleTouchEnd">
+      @touchend="handleTouchEnd">
     <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
     <span></span>
   </picture>
@@ -147,6 +135,7 @@ h3 {
 }
 
 @media (min-width: 1024px) {
+
   .card-category h1,
   .card-category h3 {
     text-align: left;

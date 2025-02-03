@@ -1,63 +1,52 @@
-<script setup lang="ts">
-
-import BoleradaCarrousel from '../components/BoleradaCarrousel.vue';
-import SimpleProductCard from '../components/SimpleProductCard.vue';
-import { onMounted, computed } from 'vue';
-import { usePostStore } from '../store/post-store';
-import { useProductStore } from '../store/product-store';
-
-const postStore = usePostStore();
-const productStore = useProductStore();
-
-const posts = computed(() => postStore.posts);
-const products = computed(() => productStore.products);
-
-onMounted(async () => {
-  try {
-    console.log("fetch data");
-    await postStore.fetchPosts(0, 10);
-    await productStore.fetchProducts(0, 10);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-});
-</script>
-
 <template>
   <section id="carousel">
     <div class="row justify-content-center">
-      <BoleradaCarrousel :posts="posts" v-if="posts.length > 0" />
+      <OverTimeCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
   </section>
 
-  <section id="mini-products">
+  <!-- <section id="mini-products">
     <div class="container my-5">
       <div class="row justify-content-center">
         <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
           :description="product.description" :photos="product.photos" />
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section id="marketing">
-    <div class=" text-white p-2 text-center">
-      <strong>FORMAS DE PAGAMENTO: <span class="text-warning">DINHEIRO | PIX | BOLETO | CARTÃO </span> </strong>
-    </div>
-  </section>
+  <!-- about payment -->
+  <PaymentWayInfo />
 
-  <section>
-    <div class="container my-5">
-      <div class="row justify-content-center ">
-        <div class="col-10 col-md-8 col-lg-5">
-          <h1>• IMPORTS JPE</h1>
-          <h4>Seu próximo celular a um clique: tecnologia de ponta, preços imbatíveis!</h4>
-          <p>Celulares e eletrônicos em geral</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- marketing -->
+  <YourNextPhoneMarketing />
+  
 </template>
 
+<script setup lang="ts">
+import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
+import PaymentWayInfo from '../components/home/sections/PaymentWayInfo.vue';
+import YourNextPhoneMarketing from '../components/home/sections/YourNextPhoneMarketing.vue';
+// import SimpleProductCard from '../components/SimpleProductCard.vue';
+import { onMounted, computed } from 'vue';
+import { usePostStore } from '../stores/post-store';
+// import { useProductStore } from '../stores/product-store';
+
+const postStore = usePostStore();
+// const productStore = useProductStore();
+
+const posts = computed(() => postStore.posts);
+// const products = computed(() => productStore.products);
+
+onMounted(async () => {
+  try {
+    console.log("fetch data");
+    await postStore.fetchPosts(0, 10);
+    // await productStore.fetchProducts(0, 10);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});
+</script>
 
 <style>
 .zoom-in:hover {

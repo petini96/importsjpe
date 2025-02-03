@@ -1,33 +1,40 @@
 import type { RouteRecordRaw } from 'vue-router';
-import ProductView from '../views/ProductView.vue'
-import ProductCreateView from '../views/ProductCreateView.vue'
-import CartView from '../views/CartView.vue'
+import ProductPage from '../pages/products/ProductPage.vue'
+import CartPage from '../pages/CartPage.vue'
+import HomePage from 'pages/HomePage.vue';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/InitialPage.vue') }],
+    component: () => import('layouts/home/HomeLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: HomePage
+      }
+    ],
   },
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
   {
     path: '/produto',
-    name: 'product',
-    component: ProductView
-  },
-  {
-    path: '/produto/cadastro',
-    name: 'product-create',
-    component: ProductCreateView
+    component: () => import('layouts/admin/SidebarLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'product',
+        component: ProductPage
+      },
+      {
+        path: '/cadastro',
+        component: () => import('pages/products/CreateProduct.vue'),
+        name: 'product-create',
+      }
+    ],
   },
   {
     path: '/carrinho',
     name: 'cart',
-    component: CartView
+    component: CartPage
   },
 
   // Always leave this as last one,

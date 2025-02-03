@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import type { Product } from '../types/Product'; // Importação apenas de tipos
-import { useProductStore } from '../store/product-store';
+import type { Product } from '../../types/Product'; // Importação apenas de tipos
+import { useProductStore } from '../../stores/product-store';
 
 const productStore = useProductStore();
 
