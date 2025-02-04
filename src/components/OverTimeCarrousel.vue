@@ -85,7 +85,7 @@ onMounted(() => {
 
 <template>
   <picture class="col-12 d-none d-md-block">
-    <img v-if="picked" :src="picked.media" alt="Flowers" class="img-fluid" @touchstart="handleTouchStart"
+    <img v-if="picked" :src="picked.media" alt="Flowers" style="width: 100%;" @touchstart="handleTouchStart"
       @touchend="handleTouchEnd">
     <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
     <span></span>
@@ -94,10 +94,11 @@ onMounted(() => {
 
 <style scoped>
 .progress-carousel {
-  background-color: gray;
+  background: linear-gradient(90deg,transparent, #ffd9f0, #ff8bd3);
   width: 0%;
-  padding: 1px;
-  transition: width 0.2s ease-in-out;
+  padding: 5px;
+  transition: width 0.4s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(255, 0, 122, 0.2);
 }
 
 .card-category {

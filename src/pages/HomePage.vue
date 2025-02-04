@@ -1,18 +1,26 @@
 <template>
+  
+  <!-- carrousel -->
   <section id="carousel">
     <div class="row justify-content-center">
       <OverTimeCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
   </section>
 
-  <!-- <section id="mini-products">
+  <!-- miniature products -->
+  <section id="mini-products">
     <div class="container my-5">
-      <div class="row justify-content-center">
-        <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
-          :description="product.description" :photos="product.photos" />
-      </div>
+      <q-container class="flex flex-center">
+        <SimpleProductCard v-for="(product, index) in products" 
+          :key="index" 
+          :id="product.id" 
+          :name="product.name"
+          :description="product.description" 
+          :photos="product.photos" 
+        />
+      </q-container>
     </div>
-  </section> -->
+  </section>
 
   <!-- about payment -->
   <PaymentWayInfo />
@@ -26,22 +34,22 @@
 import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
 import PaymentWayInfo from '../components/home/sections/PaymentWayInfo.vue';
 import YourNextPhoneMarketing from '../components/home/sections/YourNextPhoneMarketing.vue';
-// import SimpleProductCard from '../components/SimpleProductCard.vue';
+import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, computed } from 'vue';
 import { usePostStore } from '../stores/post-store';
-// import { useProductStore } from '../stores/product-store';
+import { useProductStore } from '../stores/product-store';
 
 const postStore = usePostStore();
-// const productStore = useProductStore();
+const productStore = useProductStore();
 
 const posts = computed(() => postStore.posts);
-// const products = computed(() => productStore.products);
+const products = computed(() => productStore.products);
 
 onMounted(async () => {
   try {
     console.log("fetch data");
     await postStore.fetchPosts(0, 10);
-    // await productStore.fetchProducts(0, 10);
+    await productStore.fetchProducts(0, 10);
   } catch (error) {
     console.error('Error fetching data:', error);
   }

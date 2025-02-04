@@ -24,9 +24,10 @@ const handleWhatsappSubmit = (): void => {
             <h4>Dúvidas frequentes</h4>
             <hr />
           </li>
-          <p>Perguntas frequentes</p>
-          <p>Devoluções</p>
           <p>Como comprar</p>
+          <p>Encomendas</p>
+          <p>Entregas</p>
+          <p>Devoluções</p>
         </ul>
       </div>
 
@@ -55,7 +56,7 @@ const handleWhatsappSubmit = (): void => {
             <a @click="handleRedirectBlankSubmit('https://instagram.com/bolerada67_3.0')">
               <span>
                 <font-awesome-icon icon="fa-brands fa-instagram" class="icon-mobile-md" />
-                <span class="text-icon mx-3">importsjpe</span>
+                <span class="text-icon mx-3">artesanaldoceriacg</span>
               </span>
             </a>
           </li>
@@ -71,7 +72,7 @@ const handleWhatsappSubmit = (): void => {
             <a @click="handleWhatsappSubmit">
               <span>
                 <font-awesome-icon icon="fa-solid fa-mail-forward" class="icon-mobile-md" />
-                <span class="text-icon mx-3">contato@importsjpe.com.br</span>
+                <span class="text-icon mx-3">contato@artesanaldoceriacg.com.br</span>
               </span>
             </a>
           </li>

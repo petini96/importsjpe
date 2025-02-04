@@ -21,20 +21,28 @@ const handleProductClick = async () => {
 </script>
 
 <template>
-  <div class="col-10 col-md-3 col-lg-3 my-1 my-md-5">
-    <div @click="handleProductClick" class="card bg-black my-1 my-md-5 zoom-in">
-      <div class="card-body">
-        <img 
+  <div class="col-12 col-md-3 col-lg-3 q-my-lg q-my-md-xl">
+    <q-card class="bg-primary q-mx-md q-my-xs q-my-md-xl q-px-md zoom-in" style="max-width: 150px; min-width: 150px; height: 200px;" @click="handleProductClick">
+      <q-card-section class="q-pa-none q-my-none" style="height: 100px;">
+        <q-img 
           v-if="photos?.length" 
           :src="photos[0] ? photos[0].url : ''" 
           alt="Product image" 
-          class="img-fluid" 
+          class="img-fluid"
+          fit="cover"
+          style="height: 100%; object-fit: cover;"
         />
-
-      </div>
-      <div class="card-footer text-center text-white">
-        <li><strong>{{ description }}</strong></li>
-      </div>
-    </div>
+      </q-card-section>
+  
+      <q-separator dark />
+  
+      <q-card-actions align="center" class="q-pa-none q-my-md">
+        <div class="q-pa-none">
+          <q-item-label class="text-secondary text-bold">{{ name }}</q-item-label>
+          <q-item-label class="text-white">{{ description }}</q-item-label>
+        </div>
+      </q-card-actions>
+    </q-card>
   </div>
+  
 </template>
