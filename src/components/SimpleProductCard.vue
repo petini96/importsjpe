@@ -32,7 +32,7 @@ const handleProductClick = async () => {
 <template>
   <div class="q-mx-md q-my-lg q-my-md-xl">
     <q-card 
-      class="bg-primary"
+      class="bg-white shadown-pink border-rounded"
       :style="{ width: cardSize.width, height: cardSize.height }"
       @click="handleProductClick"
     >
@@ -52,14 +52,21 @@ const handleProductClick = async () => {
 
       <!-- Nome e Descrição -->
       <q-card-actions align="center" class="q-pa-none q-my-md flex column">
-        <q-item-label class="text-secondary text-bold fixed-title">{{ name }}</q-item-label>
-        <q-item-label class="text-white fixed-description">{{ description }}</q-item-label>
+        <q-item-label class="text-secondary text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
+        <q-item-label class="text-black q-px-lg ">{{ description }}</q-item-label>
       </q-card-actions>
     </q-card>
   </div>
 </template>
 
 <style scoped>
+.shadown-pink{
+  box-shadow: #c37fc9 0px 5px 15px;
+}
+
+.border-rounded{
+  border-radius: 15px;
+}
 /* Garantir que a altura do título e da descrição sejam fixas */
 .fixed-title {
   height: 24px; /* Ajuste conforme necessário */

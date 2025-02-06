@@ -11,7 +11,7 @@
   <section id="mini-products">
 
     <div class="q-pa-md my-5">
-      <q-scroll-area :thumb-style="thumbStyle" style="height: 390px; max-width: 100%;">
+      <q-scroll-area :thumb-style="thumbStyle" style="height: 450px; max-width: 100%;">
         <q-page-container>
           <div class="row no-wrap">
             <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
@@ -48,16 +48,23 @@ import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
 import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
-import { QScrollObserver, scroll } from 'quasar'
+import { type QScrollObserver, scroll } from 'quasar'
+import { type ScrollDetails } from 'src/types/Scroll';
+
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
 const scrollInfo = ref({})
+ 
+const onScroll = ((info: ScrollDetails) => {
 
-const onScroll = ((info: QScrollObserver) => {
+  if (info.position.top > 800) {
+    isDonutVisible.value = true;
+  } else {
+    isDonutVisible.value = false;
+  }
   scrollInfo.value = info
-
 })
-
+ 
 const thumbStyle = {
   right: '4px',
   borderRadius: '5px',
@@ -65,8 +72,6 @@ const thumbStyle = {
   width: '5px',
   opacity: 0.75
 } as unknown as Partial<CSSStyleDeclaration>;
-
-
 
 const isDonutVisible = ref(false);
 
@@ -76,20 +81,12 @@ const productStore = useProductStore();
 const posts = computed(() => postStore.posts);
 const products = computed(() => productStore.products);
 
-const handleScroll = () => {
-  const scrollPosition = window.innerHeight + window.scrollY;
-  const pageHeight = document.documentElement.offsetHeight;
 
-  if (scrollPosition >= pageHeight - 50) {
-    isDonutVisible.value = true;
-  }
-};
 
 function scrollToElement(el: Element) {
   const target = getScrollTarget(el);
   const duration = 1000;
-  window.addEventListener("scroll", handleScroll);
-
+  
   if (el instanceof HTMLElement) {
     const offset = el.offsetTop;
     setVerticalScrollPosition(target, offset, duration);
@@ -112,34 +109,38 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+
 });
 
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
+  // alert("xau")
 });
 
 
 </script>
 
 <style lang="scss">
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
-
+  
   100% {
     transform: rotate(360deg);
   }
 }
 
 .icon {
-  // Começa invisível
-  transition: opacity 0.5s ease;
+  position: fixed;
+  bottom: 0;
+  display: inline-block;
+  transition: opacity 0.5s ease; 
 
   &.animate {
-    opacity: 1; // Torna-se visível ao atingir 90% do scroll
-    animation: spin 2s linear infinite;
+    opacity: 1; 
+    animation: spin 1s linear infinite;
   }
 }
 </style>
