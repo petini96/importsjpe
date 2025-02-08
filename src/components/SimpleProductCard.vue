@@ -14,7 +14,7 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { width: "250px", height: "320px" };
+  if ($q.screen.xs) return { width: "70vw", height: "42vh" };
   if ($q.screen.sm) return { width: "280px", height: "340px" };
   if ($q.screen.md) return { width: "300px", height: "340px" };
   return { width: "320px", height: "380px" };
@@ -30,7 +30,7 @@ const handleProductClick = async () => {
 </script>
 
 <template>
-  <div class="q-mx-md q-my-lg q-my-md-xl">
+  <div class="q-pa-md">
     <q-card 
       class="bg-white shadown-pink border-rounded"
       :style="{ width: cardSize.width, height: cardSize.height }"
@@ -61,7 +61,7 @@ const handleProductClick = async () => {
 
 <style scoped>
 .shadown-pink{
-  box-shadow: #c37fc9 0px 5px 15px;
+  box-shadow: 0px 4px 10px rgba(200, 80, 140, 0.5);
 }
 
 .border-rounded{

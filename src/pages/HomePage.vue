@@ -9,18 +9,14 @@
 
   <!-- miniature products -->
   <section id="mini-products">
-
     <div class="q-pa-md my-5">
-      <q-scroll-area :thumb-style="thumbStyle" style="height: 450px; max-width: 100%;">
-        <q-page-container>
-          <div class="row no-wrap">
-            <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
-              :description="product.description" :photos="product.photos" />
-          </div>
-        </q-page-container>
+      <q-scroll-area :thumb-style="thumbStyle" :style="{ height: cardSize.height, maxHeight: cardSize.maxHeight, width: cardSize.width }" >
+        <div class="row no-wrap justify-center">
+          <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
+            :description="product.description" :photos="product.photos" />
+        </div>
       </q-scroll-area>
     </div>
-
   </section>
 
   <div class="q-pa-md">
@@ -48,13 +44,23 @@ import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
 import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
-import { type QScrollObserver, scroll } from 'quasar'
+import { type QScrollObserver, scroll, useQuasar } from 'quasar'
 import { type ScrollDetails } from 'src/types/Scroll';
+
+const $q = useQuasar();
+
+const cardSize = computed(() => {
+  if ($q.screen.xs) return { height: "55vh", maxHeight: "400px", width: "100%" };
+  if ($q.screen.sm) return { height: "50vh", maxHeight: "450px", width: "95%" };
+  if ($q.screen.md) return { height: "52vh", maxHeight: "500px", width: "100%" };
+  return { height: "55vh", maxHeight: "550px", width: "100%" };
+});
+
 
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
 const scrollInfo = ref({})
- 
+
 const onScroll = ((info: ScrollDetails) => {
 
   if (info.position.top > 800) {
@@ -64,7 +70,7 @@ const onScroll = ((info: ScrollDetails) => {
   }
   scrollInfo.value = info
 })
- 
+
 const thumbStyle = {
   right: '4px',
   borderRadius: '5px',
@@ -86,7 +92,7 @@ const products = computed(() => productStore.products);
 function scrollToElement(el: Element) {
   const target = getScrollTarget(el);
   const duration = 1000;
-  
+
   if (el instanceof HTMLElement) {
     const offset = el.offsetTop;
     setVerticalScrollPosition(target, offset, duration);
@@ -121,12 +127,11 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
-  
+
   100% {
     transform: rotate(360deg);
   }
@@ -136,10 +141,10 @@ onUnmounted(() => {
   position: fixed;
   bottom: 0;
   display: inline-block;
-  transition: opacity 0.5s ease; 
+  transition: opacity 0.5s ease;
 
   &.animate {
-    opacity: 1; 
+    opacity: 1;
     animation: spin 1s linear infinite;
   }
 }
