@@ -90,7 +90,7 @@ const mediaToShow = computed(() => {
 
 const bannerSize = computed(()=>{
   if($q.screen.xs) return { height:"90vh", width: "100vw" };
-  return { height:"auto", width: "auto"}
+  return { height:"auto", width: "100vw"}
 })
 
 </script>

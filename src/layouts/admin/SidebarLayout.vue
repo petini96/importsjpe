@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar class="bg-grey-9 text-white">
+      <q-toolbar class="bg-primary text-white">
         <q-btn
           flat
           dense
@@ -54,6 +54,12 @@ const linksList: EssentialLinkProps[] = [
     title: 'Produtos',
     caption: 'Cadastre o produto que será disponibilizado para venda',
     icon: 'category',
+    link: '/produto/cadastrar'
+  },
+  {
+    title: 'Banner',
+    caption: 'Cadastre os banners iniciais para tela principal',
+    icon: 'campaign',
     link: '/produto/cadastrar'
   }
 ];

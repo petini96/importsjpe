@@ -47,7 +47,7 @@ import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
 import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
-import { type QScrollObserver, scroll, useQuasar } from 'quasar'
+import { scroll, useQuasar } from 'quasar'
 import { type ScrollDetails } from 'src/types/Scroll';
 
 const { getScrollHeight } = scroll
@@ -55,10 +55,10 @@ const { getScrollHeight } = scroll
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { height: "60vh", maxHeight: "480px", width: "100%" };
-  if ($q.screen.sm) return { height: "50vh", maxHeight: "450px", width: "95%" };
-  if ($q.screen.md) return { height: "52vh", maxHeight: "500px", width: "100%" };
-  return { height: "55vh", maxHeight: "550px", width: "100%" };
+  if ($q.screen.xs) return { height: "60vh", maxHeight: "auto", width: "100%" };
+  if ($q.screen.sm) return { height: "60vh", maxHeight: "auto", width: "95%" };
+  if ($q.screen.md) return { height: "80vh", maxHeight: "auto", width: "100%" };
+  return { height: "55vh", maxHeight: "auto", width: "100%" };
 });
 
 const { setVerticalScrollPosition, getScrollTarget } = scroll

@@ -25,10 +25,11 @@ const routes: RouteRecordRaw[] = [
         component: ProductPage
       },
       {
-        path: '/cadastro',
+        path: 'cadastro',
         component: () => import('pages/products/CreateProduct.vue'),
         name: 'product-create',
       }
+      
     ],
   },
   {
