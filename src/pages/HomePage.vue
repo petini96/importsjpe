@@ -10,7 +10,8 @@
   <!-- miniature products -->
   <section id="mini-products">
     <div class="q-pa-md my-5">
-      <q-scroll-area :thumb-style="thumbStyle" :style="{ height: cardSize.height, maxHeight: cardSize.maxHeight, width: cardSize.width }" >
+      <q-scroll-area :thumb-style="thumbStyle"
+        :style="{ height: cardSize.height, maxHeight: cardSize.maxHeight, width: cardSize.width }">
         <div class="row no-wrap justify-center">
           <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
             :description="product.description" :photos="product.photos" />
@@ -30,8 +31,10 @@
   <!-- marketing -->
   <YourNextPhoneMarketing />
 
-  <div id="donut" class="icon" :class="{ animate: isDonutVisible }">
-    <q-img src="../assets/images/svg/smile-donut.svg" alt="Donut image" fit="cover" style="width: 125px;" />
+  <!-- donut -->
+  <div id="donut" class="icon" :class="{ animate: isDonutVisible }"
+    :style="{ transform: `rotate(${donutRotation}deg)`, filter: `grayscale(${donutGrayScale}) ` }">
+    <q-img src="../assets/images/svg/smile-donut.svg" alt="Donut image" style="width: 125px;" />
   </div>
 
 </template>
@@ -47,29 +50,44 @@ import { useProductStore } from '../stores/product-store';
 import { type QScrollObserver, scroll, useQuasar } from 'quasar'
 import { type ScrollDetails } from 'src/types/Scroll';
 
+const { getScrollHeight } = scroll
+
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { height: "55vh", maxHeight: "400px", width: "100%" };
+  if ($q.screen.xs) return { height: "60vh", maxHeight: "480px", width: "100%" };
   if ($q.screen.sm) return { height: "50vh", maxHeight: "450px", width: "95%" };
   if ($q.screen.md) return { height: "52vh", maxHeight: "500px", width: "100%" };
   return { height: "55vh", maxHeight: "550px", width: "100%" };
 });
 
-
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
 const scrollInfo = ref({})
+const onScroll = (info: ScrollDetails) => {
+  const screenHeight = $q.screen.height
+  const scrollPercentage = screenHeight ? info.position.top / screenHeight : 0;
 
-const onScroll = ((info: ScrollDetails) => {
+  const elementToScroll: Element | null = document.querySelector("#footer");
+  if(elementToScroll){
+    console.log(`getScrollHeight: ${getScrollHeight(elementToScroll)}`);
+  }
+  console.log(`screenHeight: ${screenHeight}`);
+  console.log(`scrollPercentage: ${scrollPercentage}`);
+  console.log(info);
 
-  if (info.position.top > 800) {
+  donutGrayScale.value = scrollPercentage;
+  donutRotation.value = info.position.top * 0.4;
+
+  if (elementToScroll && info.position.top >= getScrollHeight(elementToScroll) ) {
     isDonutVisible.value = true;
   } else {
     isDonutVisible.value = false;
   }
-  scrollInfo.value = info
-})
+
+  scrollInfo.value = info;
+};
+
 
 const thumbStyle = {
   right: '4px',
@@ -80,14 +98,14 @@ const thumbStyle = {
 } as unknown as Partial<CSSStyleDeclaration>;
 
 const isDonutVisible = ref(false);
+const donutRotation = ref(0);
+const donutGrayScale = ref(0);
 
 const postStore = usePostStore();
 const productStore = useProductStore();
 
 const posts = computed(() => postStore.posts);
 const products = computed(() => productStore.products);
-
-
 
 function scrollToElement(el: Element) {
   const target = getScrollTarget(el);
@@ -101,9 +119,8 @@ function scrollToElement(el: Element) {
   }
 }
 
-
 onMounted(async () => {
-  const marketingElement = document.querySelector("#marketing");
+  const marketingElement = document.querySelector("#carousel");
   if (marketingElement) {
     scrollToElement(marketingElement)
   }
@@ -129,23 +146,23 @@ onUnmounted(() => {
 <style lang="scss">
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    opacity: 1;
   }
 
   100% {
-    transform: rotate(360deg);
+    opacity: 0;
   }
 }
 
 .icon {
   position: fixed;
-  bottom: 0;
+  bottom: 8%;
   display: inline-block;
   transition: opacity 0.5s ease;
 
   &.animate {
     opacity: 1;
-    animation: spin 1s linear infinite;
+    animation: spin 5s linear forwards;
   }
 }
 </style>

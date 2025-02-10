@@ -15,7 +15,7 @@ const handleWhatsappSubmit = (): void => {
 </script>
 
 <template>
-  <footer class="bg-white text-black p-3 w-100 text-center my-10" :class="{ active: isActive, 'desactive': !isActive }">
+  <footer id="footer" class="bg-white text-black p-3 w-100 text-center my-10" :class="{ active: isActive, 'desactive': !isActive }">
     <div class="row justify-content-center align-items-start w-100 my-5">
       <!-- Dúvidas frequentes -->
       <div class="col-12 col-md-4">

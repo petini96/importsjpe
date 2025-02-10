@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { useQuasar } from 'quasar';
+import { type Post } from 'src/types/Post';
+import { ref, onMounted, computed } from 'vue';
 
-interface Post {
-  media: string;
-  order: number;
-}
+const $q = useQuasar();
 
 const props = defineProps<{
   posts: Post[];
@@ -81,12 +80,31 @@ onMounted(() => {
     updateProgress();
   }, 100);
 });
+
+const mediaToShow = computed(() => {
+  if(!picked.value){
+    return undefined
+  }
+  return $q.screen.lt.md ? picked.value.mediaMobile || picked.value.media : picked.value.media;
+});
+
+const bannerSize = computed(()=>{
+  if($q.screen.xs) return { height:"90vh", width: "100vw" };
+  return { height:"auto", width: "auto"}
+})
+
 </script>
 
 <template>
   <picture class="col-12 d-none d-md-block">
-    <img v-if="picked" :src="picked.media" alt="Flowers" style="width: 100%;" @touchstart="handleTouchStart"
-      @touchend="handleTouchEnd">
+    <q-img v-if="picked" 
+      :style="{height: bannerSize.height, width: bannerSize.width}"
+      :src="mediaToShow" 
+      alt="Flowers" 
+      fit="cover" 
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd" 
+    />
     <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
     <span></span>
   </picture>

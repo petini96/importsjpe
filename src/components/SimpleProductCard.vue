@@ -14,7 +14,7 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { width: "70vw", height: "42vh" };
+  if ($q.screen.xs) return { width: "70vw", height: "50vh" };
   if ($q.screen.sm) return { width: "280px", height: "340px" };
   if ($q.screen.md) return { width: "300px", height: "340px" };
   return { width: "320px", height: "380px" };

@@ -1,14 +1,7 @@
+import { type Post } from "src/types/Post";
 import PaginableService from "./PaginableService";
 
-const API_URL = 'http://localhost:8080/posts';
-
-export interface Post {
-  id: number;
-  media: string;
-  title: string;
-  description: string;
-  order: number;
-}
+const API_URL = `${process.env.BACKEND_URL}/posts`;
 
 export const fetchPosts = async function (page: number = 0, size: number = 10) {
   try {
