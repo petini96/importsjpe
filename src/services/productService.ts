@@ -1,8 +1,9 @@
 import axios, { AxiosError } from "axios";
 import type { ListProduct, Product } from "../types/Product";
 import PaginableService from "./PaginableService";
+import { getApiUrl } from "src/utils/environmentUtils";
 
-const API_URL = `${process.env.BACKEND_URL}/products`;
+const API_URL = `${getApiUrl()}/products`;
 
 export const fetchProducts = async function (page: number = 0, size: number = 10) {
   try {
