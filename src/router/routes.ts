@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import ProductPage from '../pages/products/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
 import HomePage from 'pages/HomePage.vue';
+import CreateBannerPage from 'src/pages/banner/CreateBannerPage.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -29,7 +30,17 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/products/CreateProduct.vue'),
         name: 'product-create',
       }
-      
+    ],
+  },
+  {
+    path: '/banner',
+    component: () => import('layouts/admin/SidebarLayout.vue'),
+    children: [
+      {
+        path: 'cadastro',
+        name: 'banner',
+        component: CreateBannerPage
+      }
     ],
   },
   {
