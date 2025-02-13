@@ -1,6 +1,7 @@
 <template>
-  <q-page class="row items-center justify-center">
-    <div class="q-pa-md" >
+  <q-page class="column items-center justify-center q-pa-md">
+    <div class="q-pa-md full-width" style="max-width: 500px;">
+  
       <q-form 
         @submit="onSubmit" 
         @reset="onReset" 
@@ -13,18 +14,19 @@
           done-color="secondary" 
           active-color="primary"
           inactive-color="secondary"
+          :vertical="$q.screen.lt.md"
           style="width: 100%;"
         >
           <q-step 
             :name="1" 
-            title="Imagens" 
+            title="Banner Desktop" 
             icon="create_new_folder" 
             :done="step > 1"
           >
 
             <div>
               <q-img 
-                :src="imageUrl" 
+                :src="photoUrl" 
                 spinner-color="white" 
                 style="height: 140px; width: 100%" 
               />
@@ -33,7 +35,7 @@
             <q-file 
               filled 
               bottom-slots 
-              v-model="image" 
+              v-model="photo" 
               label="Banner" 
               counter 
               @update:model-value="updateFile" 
@@ -50,12 +52,48 @@
               </template>
             </q-file>
           </q-step>
-
+          
           <q-step 
             :name="2" 
+            title="Banner Mobile" 
+            icon="create_new_folder" 
+            :done="step > 2"
+          >
+
+            <div>
+              <q-img 
+                :src="photoMobileUrl" 
+                spinner-color="white" 
+                style="height: 140px; width: 100%" 
+              />
+            </div>
+
+            <q-file 
+              filled 
+              bottom-slots 
+              v-model="photoMobile" 
+              label="Banner" 
+              counter 
+              @update:model-value="updateMobileFile" 
+              :rules="[
+                (val) => val && val.size < 2 * 1024 * 1024 || 'O arquivo deve ter no máximo 2MB',
+                (val) => val && ['image/jpeg', 'image/png', 'image/gif'].includes(val.type) || 'Apenas imagens (JPEG, PNG, GIF) são permitidas'
+              ]"
+            >
+              <template v-slot:prepend>
+                <q-icon name="cloud_upload" @click.stop.prevent />
+              </template>
+              <template v-slot:hint>
+                Selecione a foto
+              </template>
+            </q-file>
+          </q-step>
+
+          <q-step 
+            :name="3" 
             title="Descrição" 
             icon="settings" 
-            :done="step > 2"
+            :done="step > 3"
           >
             <q-input 
               filled v-model="name" 
@@ -95,7 +133,7 @@
               label="Eu aceito usar essas imagens" 
             />
 
-            <div v-if="step === 2 && dataIsFilled()">
+            <div v-if="step === 3 && dataIsFilled()">
               <q-btn label="Salvar" type="submit" color="primary" />
               <q-btn label="Limpar" type="reset" color="primary" flat class="q-ml-sm" />
             </div>
@@ -104,7 +142,7 @@
           <template v-slot:navigation>
             <q-stepper-navigation>
               <q-btn 
-                v-if="step < 2"
+                v-if="step < 3"
                 @click="stepper?.next()" 
                 color="secondary" 
                 :label="'Continuar'" 
@@ -138,25 +176,43 @@ const step = ref(1)
 const name = ref<string | null>(null)
 const description = ref<string | null>(null)
 const order = ref<number | null>(null)
-const image = ref(null);
-const imageUrl = ref('')
+const photo = ref(null);
+const photoUrl = ref('')
+const photoMobile = ref(null);
+const photoMobileUrl = ref('')
 const accept = ref<boolean>(false)
 
 const dataIsFilled = () => {
-  return name.value && description.value && order.value && imageUrl.value && accept.value
+  return photo.value && photoMobile.value && name.value && description.value && order.value && accept.value
 }
 
-const updateFile = () => {
-  if (!image.value) {
-    imageUrl.value = '';
+const updateMobileFile = () => {
+  if (!photoMobile.value) {
+    photoMobileUrl.value = '';
     return;
   }
 
-  const file = image.value as File;
+  const file = photoMobile.value as File;
   if (file instanceof File) {
     const reader = new FileReader();
     reader.onload = () => {
-      imageUrl.value = reader.result as string;
+      photoMobileUrl.value = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+const updateFile = () => {
+  if (!photo.value) {
+    photoUrl.value = '';
+    return;
+  }
+
+  const file = photo.value as File;
+  if (file instanceof File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      photoUrl.value = reader.result as string;
     };
     reader.readAsDataURL(file);
   }
@@ -181,6 +237,8 @@ const onSubmit = () => {
 }
 
 const onReset = () => {
+  photo.value = null
+  photoMobile.value = null
   name.value = null
   description.value = null
   order.value = null
