@@ -1,7 +1,6 @@
 <template>
   <q-page class="column items-center justify-center q-pa-md">
-    <div class="q-pa-md full-width" style="max-width: 500px;">
-  
+    <div class="q-pa-md">
       <q-form 
         @submit="onSubmit" 
         @reset="onReset" 
@@ -35,7 +34,7 @@
             <q-file 
               filled 
               bottom-slots 
-              v-model="photo" 
+              v-model="postInput.media" 
               label="Banner" 
               counter 
               @update:model-value="updateFile" 
@@ -71,7 +70,7 @@
             <q-file 
               filled 
               bottom-slots 
-              v-model="photoMobile" 
+              v-model="postInput.mediaMobile" 
               label="Banner" 
               counter 
               @update:model-value="updateMobileFile" 
@@ -96,7 +95,7 @@
             :done="step > 3"
           >
             <q-input 
-              filled v-model="name" 
+              filled v-model="title" 
               label="Título *" 
               hint="Descreva qual o título" 
               lazy-rules
@@ -167,32 +166,41 @@
 
 <script setup lang="ts">
 import { useQuasar, type QStepper } from 'quasar'
+import {type PostInput } from 'src/types/Post';
 import { ref } from 'vue'
 
 const $q = useQuasar()
 const stepper = ref<QStepper | null>(null);
 
+const postInput = ref<PostInput>({
+  media: null,
+  mediaMobile: null,
+  title: '',
+  description: '',
+  order: 0
+});
+
 const step = ref(1)
-const name = ref<string | null>(null)
+const title = ref<string | null>(null)
 const description = ref<string | null>(null)
 const order = ref<number | null>(null)
-const photo = ref(null);
+// const photo = ref(null);
 const photoUrl = ref('')
-const photoMobile = ref(null);
+// const photoMobile = ref(null);
 const photoMobileUrl = ref('')
 const accept = ref<boolean>(false)
 
 const dataIsFilled = () => {
-  return photo.value && photoMobile.value && name.value && description.value && order.value && accept.value
+  return postInput.value?.media && postInput.value?.mediaMobile && title.value && description.value && order.value && accept.value
 }
 
 const updateMobileFile = () => {
-  if (!photoMobile.value) {
+  if (!postInput.value?.mediaMobile) {
     photoMobileUrl.value = '';
     return;
   }
 
-  const file = photoMobile.value as File;
+  const file = postInput.value?.mediaMobile as File;
   if (file instanceof File) {
     const reader = new FileReader();
     reader.onload = () => {
@@ -203,12 +211,12 @@ const updateMobileFile = () => {
 };
 
 const updateFile = () => {
-  if (!photo.value) {
+  if (!postInput.value?.media) {
     photoUrl.value = '';
     return;
   }
 
-  const file = photo.value as File;
+  const file = postInput.value?.media as File;
   if (file instanceof File) {
     const reader = new FileReader();
     reader.onload = () => {
@@ -218,7 +226,8 @@ const updateFile = () => {
   }
 };
 
-const onSubmit = () => {
+const onSubmit = async () => {
+ 
   if (!accept.value) {
     $q.notify({
       color: 'red-5',
@@ -226,21 +235,70 @@ const onSubmit = () => {
       icon: 'warning',
       message: 'Você precisa aceitar os termos primeiramente'
     })
-  } else {
-    $q.notify({
-      color: 'green-4',
-      textColor: 'white',
-      icon: 'cloud_done',
-      message: 'Sucesso ao salvar'
-    })
-  }
+  } 
+
+  await sendAPI()
+
 }
 
 const onReset = () => {
-  photo.value = null
-  photoMobile.value = null
-  name.value = null
+  stepper.value?.goTo(1);
+  postInput.value.media = null
+  photoUrl.value = ''
+  postInput.value.mediaMobile = null
+  photoMobileUrl.value = ''
+  title.value = null
   description.value = null
   order.value = null
 }
+
+const sendAPI = async () => {
+  const formData = new FormData();
+  
+  if (postInput.value.media) {
+    formData.append("photo", postInput.value.media);
+  }
+
+  if (postInput.value.mediaMobile) {
+    formData.append("photo_mobile", postInput.value.mediaMobile); 
+  }
+
+  formData.append("post", new Blob([JSON.stringify({
+    title: title.value,
+    description: description.value,
+    order: order.value
+  })], { type: 'application/json' }));
+  
+
+  try {
+    const response = await fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (response.ok) {
+      $q.notify({
+        color: 'green-4',
+        textColor: 'white',
+        icon: 'cloud_done',
+        message: 'Post salvo com sucesso!'
+      });
+      onReset();
+    } else {
+      throw new Error(result.message || "Erro ao salvar o post");
+    }
+  } catch (error) {
+    console.error(error);
+    $q.notify({
+      color: 'red-5',
+      textColor: 'white',
+      icon: 'error',
+      message: `Erro ao enviar o post`
+    });
+  }
+};
+
 </script>
