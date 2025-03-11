@@ -1,24 +1,24 @@
-# Etapa de construção
-FROM node:lts-alpine as build-stage
+# build
+FROM node:lts-alpine AS build-stage
 
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
 
 COPY . .
 
+RUN npm install
+
 RUN npm run build
 
-# Etapa de produção
-FROM node:lts-alpine as production-stage
+# serve
+FROM node:lts-alpine AS production-stage
 
 WORKDIR /app
 
-COPY --from=build-stage /app .
+COPY --from=build-stage /app/dist/spa ./dist/spa
+COPY --from=build-stage /app/package*.json ./
 
-EXPOSE 5173
+RUN npm install -g @quasar/cli
 
-# Comando inicial do Vite preview
-CMD ["npm", "run", "serve"]
+EXPOSE 4000
+
+CMD ["npx", "quasar", "serve", "dist/spa"]
