@@ -21,4 +21,4 @@ RUN npm install -g @quasar/cli
 
 EXPOSE 4000
 
-CMD ["npx", "quasar", "serve", "dist/spa"]
+CMD ["npx", "quasar", "serve", "dist/spa", "--history"]
