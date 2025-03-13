@@ -1,24 +1,27 @@
-# build
+# Build Stage
 FROM node:lts-alpine AS build-stage
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
-RUN npm install
+RUN npm ci --production --ignore-scripts \
+    && npm ci --only=dev --ignore-scripts
+
+COPY . .
 
 RUN npm run build
 
-# serve
+# Production Stage
 FROM node:lts-alpine AS production-stage
 
 WORKDIR /app
 
+RUN npm install -g @quasar/cli --production
+
 COPY --from=build-stage /app/dist/spa ./dist/spa
 COPY --from=build-stage /app/package*.json ./
 
-RUN npm install -g @quasar/cli
-
 EXPOSE 4000
 
-CMD ["npx", "quasar", "serve", "dist/spa", "--history"]
+CMD ["quasar", "serve", "dist/spa", "--history"]
