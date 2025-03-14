@@ -5,8 +5,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --production --ignore-scripts \
-    && npm ci --only=dev --ignore-scripts
+# Instala todas as dependências de uma vez
+RUN npm ci
 
 COPY . .
 
@@ -17,11 +17,12 @@ FROM node:lts-alpine AS production-stage
 
 WORKDIR /app
 
-RUN npm install -g @quasar/cli --production
+# Instala o Quasar CLI como dependência local
+COPY package*.json ./
+RUN npm ci --only=production
 
 COPY --from=build-stage /app/dist/spa ./dist/spa
-COPY --from=build-stage /app/package*.json ./
 
 EXPOSE 4000
 
-CMD ["quasar", "serve", "dist/spa", "--history"]
+CMD ["npx", "quasar", "serve", "dist/spa", "--history"]
