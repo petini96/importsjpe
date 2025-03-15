@@ -167,6 +167,7 @@
 <script setup lang="ts">
 import { useQuasar, type QStepper } from 'quasar'
 import {type PostInput } from 'src/types/Post';
+import { getApiUrl } from 'src/utils/environmentUtils';
 import { ref } from 'vue'
 
 const $q = useQuasar()
@@ -271,7 +272,7 @@ const sendAPI = async () => {
   
 
   try {
-    const response = await fetch("http://localhost:8080/posts", {
+    const response = await fetch(`${getApiUrl()}/posts`, {
       method: "POST",
       body: formData
     });
