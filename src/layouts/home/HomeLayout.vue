@@ -5,8 +5,11 @@
       <!-- nav section -->
       <NavLayout />
 
+      
+
       <q-page-container>
         <q-page >
+          <TabMenu />
           <router-view />
           <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
             <q-btn fab icon="keyboard_arrow_up" color="accent" />
@@ -22,4 +25,5 @@
 <script setup lang="ts">
 import NavLayout from 'src/components/layouts/home/NavLayout.vue';
 import FooterLayout from 'src/components/layouts/home/FooterLayout.vue';
+import TabMenu from 'src/components/generics/TabMenu.vue';
 </script>
