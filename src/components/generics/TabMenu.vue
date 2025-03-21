@@ -12,6 +12,7 @@
         <q-tab name="mini-products" label="Cardápio" />
         <q-tab name="galerry" label="Galeria" />
         <q-tab name="customer" label="Clientes" />
+        <q-tab name="contact" label="Contato" />
       </q-tabs>
     </div>
   </template>
