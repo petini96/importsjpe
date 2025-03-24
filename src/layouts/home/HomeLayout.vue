@@ -3,13 +3,16 @@
     <q-layout view="lHh Lpr lFf" container style="height: 100vh" class="shadow-2 rounded-borders">
       
       <!-- nav section -->
-      <NavLayout />
-
+      <NavLayout /> 
       
-
       <q-page-container>
         <q-page >
-          <TabMenu />
+          <TabMenu :tab-props="[
+            { name: 'about', label: 'Sobre' },
+            { name: 'menu', label: 'Cardápio' },
+            { name: 'gallery', label: 'Galeria' },
+            { name: 'customer', label: 'Clientes' }
+          ]" />
           <router-view />
           <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
             <q-btn fab icon="keyboard_arrow_up" color="accent" />
@@ -25,5 +28,5 @@
 <script setup lang="ts">
 import NavLayout from 'src/components/layouts/home/NavLayout.vue';
 import FooterLayout from 'src/components/layouts/home/FooterLayout.vue';
-import TabMenu from 'src/components/generics/TabMenu.vue';
+import TabMenu from 'src/components/generics/tab/TabMenu.vue';
 </script>
