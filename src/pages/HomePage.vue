@@ -11,7 +11,11 @@
   <section id="mini-products">
     <div class="q-pa-md my-5">
       <q-scroll-area :thumb-style="thumbStyle"
-        :style="{ height: cardSize.height, maxHeight: cardSize.maxHeight, width: cardSize.width }">
+        :style="{ 
+          height: containerCard.height, 
+          maxHeight: containerCard.maxHeight, 
+          width: containerCard.width 
+        }">
         <div class="row no-wrap justify-center">
           <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
             :description="product.description" :photos="product.photos" />
@@ -54,9 +58,9 @@ const { getScrollHeight } = scroll
 
 const $q = useQuasar();
 
-const cardSize = computed(() => {
-  if ($q.screen.xs) return { height: "60vh", maxHeight: "auto", width: "100%" };
-  if ($q.screen.sm) return { height: "60vh", maxHeight: "auto", width: "95%" };
+const containerCard = computed(() => {
+  if ($q.screen.xs) return { height: "600px", maxHeight: "auto", width: "100%" };
+  if ($q.screen.sm) return { height: "600px", maxHeight: "auto", width: "100%" };
   if ($q.screen.md) return { height: "80vh", maxHeight: "auto", width: "100%" };
   return { height: "55vh", maxHeight: "auto", width: "100%" };
 });

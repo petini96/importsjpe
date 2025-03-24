@@ -14,7 +14,7 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { width: "70vw", height: "50vh" };
+  if ($q.screen.xs) return { width: "75vw", height: "500px" };
   if ($q.screen.sm) return { width: "280px", height: "340px" };
   if ($q.screen.md) return { width: "300px", height: "340px" };
   return { width: "320px", height: "380px" };
@@ -50,10 +50,16 @@ const handleProductClick = async () => {
 
       <q-separator dark />
 
+      <q-card-section class="q-px-md">
+        <q-item-label class="q-my-lg text-secondary text-center text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
+        <q-item-label class="text-black q-px-lg ">{{ description }}</q-item-label>
+      </q-card-section>
+
       <!-- Nome e Descrição -->
       <q-card-actions align="center" class="q-pa-none q-my-md flex column">
-        <q-item-label class="text-secondary text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
-        <q-item-label class="text-black q-px-lg ">{{ description }}</q-item-label>
+        
+        <q-btn color="primary" icon-right="send" label="Comprar" />
+
       </q-card-actions>
     </q-card>
   </div>
