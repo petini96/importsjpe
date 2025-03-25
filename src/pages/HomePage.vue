@@ -10,13 +10,14 @@
   <!-- miniature products -->
   <section id="mini-products">
     <div class="q-pa-md my-5">
-      <q-scroll-area :thumb-style="thumbStyle"
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        :content-style="contentStyle"
         :style="{ 
-          height: containerCard.height, 
-          maxHeight: containerCard.maxHeight, 
-          width: containerCard.width
+          height: '90vh',
+          width: '100%'
         }">
-        <div class="row no-wrap justify-center">
+        <div class="row no-wrap justify-center items-center full-height	">
           <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
             :description="product.description" :photos="product.photos" />
         </div>
@@ -25,7 +26,6 @@
   </section>
 
   <div class="q-pa-md">
-    <pre class="q-ma-none container">{{ scrollInfo }}</pre>
     <q-scroll-observer @scroll="onScroll" />
   </div>
 
@@ -57,13 +57,6 @@ import { type ScrollDetails } from 'src/types/Scroll';
 const { getScrollHeight } = scroll
 
 const $q = useQuasar();
-
-const containerCard = computed(() => {
-  if ($q.screen.xs) return { height: "600px", maxHeight: "600px", width: "100vw" };
-  if ($q.screen.sm) return { height: "52vh", maxHeight: "70vh", width: "100vw" };
-  if ($q.screen.md) return { height: "80vh", maxHeight: "80vh", width: "100vw" };
-  return { height: "55vh", maxHeight: "auto", width: "100%" };
-});
 
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
@@ -99,6 +92,13 @@ const thumbStyle = {
   backgroundColor: 'pink',
   width: '5px',
   opacity: 0.75
+} as unknown as Partial<CSSStyleDeclaration>;
+
+const contentStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  height: '100%'
 } as unknown as Partial<CSSStyleDeclaration>;
 
 const isDonutVisible = ref(false);
@@ -141,7 +141,6 @@ onMounted(async () => {
 
 
 onUnmounted(() => {
-  // alert("xau")
 });
 
 

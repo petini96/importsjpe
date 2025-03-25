@@ -20,13 +20,11 @@
         </q-page>
       </q-page-container>
 
-      <FooterLayout />
     </q-layout>
   </div> 
 </template>
 
 <script setup lang="ts">
 import NavLayout from 'src/components/layouts/home/NavLayout.vue';
-import FooterLayout from 'src/components/layouts/home/FooterLayout.vue';
 import TabMenu from 'src/components/generics/tab/TabMenu.vue';
 </script>

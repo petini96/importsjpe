@@ -14,31 +14,10 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { width: "75vw", height: "70vh" };
-  if ($q.screen.sm) return { width: "35vw", height: "45vh" };
-  if ($q.screen.md) return { width: "20vw", height: "70vh" };
-  return { width: "20vw", height: "90%" };
-});
-
-const cardHeaderSize = computed(() => {
-  if ($q.screen.xs) return { minHeight: "50%", maxHeight: "50%" };
-  if ($q.screen.sm) return { minHeight: "50%", maxHeight: "50%" };
-  if ($q.screen.md) return { minHeight: "50%", maxHeight: "50%" };
-  return { minHeight: "50%", maxHeight: "50%" };
-});
-
-const cardBodySize = computed(() => {
-  if ($q.screen.xs) return { minHeight: "30%", maxHeight: "30%" };
-  if ($q.screen.sm) return { minHeight: "30%", maxHeight: "30%" };
-  if ($q.screen.md) return { minHeight: "30%", maxHeight: "30%" };
-  return { minHeight: "30%", maxHeight: "30%" };
-});
-
-const cardFooterSize = computed(() => {
-  if ($q.screen.xs) return { minHeight: "10%", maxHeight: "10%" };
-  if ($q.screen.sm) return { minHeight: "10%", maxHeight: "10%" };
-  if ($q.screen.md) return { minHeight: "10%", maxHeight: "10%" };
-  return { minHeight: "10%", maxHeight: "10%" };
+  if ($q.screen.xs) return { maxWidth: '250px', height: "75vh" };
+  if ($q.screen.sm) return { maxWidth: '250px', height: "75vh" };
+  if ($q.screen.md) return { maxWidth: '300px', height: "60vh" };
+  return { maxWidth: "20vw", height: "90%" };
 });
 
 const router = useRouter();
@@ -53,14 +32,14 @@ const handleProductClick = async () => {
 <template>
   <div class="q-pa-md">
     <q-card 
-      class=" shadown-pink border-rounded"
-      :style="{ width: cardSize.width, height: cardSize.height }"
+      class="shadown-pink border-rounded"
+      :style="{ width: '70vw', maxWidth: cardSize.maxWidth, height: cardSize.height }"
       @click="handleProductClick"
     >
       <!-- Imagem -->
       <q-card-section 
         class="card-image-container"
-        :style="{ minHeight: cardHeaderSize.minHeight, maxHeight: cardHeaderSize.maxHeight}"
+        :style="{ height:'50%'}"
       >
         <q-img 
           v-if="photos?.length" 
@@ -75,10 +54,9 @@ const handleProductClick = async () => {
       <q-separator dark />
 
       <q-card-section 
-        class=""
-        :style="{ minHeight: cardBodySize.minHeight, maxHeight: cardBodySize.maxHeight}"
+        :style="{ height:'35%'}"
       >
-        <q-item-label class="q-mb-md text-secondary text-center text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
+        <q-item-label class="text-secondary text-bold font-primoto-pro text-h6 ">{{ name }}</q-item-label>
         <q-item-label class="text-black">{{ description }}</q-item-label>
       </q-card-section>
 
@@ -87,8 +65,7 @@ const handleProductClick = async () => {
         align="center" 
         class="q-my-sm flex column"
         :style="{ 
-          minHeight: cardFooterSize.minHeight, 
-          maxHeight: cardFooterSize.maxHeight
+          height: '10%'
         }"
       >
   
