@@ -14,10 +14,31 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const cardSize = computed(() => {
-  if ($q.screen.xs) return { width: "70vw", height: "50vh" };
-  if ($q.screen.sm) return { width: "280px", height: "340px" };
-  if ($q.screen.md) return { width: "300px", height: "340px" };
-  return { width: "320px", height: "380px" };
+  if ($q.screen.xs) return { width: "75vw", height: "70vh" };
+  if ($q.screen.sm) return { width: "35vw", height: "45vh" };
+  if ($q.screen.md) return { width: "20vw", height: "70vh" };
+  return { width: "20vw", height: "90%" };
+});
+
+const cardHeaderSize = computed(() => {
+  if ($q.screen.xs) return { minHeight: "50%", maxHeight: "50%" };
+  if ($q.screen.sm) return { minHeight: "50%", maxHeight: "50%" };
+  if ($q.screen.md) return { minHeight: "50%", maxHeight: "50%" };
+  return { minHeight: "50%", maxHeight: "50%" };
+});
+
+const cardBodySize = computed(() => {
+  if ($q.screen.xs) return { minHeight: "30%", maxHeight: "30%" };
+  if ($q.screen.sm) return { minHeight: "30%", maxHeight: "30%" };
+  if ($q.screen.md) return { minHeight: "30%", maxHeight: "30%" };
+  return { minHeight: "30%", maxHeight: "30%" };
+});
+
+const cardFooterSize = computed(() => {
+  if ($q.screen.xs) return { minHeight: "10%", maxHeight: "10%" };
+  if ($q.screen.sm) return { minHeight: "10%", maxHeight: "10%" };
+  if ($q.screen.md) return { minHeight: "10%", maxHeight: "10%" };
+  return { minHeight: "10%", maxHeight: "10%" };
 });
 
 const router = useRouter();
@@ -32,28 +53,47 @@ const handleProductClick = async () => {
 <template>
   <div class="q-pa-md">
     <q-card 
-      class="bg-white shadown-pink border-rounded"
+      class=" shadown-pink border-rounded"
       :style="{ width: cardSize.width, height: cardSize.height }"
       @click="handleProductClick"
     >
       <!-- Imagem -->
-      <q-card-section class="q-px-md card-image-container">
+      <q-card-section 
+        class="card-image-container"
+        :style="{ minHeight: cardHeaderSize.minHeight, maxHeight: cardHeaderSize.maxHeight}"
+      >
         <q-img 
           v-if="photos?.length" 
           :src="photos[0]?.url" 
           alt="Product image" 
           class="img-fluid"
           fit="cover"
-          style="width: 100%; height: 180px; object-fit: cover;"
+          style="width: 100%; height: 100%; object-fit: cover;"
         />
       </q-card-section>
 
       <q-separator dark />
 
+      <q-card-section 
+        class=""
+        :style="{ minHeight: cardBodySize.minHeight, maxHeight: cardBodySize.maxHeight}"
+      >
+        <q-item-label class="q-mb-md text-secondary text-center text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
+        <q-item-label class="text-black">{{ description }}</q-item-label>
+      </q-card-section>
+
       <!-- Nome e Descrição -->
-      <q-card-actions align="center" class="q-pa-none q-my-md flex column">
-        <q-item-label class="text-secondary text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
-        <q-item-label class="text-black q-px-lg ">{{ description }}</q-item-label>
+      <q-card-actions 
+        align="center" 
+        class="q-my-sm flex column"
+        :style="{ 
+          minHeight: cardFooterSize.minHeight, 
+          maxHeight: cardFooterSize.maxHeight
+        }"
+      >
+  
+        <q-btn color="primary" icon-right="send" label="Comprar" />
+
       </q-card-actions>
     </q-card>
   </div>
