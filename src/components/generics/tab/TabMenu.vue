@@ -18,16 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { PropType } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import type { TabMenuProps } from './TabProps';
 
-defineProps({
-  tabProps: {
-    type: Object as PropType<TabMenuProps[]>,
-    required: true,
-  }
-});
+const { tabProps } = defineProps<{
+  tabProps: TabMenuProps[];
+}>();
+
 const tab = ref<string>(''); 
 
 const scrollToSection = (newTab: string) => {
@@ -35,14 +32,24 @@ const scrollToSection = (newTab: string) => {
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' });
   }
-};
+  
+  const app = getCurrentInstance();
+  const gtag = app?.appContext.config.globalProperties.$gtag;
+  const tabLabel = tabProps.find(tab => tab.name === newTab)?.label || newTab;
 
+  if (gtag) {
+    gtag.event('Clique', {
+      event_category: 'Navegação',
+      event_label: `Aba: ${tabLabel}`,
+      value: 1
+    });
+  }
+};
 </script>
 
 <style scoped>
 .section {
   height: 100vh;
-  /* Apenas para exemplo, ajuste conforme necessário */
   padding: 20px;
   background-color: #f5f5f5;
   margin-top: 20px;

@@ -60,6 +60,9 @@
       "boot": [
         "./../src/boot"
       ],
+      "boot/*": [
+        "./../src/boot/*"
+      ],
       "stores": [
         "./../src/stores"
       ],
