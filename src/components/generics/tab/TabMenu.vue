@@ -26,23 +26,34 @@ const { tabProps } = defineProps<{
 }>();
 
 const tab = ref<string>(''); 
-
-const scrollToSection = (newTab: string) => {
+  const scrollToSection = (newTab: string) => {
+  console.log('scrollToSection chamado com aba:', newTab);
   const element = document.getElementById(newTab);
   if (element) {
+    console.log('Elemento encontrado, rolando para:', newTab);
     element.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    console.log('Elemento não encontrado para a aba:', newTab);
   }
   
   const app = getCurrentInstance();
   const gtag = app?.appContext.config.globalProperties.$gtag;
   const tabLabel = tabProps.find(tab => tab.name === newTab)?.label || newTab;
 
+  console.log('gtag:', gtag);
   if (gtag) {
+    console.log('Enviando evento Clique para o GA:', {
+      event_category: 'Navegação',
+      event_label: `Aba: ${tabLabel}`,
+      value: 1
+    });
     gtag.event('Clique', {
       event_category: 'Navegação',
       event_label: `Aba: ${tabLabel}`,
       value: 1
     });
+  } else {
+    console.log('gtag não está definido! Verifique a configuração do vue-gtag.');
   }
 };
 </script>
