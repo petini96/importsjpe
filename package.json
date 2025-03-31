@@ -29,6 +29,7 @@
     "@popperjs/core": "^2.11.6",
     "@quasar/app-vite": "^2.0.8",
     "@quasar/extras": "^1.16.4",
+    "@typebot.io/js": "^0.3.78",
     "axios": "^1.7.7",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
