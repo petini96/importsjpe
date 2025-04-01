@@ -1,31 +1,38 @@
 <template>
 
   <!-- carrousel -->
-  <section id="carousel">
+  <!-- <section id="carousel">
     <div class="row justify-content-center">
       <OverTimeCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
-  </section>
+  </section> -->
 
   <!-- miniature products -->
-  <section id="mini-products">
+  <!-- <section id="mini-products">
     <div class="q-pa-md my-5">
-      <q-scroll-area :thumb-style="thumbStyle"
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        :content-style="contentStyle"
         :style="{ 
-          height: containerCard.height, 
-          maxHeight: containerCard.maxHeight, 
-          width: containerCard.width 
+          height: '90vh',
+          width: '100%'
         }">
-        <div class="row no-wrap justify-center">
+        <div class="row no-wrap justify-center items-center full-height	full-width">
           <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
             :description="product.description" :photos="product.photos" />
         </div>
       </q-scroll-area>
     </div>
-  </section>
+  </section> -->
+  <SimpleProductCard v-for="(product, index) in products" 
+    :key="index" 
+    :id="product.id" 
+    :name="product.name"
+    :description="product.description" 
+    :photos="product.photos" 
+  />
 
   <div class="q-pa-md">
-    <pre class="q-ma-none container">{{ scrollInfo }}</pre>
     <q-scroll-observer @scroll="onScroll" />
   </div>
 
@@ -44,12 +51,12 @@
 </template>
 
 <script setup lang="ts">
-import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
+// import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
 import PaymentWayInfo from '../components/home/sections/PaymentWayInfo.vue';
 import YourNextPhoneMarketing from '../components/home/sections/YourNextPhoneMarketing.vue';
 import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
-import { usePostStore } from '../stores/post-store';
+// import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
 import { scroll, useQuasar } from 'quasar'
 import { type ScrollDetails } from 'src/types/Scroll';
@@ -57,13 +64,6 @@ import { type ScrollDetails } from 'src/types/Scroll';
 const { getScrollHeight } = scroll
 
 const $q = useQuasar();
-
-const containerCard = computed(() => {
-  if ($q.screen.xs) return { height: "600px", maxHeight: "auto", width: "100%" };
-  if ($q.screen.sm) return { height: "600px", maxHeight: "auto", width: "100%" };
-  if ($q.screen.md) return { height: "80vh", maxHeight: "auto", width: "100%" };
-  return { height: "55vh", maxHeight: "auto", width: "100%" };
-});
 
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
@@ -73,7 +73,7 @@ const onScroll = (info: ScrollDetails) => {
   const scrollPercentage = screenHeight ? info.position.top / screenHeight : 0;
 
   const elementToScroll: Element | null = document.querySelector("#footer");
-  if(elementToScroll){
+  if (elementToScroll) {
     console.log(`getScrollHeight: ${getScrollHeight(elementToScroll)}`);
   }
   console.log(`screenHeight: ${screenHeight}`);
@@ -83,7 +83,7 @@ const onScroll = (info: ScrollDetails) => {
   donutGrayScale.value = scrollPercentage;
   donutRotation.value = info.position.top * 0.4;
 
-  if (elementToScroll && info.position.top >= getScrollHeight(elementToScroll) ) {
+  if (elementToScroll && info.position.top >= getScrollHeight(elementToScroll)) {
     isDonutVisible.value = true;
   } else {
     isDonutVisible.value = false;
@@ -93,22 +93,29 @@ const onScroll = (info: ScrollDetails) => {
 };
 
 
-const thumbStyle = {
-  right: '4px',
-  borderRadius: '5px',
-  backgroundColor: 'pink',
-  width: '5px',
-  opacity: 0.75
-} as unknown as Partial<CSSStyleDeclaration>;
+// const thumbStyle = {
+//   right: '4px',
+//   borderRadius: '5px',
+//   backgroundColor: 'pink',
+//   width: '5px',
+//   opacity: 0.75
+// } as unknown as Partial<CSSStyleDeclaration>;
+
+// const contentStyle = {
+//   display: 'flex',
+//   flexDirection: 'row',
+//   alignItems: 'center',
+//   height: '100%'
+// } as unknown as Partial<CSSStyleDeclaration>;
 
 const isDonutVisible = ref(false);
 const donutRotation = ref(0);
 const donutGrayScale = ref(0);
 
-const postStore = usePostStore();
+// const postStore = usePostStore();
 const productStore = useProductStore();
 
-const posts = computed(() => postStore.posts);
+// const posts = computed(() => postStore.posts);
 const products = computed(() => productStore.products);
 
 function scrollToElement(el: Element) {
@@ -131,7 +138,7 @@ onMounted(async () => {
 
   try {
     console.log("fetch data");
-    await postStore.fetchPosts(0, 10);
+    // await postStore.fetchPosts(0, 10);
     await productStore.fetchProducts(0, 10);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -141,7 +148,6 @@ onMounted(async () => {
 
 
 onUnmounted(() => {
-  // alert("xau")
 });
 
 
@@ -156,6 +162,10 @@ onUnmounted(() => {
   100% {
     opacity: 0;
   }
+}
+
+#donut {
+  display: none;
 }
 
 .icon {

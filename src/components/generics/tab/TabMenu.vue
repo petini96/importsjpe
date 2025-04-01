@@ -18,31 +18,49 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { PropType } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import type { TabMenuProps } from './TabProps';
 
-defineProps({
-  tabProps: {
-    type: Object as PropType<TabMenuProps[]>,
-    required: true,
-  }
-});
-const tab = ref<string>(''); 
+const { tabProps } = defineProps<{
+  tabProps: TabMenuProps[];
+}>();
 
-const scrollToSection = (newTab: string) => {
+const tab = ref<string>(''); 
+  const scrollToSection = (newTab: string) => {
+  console.log('scrollToSection chamado com aba:', newTab);
   const element = document.getElementById(newTab);
   if (element) {
+    console.log('Elemento encontrado, rolando para:', newTab);
     element.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    console.log('Elemento não encontrado para a aba:', newTab);
+  }
+  
+  const app = getCurrentInstance();
+  const gtag = app?.appContext.config.globalProperties.$gtag;
+  const tabLabel = tabProps.find(tab => tab.name === newTab)?.label || newTab;
+
+  console.log('gtag:', gtag);
+  if (gtag) {
+    console.log('Enviando evento Clique para o GA:', {
+      event_category: 'Navegação',
+      event_label: `Aba: ${tabLabel}`,
+      value: 1
+    });
+    gtag.event('Clique', {
+      event_category: 'Navegação',
+      event_label: `Aba: ${tabLabel}`,
+      value: 1
+    });
+  } else {
+    console.log('gtag não está definido! Verifique a configuração do vue-gtag.');
   }
 };
-
 </script>
 
 <style scoped>
 .section {
   height: 100vh;
-  /* Apenas para exemplo, ajuste conforme necessário */
   padding: 20px;
   background-color: #f5f5f5;
   margin-top: 20px;
