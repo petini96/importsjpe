@@ -40,7 +40,7 @@ const handleProductClick = async () => {
 
       <q-separator dark />
 
-      <q-card-section >
+      <q-card-section class="col-grow">
         <q-item-label class="text-secondary text-bold font-primoto-pro text-h6 ">{{ name }}</q-item-label>
         <q-item-label class="text-black">{{ description }}</q-item-label>
       </q-card-section>
