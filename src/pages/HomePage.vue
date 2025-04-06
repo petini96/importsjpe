@@ -1,26 +1,38 @@
 <template>
-
-  <!-- carrousel -->
+  
   <section id="carousel">
     <div class="row justify-content-center">
       <OverTimeCarrousel :posts="posts" v-if="posts.length > 0" />
     </div>
   </section>
 
-  <!-- miniature products -->
   <section id="mini-products">
     <div class="q-pa-md my-5">
       <q-scroll-area
         :thumb-style="thumbStyle"
         :content-style="contentStyle"
         :style="{ 
-          height: '90vh',
-          width: '100%'
+          height: height,
+          minWidth: '100%'
         }">
-        <div class="row no-wrap justify-center items-center full-height	">
-          <SimpleProductCard v-for="(product, index) in products" :key="index" :id="product.id" :name="product.name"
-            :description="product.description" :photos="product.photos" />
+
+        <q-resize-observer @resize="onResize"/>
+
+        <div class="row no-wrap">
+          <div 
+            class="col-5 col-sm-5 col-md-3 q-pa-sm" 
+            v-for="(product, index) in products" :key="index"
+          >
+            <SimpleProductCard
+              class="full-height"
+              :id="product.id"
+              :name="product.name"
+              :description="product.description"
+              :photos="product.photos"
+            />
+          </div>
         </div>
+
       </q-scroll-area>
     </div>
   </section>
@@ -57,6 +69,9 @@ import { type ScrollDetails } from 'src/types/Scroll';
 const { getScrollHeight } = scroll
 
 const $q = useQuasar();
+
+const height = ref('10px')
+const onResize = (size: { height: number; width: number; }) => height.value = `${size.height}px` 
 
 const { setVerticalScrollPosition, getScrollTarget } = scroll
 
@@ -97,8 +112,8 @@ const thumbStyle = {
 const contentStyle = {
   display: 'flex',
   flexDirection: 'row',
-  alignItems: 'center',
-  height: '100%'
+  flexWrap: 'wrap',
+  width: '100%'
 } as unknown as Partial<CSSStyleDeclaration>;
 
 const isDonutVisible = ref(false);
