@@ -14,14 +14,55 @@
 
 // src/css/quasar.variables.sass
 
-$primary   : #f6a8d6;
+@font-face {
+    font-family: primotPro;
+    src: url(./fonts/primot_pro_w01_regular.ttf);
+}
+  
+@font-face {
+    font-family: thirstyScript;
+    src: url(./fonts/thirsty_script_extra_bold_demo.otf);
+}
+  
+$primary : #f6a8d6;
 $secondary : #e04179;
-$accent    : #d32f2f;
+$accent : #d32f2f;
 
-$dark      : #f9f3f4;
+$dark : #f9f3f4;
 $dark-page : #121212;
 
-$positive  : #4caf50;
-$negative  : #c62828;
-$info      : #42a5f5;
-$warning   : #ffc107;
+$positive : #4caf50;
+$negative : #c62828;
+$info : #42a5f5;
+$warning : #ffc107;
+
+@mixin fontSize($fontSize: 1px, $color: black) {
+    font-size: $fontSize !important;
+    color: $color;
+}
+
+.big {
+    @include fontSize(50px, blue);
+}
+
+.medium {
+    @include fontSize(10px, yellow);
+}
+
+.normal {
+    @include fontSize();
+}
+
+$pinkShadown: rgba(200, 80, 140, 0.5);
+
+%shadown-pink {
+    box-shadow: 0px 4px 10px $pinkShadown;
+}
+
+%font-primoto-pro {
+    font-family: primotPro;
+}
+
+.font-primoto-pro{
+    font-family: primotPro;
+}

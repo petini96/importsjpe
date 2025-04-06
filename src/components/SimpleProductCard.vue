@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useProductStore } from '../stores/product-store';
-import { useQuasar } from 'quasar';
-import { computed } from 'vue';
+// import { useQuasar } from 'quasar';
+// import { computed } from 'vue';
 
 const props = defineProps<{
   id: number;
@@ -11,14 +11,14 @@ const props = defineProps<{
   photos: { id: number; url: string; fileType: string; fileSize: number; createdAt: number }[];
 }>();
 
-const $q = useQuasar();
+// const $q = useQuasar();
 
-const cardSize = computed(() => {
-  if ($q.screen.xs) return { maxWidth: "75vw", height: "500px" };
-  if ($q.screen.sm) return { maxWidth: "280px", height: "340px" };
-  if ($q.screen.md) return { maxWidth: "300px", height: "340px" };
-  return { maxWidth: "320px", height: "380px" };
-});
+// const cardSize = computed(() => {
+//   if ($q.screen.xs) return { maxWidth: "75vw", height: "500px" };
+//   if ($q.screen.sm) return { maxWidth: "280px", height: "340px" };
+//   if ($q.screen.md) return { maxWidth: "300px", height: "340px" };
+//   return { maxWidth: "320px", height: "380px" };
+// });
 
 const router = useRouter();
 const productStore = useProductStore();
@@ -32,85 +32,118 @@ const handleProductClick = async () => {
 <template>
   <div class="q-pa-md">
     <q-card 
-      class="product-card shadown-pink border-rounded"
-      :style="{ width: '70vw', maxWidth: cardSize.maxWidth, height: cardSize.height }"
+      class="product-card"
       @click="handleProductClick"
     >
-      <!-- Imagem -->
       <q-card-section 
-        class="card-image-container"
-        :style="{ height:'50%'}"
+        class="product-card__header"
       >
         <q-img 
           v-if="photos?.length" 
           :src="photos[0]?.url" 
           alt="Product image" 
-          class="img-fluid"
+          class="product-card__image"
           fit="cover"
-          style="width: 100%; height: 100%; object-fit: cover;"
         />
       </q-card-section>
 
-      <q-separator dark />
+      <q-separator dark class="product-card__divider" />
 
-      <q-card-section class="q-px-md">
-        <q-item-label class="q-my-lg text-secondary text-center text-bold fixed-title font-primoto-pro text-h6 ">{{ name }}</q-item-label>
-        <q-item-label class="text-black q-px-lg ">{{ description }}</q-item-label>
+      <q-card-section class="product-card__content">
+        <q-item-label class="product-card__title">{{ name }}</q-item-label>
+        <q-item-label class="product-card__description">{{ description }}</q-item-label>
       </q-card-section>
 
-      <!-- Nome e Descrição -->
-      <q-card-actions align="center" class="q-pa-none q-my-md flex column ">
-        
-        <q-btn color="primary" icon-right="send" label="Comprar" />
-
+      <q-card-actions class="product-card__actions">
+        <q-btn color="primary" icon-right="send" label="Comprar" class="product-card__buy-button" />
       </q-card-actions>
-    </q-card>
-
-    <div class="grandao">
-      <p>aaaaaaaaaaaaaaaa sass</p>
-    </div>
+    </q-card> 
   </div>
 </template>
+
+<style lang="scss" scoped>
+// 1. Variáveis para cores (facilita manutenção)
+$color-primary: #007bff; // Cor primária (substitua pelo valor real do Quasar)
+$color-divider: #0000ff; // Azul para o separador
+$color-header-bg: #ff0000; // Vermelho para o header
+$color-image-bg: #00ff00; // Verde para a imagem
+$color-content-bg: #ffff00; // Amarelo para o conteúdo
+$color-title-bg: #ff69b4; // Rosa para o título
+$color-description-bg: #800080; // Roxo para a descrição
+$color-actions-bg: #0000ff; // Azul para as ações
+$color-buy-button-bg: #ffa500; // Laranja para o botão de compra
+
+// 2. Estilos do bloco principal (product-card)
+.product-card{
+  @extend %shadown-pink;
  
-<style lang="sass" scoped>
+  // Estilos base do cartão
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 
-@mixin fontSize($fontSize: 1px, $color: black)
-  font-size: $fontSize !important
-  color: $color
+  @media (max-width: 400px) {
+    padding: 1rem;
+    height: 100%;
+  }
 
-.grandao
-  @include fontSize(50px, blue)
+  &__header {
+    background-color: $color-header-bg;
+    display: flex;
+    flex-direction: column;
 
-.medio
-  @include fontSize(10px, yellow)
+    @media (max-width: 400px) {
+      height: 50%;
+      max-height: 200px;
+    }
 
-.normal
-  @include fontSize()
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 
-$pinkShadown: rgba(200, 80, 140, 0.5)
+  &__divider {
+    background-color: $color-divider;
+  }
 
-@mixin theme($theme: DarkGray)
-  background: $theme
-  box-shadow: 0 0 1px rgba($theme, .25)
-  color: #fff
-  
-.shadown-pink
-  box-shadow: 0px 4px 10px $pinkShadown
+  &__content {
+    background-color: $color-content-bg;
+    display: flex;
+    flex-wrap: wrap;
+    @media (max-width: 400px) {
+      height: 35%;
+    }
+  }
 
-.border-rounded
-  border-radius: 15px
+    &__title {
+      @extend %font-primoto-pro;
+      background-color: $color-title-bg;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
 
-.fixed-title
-  height: 24px
-  line-height: 24px
+    &__description {
+      background-color: $color-description-bg;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
 
-.fixed-description
-  height: 40px
-  line-height: 20px
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
+  &__actions {
+    background-color: $color-actions-bg;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    @media (max-width: 400px) {
+      height: 15%;
+    }
+  }
 
-.card-image-container
-  height: 180px
+    &__buy-button {
+      background-color: $color-buy-button-bg;
+    }
+}
 </style>
