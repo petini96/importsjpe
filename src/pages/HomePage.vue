@@ -32,14 +32,9 @@
             />
           </div>
         </div>
-
       </q-scroll-area>
     </div>
   </section>
-
-  <div class="q-pa-md">
-    <q-scroll-observer @scroll="onScroll" />
-  </div>
 
   <!-- about payment -->
   <PaymentWayInfo />
@@ -48,14 +43,12 @@
   <YourNextPhoneMarketing />
 
   <!-- donut -->
-  <div id="donut" class="icon" :class="{ animate: isDonutVisible }"
-    :style="{ transform: `rotate(${donutRotation}deg)`, filter: `grayscale(${donutGrayScale}) ` }">
-    <q-img src="../assets/images/svg/smile-donut.svg" alt="Donut image" style="width: 125px;" />
-  </div>
+  <DonutComponent />
 
 </template>
 
 <script setup lang="ts">
+
 import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
 import PaymentWayInfo from '../components/home/sections/PaymentWayInfo.vue';
 import YourNextPhoneMarketing from '../components/home/sections/YourNextPhoneMarketing.vue';
@@ -63,43 +56,12 @@ import SimpleProductCard from '../components/SimpleProductCard.vue';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
 import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
-import { scroll, useQuasar } from 'quasar'
-import { type ScrollDetails } from 'src/types/Scroll';
-
-const { getScrollHeight } = scroll
-
-const $q = useQuasar();
+import { scroll } from 'quasar'
+import DonutComponent from 'src/components/donut/DonutComponent.vue';
 
 const height = ref('10px')
 const onResize = (size: { height: number; width: number; }) => height.value = `${size.height}px` 
-
 const { setVerticalScrollPosition, getScrollTarget } = scroll
-
-const scrollInfo = ref({})
-const onScroll = (info: ScrollDetails) => {
-  const screenHeight = $q.screen.height
-  const scrollPercentage = screenHeight ? info.position.top / screenHeight : 0;
-
-  const elementToScroll: Element | null = document.querySelector("#footer");
-  if(elementToScroll){
-    console.log(`getScrollHeight: ${getScrollHeight(elementToScroll)}`);
-  }
-  console.log(`screenHeight: ${screenHeight}`);
-  console.log(`scrollPercentage: ${scrollPercentage}`);
-  console.log(info);
-
-  donutGrayScale.value = scrollPercentage;
-  donutRotation.value = info.position.top * 0.4;
-
-  if (elementToScroll && info.position.top >= getScrollHeight(elementToScroll) ) {
-    isDonutVisible.value = true;
-  } else {
-    isDonutVisible.value = false;
-  }
-
-  scrollInfo.value = info;
-};
-
 
 const thumbStyle = {
   right: '4px',
@@ -115,11 +77,7 @@ const contentStyle = {
   flexWrap: 'wrap',
   width: '100%'
 } as unknown as Partial<CSSStyleDeclaration>;
-
-const isDonutVisible = ref(false);
-const donutRotation = ref(0);
-const donutGrayScale = ref(0);
-
+ 
 const postStore = usePostStore();
 const productStore = useProductStore();
 

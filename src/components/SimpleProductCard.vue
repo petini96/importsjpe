@@ -56,6 +56,7 @@ const handleProductClick = async () => {
 </template>
 
 <style scoped>
+
 .shadown-pink {
   box-shadow: 0px 4px 10px rgba(200, 80, 140, 0.5);
 }
