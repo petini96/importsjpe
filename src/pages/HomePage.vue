@@ -36,28 +36,29 @@
     </div>
   </section>
 
+  <AboutMe />
   <!-- about payment -->
   <PaymentWayInfo />
 
   <!-- marketing -->
   <YourNextPhoneMarketing />
 
-  <!-- donut -->
-  <DonutComponent />
+  
 
 </template>
 
 <script setup lang="ts">
 
-import OverTimeCarrousel from '../components/OverTimeCarrousel.vue';
-import PaymentWayInfo from '../components/home/sections/PaymentWayInfo.vue';
-import YourNextPhoneMarketing from '../components/home/sections/YourNextPhoneMarketing.vue';
-import SimpleProductCard from '../components/SimpleProductCard.vue';
-import { onMounted, onUnmounted, computed, ref } from 'vue';
+import { onMounted, computed, ref, defineAsyncComponent } from 'vue';
 import { usePostStore } from '../stores/post-store';
 import { useProductStore } from '../stores/product-store';
 import { scroll } from 'quasar'
-import DonutComponent from 'src/components/donut/DonutComponent.vue';
+
+const OverTimeCarrousel = defineAsyncComponent(() => import('../components/OverTimeCarrousel.vue'));
+const PaymentWayInfo = defineAsyncComponent(() => import('../components/home/sections/PaymentWayInfo.vue'));
+const YourNextPhoneMarketing = defineAsyncComponent(() => import('../components/home/sections/YourNextPhoneMarketing.vue'));
+const SimpleProductCard = defineAsyncComponent(() => import('../components/SimpleProductCard.vue'));
+const AboutMe = defineAsyncComponent(() => import('../components/home/sections/AboutMe.vue'));
 
 const height = ref('10px')
 const onResize = (size: { height: number; width: number; }) => height.value = `${size.height}px` 
@@ -84,6 +85,7 @@ const productStore = useProductStore();
 const posts = computed(() => postStore.posts);
 const products = computed(() => productStore.products);
 
+
 function scrollToElement(el: Element) {
   const target = getScrollTarget(el);
   const duration = 1000;
@@ -101,7 +103,6 @@ onMounted(async () => {
   if (marketingElement) {
     scrollToElement(marketingElement)
   }
-
   try {
     console.log("fetch data");
     await postStore.fetchPosts(0, 10);
@@ -109,11 +110,6 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-
-});
-
-
-onUnmounted(() => {
 });
 
 

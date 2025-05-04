@@ -17,7 +17,8 @@
     "dev:vite": "vite",
     "build:vite": "vue-tsc -b && vite build",
     "preview:vite": "vite preview",
-    "serve:vite": "vite preview"
+    "serve:vite": "vite preview",
+    "preview": "npx vite preview --base=/ --port 5173 --host --outDir dist/spa"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",

@@ -103,7 +103,11 @@ const bannerSize = computed(()=>{
       alt="Flowers" 
       fit="cover" 
       @touchstart="handleTouchStart"
-      @touchend="handleTouchEnd" 
+      @touchend="handleTouchEnd"
+      :loading="'eager'"
+      :onLoad="((src: string)=>{
+        console.log(src)
+      })"
     />
     <div class="progress-carousel bg-opacity-50" :style="{ width: progress + '%' }"></div>
     <span></span>

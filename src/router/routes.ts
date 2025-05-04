@@ -1,7 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import ProductPage from '../pages/products/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
-import HomePage from 'pages/HomePage.vue';
 import CreateBannerPage from 'src/pages/banner/CreateBannerPage.vue';
 
 const routes: RouteRecordRaw[] = [
@@ -12,7 +11,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
-        component: HomePage
+        component: () => import('pages/HomePage.vue')
       }
     ],
   },
