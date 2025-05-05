@@ -1,9 +1,7 @@
 <template>
   <div class="full-height full-width">
     <q-layout view="lHh Lpr lFf" container style="height: 100vh" class="shadow-2 rounded-borders">
-      <!-- Nav section -->
       <NavLayout />
-
       <q-page-container>
         <q-page ref="pageRef">
           <TabMenu
@@ -15,8 +13,6 @@
             ]"
           />
           <router-view />
-
-          <!-- Botão de chat -->
           <q-btn
             fab
             icon="chat"
@@ -25,8 +21,6 @@
             style="bottom: 20px; right: 20px; z-index: 1100;"
             @click="toggleTypebot"
           />
-
-          <!-- Container do Typebot -->
           <div v-show="showTypebot" class="typebot-container">
             <typebot-standard ref="typebot" style="width: 100%; height: 100%;" />
             <q-btn
@@ -38,8 +32,7 @@
               @click="toggleTypebot"
             />
           </div>
-
-          <!-- Donut -->
+          <q-scroll-observer @scroll="onScroll" />
           <DonutComponent />
         </q-page>
       </q-page-container>
@@ -50,9 +43,16 @@
 <script setup lang="ts">
 import NavLayout from 'src/components/layouts/home/NavLayout.vue';
 import TabMenu from 'src/components/generics/tab/TabMenu.vue';
-import { defineAsyncComponent, onMounted, onUnmounted, ref, nextTick } from 'vue';
+import DonutComponent from 'src/components/donut/DonutComponent.vue';
+import { onMounted, onUnmounted, ref, nextTick } from 'vue';
+import { type ScrollDetails } from 'src/types/Scroll';
+import { useScrollStore } from 'src/stores/scrollStore';
 
-const DonutComponent = defineAsyncComponent(() => import('src/components/donut/DonutComponent.vue'));
+const scrollStore = useScrollStore();
+
+const onScroll = (info: ScrollDetails) => {
+  scrollStore.setScrollInfo(info);
+};
 
 const showTypebot = ref(false);
 const pageRef = ref<HTMLElement | null>(null);
@@ -62,7 +62,6 @@ const toggleTypebot = () => {
 };
 
 onMounted(async () => {
-  // Script Typebot
   const script = document.createElement('script');
   script.type = 'module';
   script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3.59/dist/web.js';
@@ -78,14 +77,8 @@ onMounted(async () => {
   };
   document.head.appendChild(script);
 
-  // Medir altura do conteúdo
-  await nextTick(); // aguarda renderização do DOM
-  if (pageRef.value) {
-    const height = pageRef.value.scrollHeight;
-    console.log('Altura total do conteúdo do QPage:', height);
-  } else {
-    console.warn('Não foi possível acessar o QPage');
-  }
+  await nextTick();
+ 
 });
 
 onUnmounted(() => {
