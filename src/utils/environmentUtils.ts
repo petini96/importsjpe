@@ -1,4 +1,4 @@
 export const getApiUrl = () => {
     console.log(process.env.BACKEND_URL)
-    return 'http://localhost:8080';
+    return `${process.env.BACKEND_URL}` || 'http://localhost:8080';
 }
