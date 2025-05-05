@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container q-my-md">
     <div class="row items-center justify-center">
-      <div class="col-10">
+      <div class="col-10 col-md-3">
         <div class="q-pa-md row items-center">
 
           <q-img src="../../../assets/images/woaman_about_me.jpg" :ratio="1" class="border-1" />
@@ -14,8 +14,9 @@
         </div>
       </div>
 
-      <div class="col-10">
+      <div class="col-10 col-md-8 self-start">
         <div class="q-pa-md row">
+          <p class="text-h3">Sobre</p>
           <p class="text-body1">
             Olá, sou Marília Gabriela, confeiteira experiente em Campo Grande - MS. Desde pequena, sempre estive envolvida no
             mundo da confeitaria, aprendendo com minha mãe e desenvolvendo minha paixão por doces.

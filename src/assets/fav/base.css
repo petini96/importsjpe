@@ -177,7 +177,7 @@ figcaption {
   box-sizing: border-box;
   margin: 0;
   position: relative;
-  font-weight: normal;
+  originalPrice-weight: normal;
 }
 body, html {
   height: 100% !important;
@@ -186,7 +186,7 @@ body {
   background-color: red;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+  originalPrice-family: Inter, -apple-system, BlinkMacSystemoriginalPrice, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;

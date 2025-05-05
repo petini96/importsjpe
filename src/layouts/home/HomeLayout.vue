@@ -5,7 +5,7 @@
       <NavLayout />
 
       <q-page-container>
-        <q-page>
+        <q-page ref="pageRef">
           <TabMenu
             :tab-props="[
               { name: 'about', label: 'Sobre' },
@@ -15,11 +15,6 @@
             ]"
           />
           <router-view />
-
-          <!-- Botão de subir -->
-          <!-- <q-page-scroller position="bottom-right" :scroll-offset="900" :offset="[0, 0]">
-            <q-btn fab icon="keyboard_arrow_up" color="accent" class="scroll-to-top" />
-          </q-page-scroller> -->
 
           <!-- Botão de chat -->
           <q-btn
@@ -55,17 +50,19 @@
 <script setup lang="ts">
 import NavLayout from 'src/components/layouts/home/NavLayout.vue';
 import TabMenu from 'src/components/generics/tab/TabMenu.vue';
-import { defineAsyncComponent, onMounted, onUnmounted, ref } from 'vue';
+import { defineAsyncComponent, onMounted, onUnmounted, ref, nextTick } from 'vue';
 
 const DonutComponent = defineAsyncComponent(() => import('src/components/donut/DonutComponent.vue'));
 
 const showTypebot = ref(false);
+const pageRef = ref<HTMLElement | null>(null);
 
 const toggleTypebot = () => {
   showTypebot.value = !showTypebot.value;
 };
 
-onMounted(() => {
+onMounted(async () => {
+  // Script Typebot
   const script = document.createElement('script');
   script.type = 'module';
   script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3.59/dist/web.js';
@@ -80,6 +77,15 @@ onMounted(() => {
     console.error('Failed to load Typebot script');
   };
   document.head.appendChild(script);
+
+  // Medir altura do conteúdo
+  await nextTick(); // aguarda renderização do DOM
+  if (pageRef.value) {
+    const height = pageRef.value.scrollHeight;
+    console.log('Altura total do conteúdo do QPage:', height);
+  } else {
+    console.warn('Não foi possível acessar o QPage');
+  }
 });
 
 onUnmounted(() => {
@@ -87,48 +93,3 @@ onUnmounted(() => {
   if (script) script.remove();
 });
 </script>
-
-<style lang="scss">
-.fixed-bottom-right {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-
-.fixed-top-right {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-}
-
-.typebot-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2000;
-}
-
-.chat-button {
-  animation: pulse 2s infinite;
-}
-
-.scroll-to-top {
-  bottom: calc(env(safe-area-inset-bottom) + 80px);
-  z-index: 1000;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-</style>

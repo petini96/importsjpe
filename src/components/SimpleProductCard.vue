@@ -49,7 +49,7 @@ const handleProductClick = async () => {
         align="center" 
         class="q-my-sm"
       >
-        <q-btn color="primary" icon-right="send" label="Comprar" />
+        <q-btn color="primary" icon-right="send" label="Comprar" class="q-my-md" />
       </q-card-actions>
     </q-card>
   </div>
