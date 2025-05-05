@@ -6,7 +6,7 @@
 
           <q-img src="../../../assets/images/woaman_about_me.jpg" :ratio="1" class="border-1" />
       
-          <p class="text-h5 col-grow q-ma-none ">Marília Gabriela</p>
+          <p class="text-h5 col-grow q-ma-none text-primary">Marília Gabriela</p>
       
           <div class="col-3">
             <q-img src="../../../assets/images/cookie_unbrella.png" :ratio="1" />
@@ -15,8 +15,8 @@
       </div>
 
       <div class="col-10 col-md-8 self-start">
-        <div class="q-pa-md row">
-          <p class="text-h3">Sobre</p>
+        <div class="q-pa-md q-ml-md row">
+          <h3 class="font-primoto-pro text-primary">Sobre</h3>
           <p class="text-body1">
             Olá, sou Marília Gabriela, confeiteira experiente em Campo Grande - MS. Desde pequena, sempre estive envolvida no
             mundo da confeitaria, aprendendo com minha mãe e desenvolvendo minha paixão por doces.
