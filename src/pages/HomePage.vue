@@ -40,6 +40,7 @@
 
   <CustomerReview />
 
+  <MyVideos />
   <!-- about payment -->
   <PaymentWayInfo />
 
@@ -63,6 +64,7 @@ const YourNextPhoneMarketing = defineAsyncComponent(() => import('../components/
 const SimpleProductCard = defineAsyncComponent(() => import('../components/SimpleProductCard.vue'));
 const AboutMe = defineAsyncComponent(() => import('../components/home/sections/AboutMe.vue'));
 const CustomerReview = defineAsyncComponent(() => import('../components/home/sections/CustomerReview.vue'));
+const MyVideos = defineAsyncComponent(() => import('../components/home/sections/MyVideos.vue'));
 
 const height = ref('10px')
 const onResize = (size: { height: number; width: number; }) => height.value = `${size.height}px` 
