@@ -146,7 +146,11 @@ createQuasarApp(createApp, quasarUserOptions)
 
     return Promise[ method ]([
       
-      import('boot/google-analytics')
+      import('boot/google-analytics'),
+      
+      import('boot/keycloak'),
+      
+      import('boot/router-guards')
       
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')

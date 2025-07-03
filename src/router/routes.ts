@@ -2,8 +2,20 @@ import type { RouteRecordRaw } from 'vue-router';
 import ProductPage from '../pages/products/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
 import CreateBannerPage from 'src/pages/banner/CreateBannerPage.vue';
+import LoginPage from 'src/pages/auth/LoginPage.vue';
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/login',
+    component: () => import('layouts/auth/AuthLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'login',
+        component: LoginPage
+      }
+    ],
+  },
   {
     path: '/',
     component: () => import('layouts/home/HomeLayout.vue'),
@@ -18,6 +30,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/produto',
     component: () => import('layouts/admin/SidebarLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -30,6 +43,7 @@ const routes: RouteRecordRaw[] = [
         name: 'product-create',
       }
     ],
+    
   },
   {
     path: '/banner',
