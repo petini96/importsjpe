@@ -1,10 +1,13 @@
 import Keycloak from 'keycloak-js';
 
-// Configura a instância do Keycloak
+const KEYCLOAK_URL = `${process.env.KEYCLOAK_URL}`;
+const KEYCLOAK_REALM = `${process.env.KEYCLOAK_REALM}`;
+const KEYCLOAK_CLIENT_ID = `${process.env.KEYCLOAK_CLIENT_ID}`;
+
 const keycloak = new Keycloak({
-  url: 'http://localhost:8082', // URL do seu servidor Keycloak
-  realm: 'localhost',      // O realm que você criou
-  clientId: 'quasar-app'      // O client que você criou
+  url: KEYCLOAK_URL,
+  realm: KEYCLOAK_REALM,
+  clientId: KEYCLOAK_CLIENT_ID
 });
 
 export default keycloak;
