@@ -1,7 +1,7 @@
 <template>
   <q-page class="column items-center justify-center q-pa-md">
     <div class="q-pa-md" style="max-width: 400px; width: 100%;">
-      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+      <q-form @submit.prevent="loginWithCredentials" @reset="onReset" class="q-gutter-md">
         <q-input
           filled
           v-model="email"
@@ -82,29 +82,43 @@ const email = ref('');
 const password = ref('');
 const accept = ref(false);
 
-// --- Métodos do Formulário ---
-const onSubmit = () => {
-  if (!accept.value) {
-    $q.notify({
-      color: 'red-5',
-      textColor: 'white',
-      icon: 'warning',
-      message: 'Você precisa aceitar os termos e condições'
-    });
-    return;
-  }
-  $q.notify({
-    color: 'green-4',
-    textColor: 'white',
-    icon: 'cloud_done',
-    message: 'Enviado'
-  });
-};
+// // --- Métodos do Formulário ---
+// const onSubmit = () => {
+//   loginWithCredentials ();
+//   if (!accept.value) {
+//     $q.notify({
+//       color: 'red-5',
+//       textColor: 'white',
+//       icon: 'warning',
+//       message: 'Você precisa aceitar os termos e condições'
+//     });
+//     return;
+//   }
+//   $q.notify({
+//     color: 'green-4',
+//     textColor: 'white',
+//     icon: 'cloud_done',
+//     message: 'Enviado'
+//   });
+// };
 
 const onReset = () => {
   email.value = '';
   password.value = '';
   accept.value = false;
+};
+
+const loginWithCredentials = () => {
+  if (!keycloak) {
+    console.error('Instância do Keycloak não encontrada!');
+    return;
+  }
+  
+  // Apenas chame o login. O Keycloak mostrará a tela de login padrão
+  // com campos para usuário/senha e o botão do Google.
+  // O redirectUri garante que ele volte para a página certa.
+  keycloak.login({ redirectUri: window.location.origin })
+    .catch(err => console.error('Falha ao iniciar o processo de login:', err));
 };
 
 // --- Métodos de Autenticação ---

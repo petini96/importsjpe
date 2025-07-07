@@ -17,6 +17,17 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/complete-profile',
+    component: () => import('layouts/auth/AuthLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'complete-profile',
+        component: LoginPage
+      }
+    ],
+  },
+  {
     path: '/',
     component: () => import('layouts/home/HomeLayout.vue'),
     children: [
@@ -30,7 +41,6 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/produto',
     component: () => import('layouts/admin/SidebarLayout.vue'),
-    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -41,6 +51,7 @@ const routes: RouteRecordRaw[] = [
         path: 'cadastro',
         component: () => import('pages/products/CreateProduct.vue'),
         name: 'product-create',
+        meta: { requiresAuth: true }
       }
     ],
     
