@@ -150,7 +150,9 @@ createQuasarApp(createApp, quasarUserOptions)
       
       import('boot/keycloak'),
       
-      import('boot/router-guards')
+      import('boot/router-guards'),
+      
+      import('boot/axios')
       
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')

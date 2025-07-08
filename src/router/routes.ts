@@ -3,7 +3,8 @@ import ProductPage from '../pages/products/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
 import CreateBannerPage from 'src/pages/banner/CreateBannerPage.vue';
 import LoginPage from 'src/pages/auth/LoginPage.vue';
-
+import CompleteProfilePage from 'src/pages/profile/CompleteProfilePage.vue';
+  
 const routes: RouteRecordRaw[] = [
   {
     path: '/login',
@@ -23,7 +24,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'complete-profile',
-        component: LoginPage
+        component: CompleteProfilePage
       }
     ],
   },
@@ -54,7 +55,18 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true }
       }
     ],
-    
+  },
+  {
+    path: '/dashboard',
+    component: () => import('layouts/admin/SidebarLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/dashboard/DashboardPage.vue'),
+        name: 'dashboard',
+        meta: { requiresAuth: true }
+      }
+    ],
   },
   {
     path: '/banner',

@@ -14,7 +14,8 @@ export default defineConfig((/* ctx */) => {
     boot: [
       'google-analytics',
       'keycloak',
-      'router-guards'
+      'router-guards',
+      'axios'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
