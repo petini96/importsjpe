@@ -2,27 +2,21 @@
 import { boot } from 'quasar/wrappers';
 import keycloak from 'src/services/keycloak';
 
-export default boot(async ({ app, router }) => {
+export default boot(async ({ app }) => {
   try {
+    console.log('[BOOT] Keycloak: Iniciando inicialização...');
+
     const authenticated = await keycloak.init({
-      onLoad: 'check-sso', //single sign-on (sessão única, sempre precisar logar novamente)
-      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html' // página do kc para verifica sessão
+      onLoad: 'check-sso',
+      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
     });
 
-    app.config.globalProperties.$keycloak = keycloak; // registra keycloak como global
+    console.log(`[BOOT] Keycloak: Inicialização concluída. Autenticado: ${authenticated}`);
 
-    if (authenticated) {
-      if (router.currentRoute.value.path === '/login') {
-        // Adiciona um .catch para tratar a promessa
-        router.push('/').catch(err => {
-          console.error('Falha ao redirecionar após login:', err);
-        });
-      }
-    }
-    
-    console.log(authenticated ? 'Usuário autenticado' : 'Usuário não autenticado');
+    app.config.globalProperties.$keycloak = keycloak;
 
   } catch (error) {
-    console.error('Falha ao inicializar o Keycloak', error);
+    // Este catch pode não pegar um "hang", mas é bom ter.
+    console.error('[BOOT] Keycloak: Falha CRÍTICA ao inicializar o Keycloak', error);
   }
 });

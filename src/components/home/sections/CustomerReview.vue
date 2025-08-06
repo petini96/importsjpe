@@ -20,7 +20,7 @@
               <q-img src="../../../assets/images/review2.webp" :ratio="1" class="border-1 rounded" />
             </div>
             <div class="text q-mt-md text-white">
-              "Sensacional! Um trabalho <strong> muito bem feito </strong> que apoia <strong>animais carentes</strong>. Valeu demais!" 
+              "Sensacional! Um trabalho <strong> muito bem feito </strong> amo os brownies e invenções novas." 
             </div>
             <div>
               <q-rating size="18px" v-model="stars" :max="5" color="primary" readonly :class="{'stars-animation': isReviewVisible }"/> 
@@ -32,7 +32,7 @@
               <q-img src="../../../assets/images/review3.webp" :ratio="1" class="border-1 rounded" />
             </div>
             <div class="text q-mt-md text-white">
-              "Puta que o paril! Essa mulher é <strong> Pica to Fly! </strong> amo o trabalho dela <strong> foda-se vocês</strong>. Foda-se!" 
+              "Eu sou fã de carteirinha <strong> com toda certeza do mundo </strong> amo o trabalho dela. De mais!" 
             </div>
             <div>
               <q-rating size="18px" v-model="stars" :max="5" color="primary" readonly :class="{'stars-animation': isReviewVisible }"/> 

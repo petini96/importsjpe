@@ -1,6 +1,9 @@
 <template>
   <q-page class="column items-center justify-center q-pa-md">
     {{ name ? `Bem-vindo, ${name}!` : 'Carregando...' }}
+    <RouterLink class="navbar-brand" to="/">
+      Voltar para o Início
+    </RouterLink>
   </q-page>
 </template>
 

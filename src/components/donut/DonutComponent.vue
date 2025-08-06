@@ -26,7 +26,7 @@ const donutGrayScale = ref(0);
 watch(
   () => scrollStore.scrollInfo,
   (newScrollInfo: ScrollDetails | null) => {
-    console.log('Watch triggered in DonutComponent:', newScrollInfo);
+    // console.log('Watch triggered in DonutComponent:', newScrollInfo);
     if (!newScrollInfo) return;
 
     const html = document.documentElement;
@@ -35,12 +35,12 @@ watch(
     const viewportHeight = window.innerHeight;
     const scrollBottom = scrollPosition + viewportHeight;
 
-    console.log('Scroll details:', {
-      scrollPosition,
-      viewportHeight,
-      scrollBottom,
-      marketingSection: !!marketingSection,
-    });
+    // console.log('Scroll details:', {
+    //   scrollPosition,
+    //   viewportHeight,
+    //   scrollBottom,
+    //   marketingSection: !!marketingSection,
+    // });
 
     if (marketingSection) {
       const marketingSectionTop = marketingSection.offsetTop;

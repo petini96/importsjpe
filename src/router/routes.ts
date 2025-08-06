@@ -6,6 +6,18 @@ import LoginPage from 'src/pages/auth/LoginPage.vue';
 import CompleteProfilePage from 'src/pages/profile/CompleteProfilePage.vue';
   
 const routes: RouteRecordRaw[] = [
+   {
+    path: '/',
+    component: () => import('layouts/home/HomeLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: () => import('pages/HomePage.vue'),
+        meta: { requiresAuth: false }
+      }
+    ],
+  },
   {
     path: '/login',
     component: () => import('layouts/auth/AuthLayout.vue'),
@@ -25,17 +37,6 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'complete-profile',
         component: CompleteProfilePage
-      }
-    ],
-  },
-  {
-    path: '/',
-    component: () => import('layouts/home/HomeLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'home',
-        component: () => import('pages/HomePage.vue')
       }
     ],
   },
