@@ -1,96 +1,108 @@
-import type { RouteRecordRaw } from 'vue-router';
-import ProductPage from '../pages/products/ProductPage.vue'
-import CartPage from '../pages/CartPage.vue'
-import CreateBannerPage from 'src/pages/banner/CreateBannerPage.vue';
-import LoginPage from 'src/pages/auth/LoginPage.vue';
-import CompleteProfilePage from 'src/pages/profile/CompleteProfilePage.vue';
-  
+import type { RouteRecordRaw } from "vue-router";
+import ProductPage from "../pages/products/ProductPage.vue";
+import CartPage from "../pages/CartPage.vue";
+import CreateBannerPage from "src/pages/banner/CreateBannerPage.vue";
+import LoginPage from "src/pages/auth/LoginPage.vue";
+import CompleteProfilePage from "src/pages/profile/CompleteProfilePage.vue";
+
 const routes: RouteRecordRaw[] = [
-   {
-    path: '/',
-    component: () => import('layouts/home/HomeLayout.vue'),
+  {
+    path: "/admin",
+    component: () => import("layouts/admin/SidebarLayout.vue"),
+    meta: { requiresAuth: true, requiredRole: "ADMIN" },
     children: [
       {
-        path: '',
-        name: 'home',
-        component: () => import('pages/HomePage.vue'),
-        meta: { requiresAuth: false }
-      }
+        path: "users",
+        name: "admin-users",
+        component: () => import("pages/admin/UserManagementPage.vue"),
+      },
     ],
   },
   {
-    path: '/login',
-    component: () => import('layouts/auth/AuthLayout.vue'),
+    path: "/",
+    component: () => import("layouts/home/HomeLayout.vue"),
     children: [
       {
-        path: '',
-        name: 'login',
-        component: LoginPage
-      }
+        path: "",
+        name: "home",
+        component: () => import("pages/HomePage.vue"),
+        meta: { requiresAuth: false },
+      },
     ],
   },
   {
-    path: '/complete-profile',
-    component: () => import('layouts/auth/AuthLayout.vue'),
+    path: "/login",
+    component: () => import("layouts/auth/AuthLayout.vue"),
     children: [
       {
-        path: '',
-        name: 'complete-profile',
-        component: CompleteProfilePage
-      }
+        path: "",
+        name: "login",
+        component: LoginPage,
+      },
     ],
   },
   {
-    path: '/produto',
-    component: () => import('layouts/admin/SidebarLayout.vue'),
+    path: "/complete-profile",
+    component: () => import("layouts/auth/AuthLayout.vue"),
     children: [
       {
-        path: '',
-        name: 'product',
-        component: ProductPage
+        path: "",
+        name: "complete-profile",
+        component: CompleteProfilePage,
+      },
+    ],
+  },
+  {
+    path: "/produto",
+    component: () => import("layouts/admin/SidebarLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "product",
+        component: ProductPage,
       },
       {
-        path: 'cadastro',
-        component: () => import('pages/products/CreateProduct.vue'),
-        name: 'product-create',
-        meta: { requiresAuth: true }
-      }
+        path: "cadastro",
+        component: () => import("pages/products/CreateProduct.vue"),
+        name: "product-create",
+        meta: { requiresAuth: true },
+      },
     ],
   },
   {
-    path: '/dashboard',
-    component: () => import('layouts/admin/SidebarLayout.vue'),
+    path: "/dashboard",
+    component: () => import("layouts/admin/SidebarLayout.vue"),
     children: [
       {
-        path: '',
-        component: () => import('pages/dashboard/DashboardPage.vue'),
-        name: 'dashboard',
-        meta: { requiresAuth: true }
-      }
+        path: "",
+        component: () => import("pages/dashboard/DashboardPage.vue"),
+        name: "dashboard",
+        meta: { requiresAuth: true },
+      },
     ],
   },
   {
-    path: '/banner',
-    component: () => import('layouts/admin/SidebarLayout.vue'),
+    path: "/banner",
+    component: () => import("layouts/admin/SidebarLayout.vue"),
     children: [
       {
-        path: 'cadastro',
-        name: 'banner',
-        component: CreateBannerPage
-      }
+        path: "cadastro",
+        name: "banner",
+        component: CreateBannerPage,
+      },
     ],
   },
   {
-    path: '/carrinho',
-    name: 'cart',
-    component: CartPage
+    path: "/carrinho",
+    name: "cart",
+    component: CartPage,
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    path: "/:catchAll(.*)*",
+    component: () => import("pages/ErrorNotFound.vue"),
   },
 ];
 

@@ -1,6 +1,8 @@
 <template>
   <q-page class="column items-center justify-center q-pa-md">
     {{ name ? `Bem-vindo, ${name}!` : 'Carregando...' }}
+    <p>Suas roles: {{ userRoles.join(', ') }}</p>
+
     <RouterLink class="navbar-brand" to="/">
       Voltar para o Início
     </RouterLink>
@@ -19,10 +21,20 @@ const keycloak = proxy?.$keycloak;
 const $q = useQuasar();
 
 const name = ref('');
+const userRoles = ref<string[]>([]);
 
 onMounted(() => {
+
   if (keycloak?.authenticated && keycloak.tokenParsed) {
     name.value = keycloak.tokenParsed.name || keycloak.tokenParsed.preferred_username || 'Usuário';
+    let roles: string[] = [];
+    if (keycloak.tokenParsed.realm_access?.roles) {
+      roles = [...roles, ...keycloak.tokenParsed.realm_access.roles];
+    }
+    if (keycloak.tokenParsed.resource_access?.['quasar-app']?.roles) {
+      roles = [...roles, ...keycloak.tokenParsed.resource_access['quasar-app'].roles];
+    }
+    userRoles.value = roles;
   } else {
     $q.notify({
       color: 'negative',
