@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: true, requiredRole: "ADMIN" },
     children: [
       {
-        path: "users",
+        path: "usuarios",
         name: "admin-users",
         component: () => import("pages/admin/UserManagementPage.vue"),
       },

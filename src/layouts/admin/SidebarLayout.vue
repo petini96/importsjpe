@@ -10,6 +10,7 @@
     <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
         <q-list padding>
+
           <q-item clickable v-ripple to="/categoria-produto/cadastro">
             <q-item-section avatar>
               <q-icon name="inventory_2" />
@@ -36,6 +37,16 @@
               Postagem
             </q-item-section>
           </q-item>
+
+          <q-item clickable v-ripple to="/admin/usuarios">
+            <q-item-section avatar>
+              <q-icon name="person" />
+            </q-item-section>
+            <q-item-section>
+              Usuários
+            </q-item-section>
+          </q-item>
+
         </q-list>
         
         
