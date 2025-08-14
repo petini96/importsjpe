@@ -4,6 +4,7 @@ import CartPage from "../pages/CartPage.vue";
 import CreateBannerPage from "src/pages/banner/CreateBannerPage.vue";
 import LoginPage from "src/pages/auth/LoginPage.vue";
 import CompleteProfilePage from "src/pages/profile/CompleteProfilePage.vue";
+import CreateProductCategoryPage from "src/pages/product-category/CreateProductCategoryPage.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -89,6 +90,17 @@ const routes: RouteRecordRaw[] = [
         path: "cadastro",
         name: "banner",
         component: CreateBannerPage,
+      },
+    ],
+  },
+  {
+    path: "/categoria-produto",
+    component: () => import("layouts/admin/SidebarLayout.vue"),
+    children: [
+      {
+        path: "cadastro",
+        name: "create-product-category",
+        component: CreateProductCategoryPage,
       },
     ],
   },
